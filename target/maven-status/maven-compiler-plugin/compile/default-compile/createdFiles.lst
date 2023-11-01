@@ -1,2 +1,5 @@
-com/emma/home/Home.class
+com/emma/app/bean/AttendanceBean.class
 com/emma/auth/Login.class
+com/emma/home/Home.class
+com/emma/app/model/Attendance.class
+com/emma/app/bean/AttendanceBeanI.class
