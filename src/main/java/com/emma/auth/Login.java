@@ -1,5 +1,8 @@
 package com.emma.auth;
 
+import com.emma.app.model.entity.User;
+import com.emma.database.Database;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -14,10 +17,7 @@ import java.util.Date;
 
 
 
-@WebServlet(urlPatterns = "/login", initParams = {
-        @WebInitParam(name = "username", value = "Emma"),
-        @WebInitParam(name = "password", value = "Nur")
-})
+@WebServlet(urlPatterns = "/login")
 
 public class Login extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,18 +33,23 @@ public class Login extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (username.equals(getInitParameter("username")) && password.equals(getInitParameter("password"))){
-            HttpSession httpSession = req.getSession();
+        Database database =  Database.getDbInstance();
 
-            httpSession.setAttribute("loggedInId", new Date().getTime()+"");
-            httpSession.setAttribute("username", username);
+        for (User user : database.getUsers()){
+            if (username.equals(user.getUsername()) && password.equals(user.getPassword())){
+                HttpSession httpSession = req.getSession(true);
 
-            resp.sendRedirect("./home");
-        } else {
-            PrintWriter print = resp.getWriter();
-            print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
+                httpSession.setAttribute("loggedInId", new Date().getTime()+"");
+                httpSession.setAttribute("username", username);
 
+                resp.sendRedirect("./home");
+            }
         }
+
+        PrintWriter print = resp.getWriter();
+        print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
+
+
     }
 
 }

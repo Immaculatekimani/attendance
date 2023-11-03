@@ -1,26 +1,26 @@
 package com.emma.app.model.entity;
 
 public class User {
-    private int userId;
+    private String userId;
     private String username;
     private String password;
-    private String role; // Enum for user roles (e.g., EMPLOYEE, STUDENT, ADMIN)
+    private UserRole role;
 
     public User() {
     }
 
-    public User(int userId, String username, String password, String role) {
+    public User(String userId, String username, String password, UserRole role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -40,11 +40,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 }

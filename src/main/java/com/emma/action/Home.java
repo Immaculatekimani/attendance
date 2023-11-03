@@ -1,9 +1,8 @@
-package com.emma.home;
+package com.emma.action;
 
 import com.emma.app.bean.AttendanceBean;
 import com.emma.app.bean.AttendanceBeanI;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

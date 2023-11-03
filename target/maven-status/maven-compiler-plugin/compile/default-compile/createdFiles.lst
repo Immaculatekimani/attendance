@@ -1,7 +1,10 @@
+com/emma/action/Home.class
 com/emma/app/bean/AttendanceBean.class
+com/emma/database/Database.class
 com/emma/auth/Login.class
-com/emma/home/Home.class
+com/emma/app/model/entity/UserRole.class
 com/emma/auth/Logout.class
 com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/model/entity/User.class
+com/emma/event/AppInit.class
 com/emma/app/model/entity/Attendance.class
