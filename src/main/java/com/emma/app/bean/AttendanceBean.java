@@ -1,6 +1,6 @@
 package com.emma.app.bean;
 
-import com.emma.app.model.Attendance;
+import com.emma.app.model.entity.Attendance;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,4 +1,4 @@
-package com.emma.app.model;
+package com.emma.app.model.entity;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;

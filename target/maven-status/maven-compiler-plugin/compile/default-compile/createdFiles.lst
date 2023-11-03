@@ -1,5 +1,7 @@
 com/emma/app/bean/AttendanceBean.class
 com/emma/auth/Login.class
 com/emma/home/Home.class
-com/emma/app/model/Attendance.class
+com/emma/auth/Logout.class
 com/emma/app/bean/AttendanceBeanI.class
+com/emma/app/model/entity/User.class
+com/emma/app/model/entity/Attendance.class

@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+
+
 
 @WebServlet(urlPatterns = "/login", initParams = {
         @WebInitParam(name = "username", value = "Emma"),
@@ -17,7 +21,12 @@ import java.io.PrintWriter;
 
 public class Login extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("./");
+        HttpSession httpSession = req.getSession();
+
+        if(httpSession.getAttribute("loggedInId") != null){
+            resp.sendRedirect("./home");
+        } else
+            resp.sendRedirect("./");
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -25,9 +34,12 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
 
         if (username.equals(getInitParameter("username")) && password.equals(getInitParameter("password"))){
-            req.setAttribute("homeInfo", "Welcome to Attendance Home Page");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
-            dispatcher.forward(req, resp);
+            HttpSession httpSession = req.getSession();
+
+            httpSession.setAttribute("loggedInId", new Date().getTime()+"");
+            httpSession.setAttribute("username", username);
+
+            resp.sendRedirect("./home");
         } else {
             PrintWriter print = resp.getWriter();
             print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");

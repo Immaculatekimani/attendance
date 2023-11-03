@@ -10,7 +10,10 @@ body {
     align-items: center;
     height: 100vh;
 }
-
+ h1 {
+            text-align: center;
+            color: #186F65;
+   }
 .login-container {
     background-color: #F9DEC9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

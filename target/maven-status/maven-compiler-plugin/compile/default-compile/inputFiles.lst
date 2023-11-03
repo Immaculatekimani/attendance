@@ -1,5 +1,7 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceBeanI.java
-/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/Attendance.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/auth/Logout.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/entity/Attendance.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/home/Home.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/entity/User.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/auth/Login.java
