@@ -1,7 +1,5 @@
 package com.emma.action;
 
-import com.emma.app.bean.AttendanceBean;
-import com.emma.app.bean.AttendanceBeanI;
 import com.emma.app.view.html.AppPage;
 
 import javax.servlet.ServletException;
@@ -11,17 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-
-@WebServlet("/home")
-public class Home extends HttpServlet {
+@WebServlet("reports")
+public class Report extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
 
         if (session.getAttribute("loggedInId") != null) {
-            AttendanceBeanI attendanceBean = new AttendanceBean();
-            new AppPage().renderHtml(req, resp,  0," " +attendanceBean.attendanceRecord());
+            new AppPage().renderHtml(req, resp,  2,"<h2>Employee info goes here</h2> ") ;
 
         } else
             resp.sendRedirect("./");
