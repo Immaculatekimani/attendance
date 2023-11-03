@@ -1,5 +1,6 @@
 package com.emma.database;
 
+import com.emma.app.model.entity.Attendance;
 import com.emma.app.model.entity.User;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 public class Database implements Serializable {
     private String databaseCreation;
     private List<User> users = new ArrayList<>();
+    private List<Attendance> attendances = new ArrayList<>();
     private static Database dbInstance;
 
     private Database() {
@@ -31,5 +33,13 @@ public class Database implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
     }
 }

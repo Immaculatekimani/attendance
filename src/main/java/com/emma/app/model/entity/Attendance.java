@@ -1,14 +1,12 @@
 package com.emma.app.model.entity;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Attendance implements Serializable {
-    private String employeeId;
-    private String employeeName;
+    private String userId;
+    private String userName;
     private LocalDate attendanceDate;
     private LocalTime attendanceTime;
     private String attendanceStatus;
@@ -16,20 +14,20 @@ public class Attendance implements Serializable {
     public Attendance() {
     }
 
-    public Attendance(String employeeId, String employeeName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
+    public Attendance(String userId, String userName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
+        this.userId = userId;
+        this.userName = userName;
         this.attendanceDate = attendanceDate;
         this.attendanceTime = attendanceTime;
         this.attendanceStatus = attendanceStatus;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getUserName() {
+        return userName;
     }
 
     public LocalDate getAttendanceDate() {
@@ -48,8 +46,8 @@ public class Attendance implements Serializable {
         StringBuilder trBuilder = new StringBuilder();
 
         trBuilder.append("<tr>");
-        trBuilder.append("<td>").append(getEmployeeId().strip()).append("</td>");
-        trBuilder.append("<td>").append(getEmployeeName().strip()).append("</td>");
+        trBuilder.append("<td>").append(getUserId().strip()).append("</td>");
+        trBuilder.append("<td>").append(getUserName().strip()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceDate()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceTime()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceStatus().strip()).append("</td>");
