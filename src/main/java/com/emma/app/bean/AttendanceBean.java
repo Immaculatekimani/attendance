@@ -13,13 +13,14 @@ public class AttendanceBean implements AttendanceBeanI {
     public String attendanceRecord() {
 
         StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<table>\n" +
+        trBuilder.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">LATEST ATTENDANCE RECORDS </h2>" +
+                "<table>\n" +
                         "        <thead>\n" +
                         "            <tr>\n" +
                         "                <th>Employee ID</th>\n" +
                         "                <th>Employee Name</th>\n" +
                         "                <th>Date</th>\n" +
-                        "                <th>Time</th> <!-- Add the Time column -->\n" +
+                        "                <th>Time</th> \n" +
                         "                <th>Attendance Status</th>\n" +
                         "             </tr>\n" +
                         "        </thead>");

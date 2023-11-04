@@ -6,7 +6,7 @@ public class AppCss implements Serializable {
     private String style = "<style>" +
             ".topnav {" +
             "   overflow: hidden;" +
-            "   background-color: #333;" +
+            "   background-color: #3D0C11;" +
             "}" +
             ".topnav a {" +
             "   float: left;" +
@@ -19,10 +19,11 @@ public class AppCss implements Serializable {
             ".topnav a:hover {" +
             "   background-color: #ddd;" +
             "   color: black;" +
+            "   transition: background-color 0.3s;" +
             "}" +
             ".topnav a.active {" +
-            "   background-color: #4CAF50;" +
-            "   color: white;" +
+            "   background-color:  #F9DEC9;" +
+            "   color: #068DA9;" +
             "}" +
             ".attendance { " +
             "    margin: 20px; " +

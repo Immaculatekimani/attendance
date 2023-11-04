@@ -16,7 +16,7 @@ public class Report extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("loggedInId") != null) {
-            new AppPage().renderHtml(req, resp,  2,"<h2>Employee info goes here</h2> ") ;
+            new AppPage().renderHtml(req, resp,  3,"<h2>Employee attendance info goes here</h2> ") ;
 
         } else
             resp.sendRedirect("./");

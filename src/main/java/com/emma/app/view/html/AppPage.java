@@ -21,11 +21,9 @@ public class AppPage implements Serializable {
                 "</head>" +
                 "<body>" +
                 new TopBar().menu(activeMenu)+
-                "<h2> Welcome " + session.getAttribute("username") + "</h2>" +
-
-                "<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\"> ATTENDANCE RECORDS </h2>");
+                "<h2> Welcome " + session.getAttribute("username") + "</h2>" );
         print.write(content);
-        print.write("<a href=\"./logout\" >LOGOUT</a>"+
+        print.write(
                 "</body>"+
                 "</html>");
     }

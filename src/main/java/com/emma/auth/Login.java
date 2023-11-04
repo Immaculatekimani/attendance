@@ -46,10 +46,7 @@ public class Login extends HttpServlet {
             }
         }
 
-        PrintWriter print = resp.getWriter();
-        print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
-
-
+       resp.sendRedirect("./invalid-login");
     }
 
 }
