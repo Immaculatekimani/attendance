@@ -14,5 +14,6 @@ com/emma/auth/Logout.class
 com/emma/app/bean/AttendanceBeanI.class
 com/emma/action/Report.class
 com/emma/action/Employee.class
+com/emma/action/UserAction.class
 com/emma/event/AppInit.class
 com/emma/app/model/entity/Attendance.class
