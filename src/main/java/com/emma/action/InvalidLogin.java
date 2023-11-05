@@ -69,7 +69,7 @@ public class InvalidLogin extends HttpServlet {
                 "\n" +
                 "<body>\n" +
                 "<div class=\"login-container\">\n" +
-                "    <h2>Invalid Login</h2>\n" +
+                "    <h2>Invalid Login or Register</h2>\n" +
                 "    <p>Your login attempt was unsuccessful. Please check your credentials and try again.</p>\n" +
                 "    <button><a href=\"./login\">Back to Login</a></button>\n" +
                 "</div>\n" +

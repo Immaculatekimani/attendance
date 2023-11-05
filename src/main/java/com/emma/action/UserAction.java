@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/user")
 public class UserAction extends HttpServlet {
@@ -22,6 +23,11 @@ public class UserAction extends HttpServlet {
 
         if (password.equals(confirmPassword))
             database.getUsers().add(new User("E230", username, password, UserRole.ADMIN));
+        else {
+            PrintWriter print = resp.getWriter();
+            print.write("Sorry passwords don't match please register or login again.");
+            resp.sendRedirect("./invalid-login");
+        }
 
         resp.sendRedirect("./");
     }
