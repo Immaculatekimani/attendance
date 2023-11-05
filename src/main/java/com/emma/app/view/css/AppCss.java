@@ -58,8 +58,22 @@ public class AppCss implements Serializable {
             "    background-color: #d1d1d1; " +
             "} " +
             "</style> ";
+    private String homeImageCss = "    <style>" +
+            "        .image-container {" +
+            "            position: relative;" +
+            "            max-width: 100%;" +
+            "            margin: auto;" +
+            "        }" +
+            "        img {" +
+            "            width: 100%;" +
+            "        }" +
+            "    </style>";
 
     public String getStyle() {
         return style;
+    }
+
+    public String getHomeImageCss() {
+        return homeImageCss;
     }
 }
