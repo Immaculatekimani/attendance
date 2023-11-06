@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Attendance implements Serializable {
-    private String userId;
-    private String userName;
+    private String employeeID;
+    private String employeeName;
     private LocalDate attendanceDate;
     private LocalTime attendanceTime;
     private String attendanceStatus;
@@ -14,20 +14,20 @@ public class Attendance implements Serializable {
     public Attendance() {
     }
 
-    public Attendance(String userId, String userName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
-        this.userId = userId;
-        this.userName = userName;
+    public Attendance(String employeeID, String employeeName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
+        this.employeeID = employeeID;
+        this.employeeName = employeeName;
         this.attendanceDate = attendanceDate;
         this.attendanceTime = attendanceTime;
         this.attendanceStatus = attendanceStatus;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getEmployeeID() {
+        return employeeID;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
     public LocalDate getAttendanceDate() {
@@ -46,8 +46,8 @@ public class Attendance implements Serializable {
         StringBuilder trBuilder = new StringBuilder();
 
         trBuilder.append("<tr>");
-        trBuilder.append("<td>").append(getUserId().strip()).append("</td>");
-        trBuilder.append("<td>").append(getUserName().strip()).append("</td>");
+        trBuilder.append("<td>").append(getEmployeeID().strip()).append("</td>");
+        trBuilder.append("<td>").append(getEmployeeName().strip()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceDate()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceTime()).append("</td>");
         trBuilder.append("<td>").append(getAttendanceStatus().strip()).append("</td>");

@@ -17,6 +17,7 @@ com/emma/database/Database.class
 com/emma/action/AttendanceSheet.class
 com/emma/app/model/entity/EmployeeRole.class
 com/emma/app/model/entity/Employee.class
+com/emma/action/AttendanceAction.class
 com/emma/auth/Login.class
 com/emma/auth/Logout.class
 com/emma/action/Report.class

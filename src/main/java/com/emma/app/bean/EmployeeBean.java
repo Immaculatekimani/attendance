@@ -10,7 +10,7 @@ public class EmployeeBean implements EmployeeBeanI, Serializable {
     @Override
     public String employeeRecords() {
         StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">TATU EMPLOYEES </h2>" +
+        trBuilder.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">TECH-STAR EMPLOYEES </h2>" +
                 "<table>\n" +
                 "        <thead>\n" +
                 "            <tr>\n" +
