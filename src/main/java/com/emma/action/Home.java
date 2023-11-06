@@ -19,18 +19,7 @@ public class Home extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("loggedInId") != null) {
-            AttendanceBeanI attendanceBean = new AttendanceBean();
-            new AppPage().renderHtml(req, resp,  0," <div class=\"image-container\">" +
-                    "        <div> " +
-                    "            <img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +
-                    "        </div>" +
-                    "    </div>" +
-                     attendanceBean.attendanceRecord());
-
-        } else
-            resp.sendRedirect("./");
-
-
+        AttendanceBeanI attendanceBean = new AttendanceBean();
+        new AppPage().renderHtml(req, resp, 0, " <div class=\"image-container\">" + "        <div> " + "            <img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" + "        </div>" + "    </div>" + attendanceBean.attendanceRecord());
     }
 }

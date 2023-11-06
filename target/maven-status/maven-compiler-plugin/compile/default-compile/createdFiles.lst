@@ -21,5 +21,6 @@ com/emma/auth/Login.class
 com/emma/auth/Logout.class
 com/emma/action/Report.class
 com/emma/action/UserAction.class
+com/emma/filter/AuthFilter.class
 com/emma/event/AppInit.class
 com/emma/action/EmployeeAction.class

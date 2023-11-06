@@ -23,8 +23,6 @@ public class UserAction extends HttpServlet {
         if (password.equals(confirmPassword))
             database.getUsers().add(new User("E230", username, password));
         else {
-            PrintWriter print = resp.getWriter();
-            print.write("Sorry passwords don't match please register or login again.");
             resp.sendRedirect("./invalid-login");
         }
 

@@ -28,12 +28,8 @@ public class AddEmployeeAction extends HttpServlet {
         HttpSession session = req.getSession();
 
         EmployeeBeanI employeeBean = new EmployeeBean();
-        if (session.getAttribute("loggedInId") != null) {
-            database.getEmployees().add(new Employee(employeeId,firstName,lastName,employeeRole));
-            resp.sendRedirect("./employee");
-
-        } else
-            resp.sendRedirect("./");
+        database.getEmployees().add(new Employee(employeeId, firstName, lastName, employeeRole));
+        resp.sendRedirect("./employee");
 
 
     }

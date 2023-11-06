@@ -16,11 +16,7 @@ public class AttendanceSheet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("loggedInId") != null) {
-            new AppPage().renderHtml(req, resp,  1,"<h2>Adding and updating daily attendances</h2> ") ;
-
-        } else
-            resp.sendRedirect("./");
+        new AppPage().renderHtml(req, resp, 1, "<h2>Adding and updating daily attendances</h2> ");
 
 
     }
