@@ -1,7 +1,6 @@
 package com.emma.action;
 
 import com.emma.app.model.entity.User;
-import com.emma.app.model.entity.UserRole;
 import com.emma.database.Database;
 
 import javax.servlet.ServletException;
@@ -22,7 +21,7 @@ public class UserAction extends HttpServlet {
         String confirmPassword = req.getParameter("confirmNewPassword");
 
         if (password.equals(confirmPassword))
-            database.getUsers().add(new User("E230", username, password, UserRole.ADMIN));
+            database.getUsers().add(new User("E230", username, password));
         else {
             PrintWriter print = resp.getWriter();
             print.write("Sorry passwords don't match please register or login again.");

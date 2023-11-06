@@ -1,8 +1,9 @@
 package com.emma.event;
 
 import com.emma.app.model.entity.Attendance;
+import com.emma.app.model.entity.Employee;
+import com.emma.app.model.entity.EmployeeRole;
 import com.emma.app.model.entity.User;
-import com.emma.app.model.entity.UserRole;
 import com.emma.database.Database;
 
 import javax.servlet.ServletContextEvent;
@@ -10,8 +11,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebListener
 public class AppInit implements ServletContextListener {
@@ -20,9 +19,9 @@ public class AppInit implements ServletContextListener {
         System.out.println("#################### App Stariting ###############");
 
         Database db = Database.getDbInstance();
-        db.getUsers().add(new User("E123", "Emma", "123s", UserRole.ADMIN));
-        db.getUsers().add(new User("E456", "Tatu", "456", UserRole.EMPLOYER));
-        db.getUsers().add(new User("E789", "Kim", "789", UserRole.EMPLOYEE));
+        db.getUsers().add(new User("E123", "Emma", "123s"));
+        db.getUsers().add(new User("E456", "Tatu", "456"));
+        db.getUsers().add(new User("E789", "Kim", "789"));
 
         db.getAttendances().add(new Attendance("E12345", "John Doe", LocalDate.of(2023, 11, 5), LocalTime.of(8, 30), "Present"));
         db.getAttendances().add(new Attendance("E38292", "Taylor Swift", LocalDate.of(2023, 11, 5), LocalTime.of(8, 50), "Present"));
@@ -32,6 +31,15 @@ public class AppInit implements ServletContextListener {
         db.getAttendances().add(new Attendance("E40283", "Jack Ireri", LocalDate.of(2023, 11, 5), LocalTime.of(8, 34), "Present"));
         db.getAttendances().add(new Attendance("E10392", "Cynthia Wangari", LocalDate.of(2023, 11, 5), LocalTime.of(8, 52), "Absent"));
         db.getAttendances().add(new Attendance("E29390", "Grace Emily", LocalDate.of(2023, 11, 5), LocalTime.of(8, 41), "Present"));
+
+        db.getEmployees().add(new Employee("E12345","John", "Doe",EmployeeRole.DEVELOPER));
+        db.getEmployees().add(new Employee("E38292","Taylor", "Swift",EmployeeRole.DEVELOPER));
+        db.getEmployees().add(new Employee("E39293","Eminem", "Mark",EmployeeRole.QA));
+        db.getEmployees().add(new Employee("E37829","Hope", "Kimani",EmployeeRole.DEVOPS));
+        db.getEmployees().add(new Employee("E27738","Smino", "Otieno",EmployeeRole.DEVOPS));
+        db.getEmployees().add(new Employee("E40283","Jack", "Ireri",EmployeeRole.QA));
+        db.getEmployees().add(new Employee("E10392","Cynthia", "Wangari",EmployeeRole.QA));
+        db.getEmployees().add(new Employee("E29390","Grace", "Emily",EmployeeRole.DEVELOPER));
 
     }
 
