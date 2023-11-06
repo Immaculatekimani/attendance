@@ -69,6 +69,58 @@ public class AppCss implements Serializable {
             "        }" +
             "    </style>";
 
+
+    private String AddEmployeeFormCss = "<style> .modal {" +
+            "  display: none;" +
+            "  position: fixed;" +
+            "  z-index: 1;" +
+            "  left: 0;" +
+            "  top: 0;" +
+            "  width: 100%;" +
+            "  height: 100%;" +
+            "  background-color: rgba(0,0,0,0.4);" +
+            "}" +
+            ".modal-content {" +
+            "  background-color: #F9DEC9;" +
+            "  border: 1px solid #ccc;" +
+            "  border-radius: 5px;"+
+            "  padding: 20px;" +
+            "  width: 400px;" +
+            "  margin: 15% auto;" +
+            "  text-align: left;" +
+            "  position: relative;" +
+            "  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" +
+            "}" +
+            ".close {" +
+            "  position: absolute;" +
+            "  top: 0;" +
+            "  right: 0;" +
+            "  padding: 10px;" +
+            "  cursor: pointer;" +
+            "}" +
+            ".form-control {" +
+            " width: 80%;\n" +
+            "    padding: 10px;\n" +
+            "    margin: 10px 0;\n" +
+            "    border: 1px solid #ccc;\n" +
+            "    border-radius: 5px;" +
+            "}" +
+            ".submit-button {" +
+            "  background-color: #068DA9;" +
+            "  color: #fff;" +
+            "  border: none;" +
+            "  padding: 10px 20px;" +
+            "  border-radius: 5px;" +
+            "  cursor: pointer;" +
+            "}" +
+            ".submit-button:hover {" +
+            "  background-color: #0056b3;" +
+            "}</style>";
+
+    public String getAddEmployeeFormCss() {
+        return AddEmployeeFormCss;
+    }
+
     public String getStyle() {
         return style;
     }

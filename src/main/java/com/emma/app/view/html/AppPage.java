@@ -19,6 +19,7 @@ public class AppPage implements Serializable {
                 "            <head>" +
                 new AppCss().getStyle()+
                 new AppCss().getHomeImageCss()+
+                new AppCss().getAddEmployeeFormCss()+
                 "</head>" +
                 "<body>" +
                 new TopBar().menu(activeMenu)+

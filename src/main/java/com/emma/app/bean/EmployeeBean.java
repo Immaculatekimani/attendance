@@ -4,7 +4,9 @@ import com.emma.app.model.entity.Attendance;
 import com.emma.app.model.entity.Employee;
 import com.emma.database.Database;
 
-public class EmployeeBean implements EmployeeBeanI{
+import java.io.Serializable;
+
+public class EmployeeBean implements EmployeeBeanI, Serializable {
     @Override
     public String employeeRecords() {
         StringBuilder trBuilder = new StringBuilder();
@@ -28,7 +30,11 @@ public class EmployeeBean implements EmployeeBeanI{
 
     @Override
     public Employee addorUpdateEmployee(Employee employee) throws Exception {
-        return null;
+        Database database = Database.getDbInstance();
+
+        database.getEmployees().add(employee);
+
+        return employee;
     }
 
     @Override
