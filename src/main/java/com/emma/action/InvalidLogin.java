@@ -75,6 +75,8 @@ public class InvalidLogin extends HttpServlet {
                 "</div>\n" +
                 "</body>\n" +
                 "</html>");
+        req.getSession().invalidate();
+        resp.getWriter().flush();
 
     }
 

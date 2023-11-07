@@ -25,7 +25,7 @@ public class AuthFilter implements Filter {
 
         if (session.isNew()) {
             session.invalidate();
-            if(servletPath.equals("/login") || servletPath.equals("/index.html")){
+            if(servletPath.equals("/login") || servletPath.equals("/index.html") || servletPath.equals("/user") || servletPath.equals("/invalid-login")){
                 filterChain.doFilter(req, res);
             } else {
                 res.sendRedirect(req.getContextPath() + "/");
