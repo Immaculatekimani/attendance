@@ -1,33 +1,27 @@
 package com.emma.action;
 
+import com.emma.app.bean.UserBean;
+import com.emma.app.bean.UserBeanI;
 import com.emma.app.model.entity.User;
-import com.emma.database.Database;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/user")
-public class UserAction extends HttpServlet {
+public class UserAction extends BaseAction {
+    UserBeanI userBean = new UserBean();
+
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Database database = Database.getDbInstance();
+        User registerUser = new User();
+        serializeForm(registerUser, req.getParameterMap());
 
-        String username = req.getParameter("new-username");
-        String password = req.getParameter("new-password");
-        String confirmPassword = req.getParameter("confirmNewPassword");
-
-        if (password.equals(confirmPassword))
-            database.getUsers().add(new User("E230", username, password));
-        else {
-            PrintWriter print = resp.getWriter();
-            print.write("<html><body>Password don't match <a href=\".\"> Register again </a></body></html>");
-        }
+        userBean.register(registerUser);
 
         resp.sendRedirect("./");
+        ;
     }
 
 }

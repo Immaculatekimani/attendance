@@ -12,6 +12,7 @@ com/emma/action/AddEmployeeAction.class
 com/emma/app/bean/EmployeeBeanI.class
 com/emma/app/bean/EmployeeBean.class
 com/emma/app/bean/AttendanceBeanI.class
+com/emma/app/bean/UserBeanI.class
 com/emma/app/model/entity/Attendance.class
 com/emma/database/Database.class
 com/emma/action/AttendanceSheet.class
@@ -23,5 +24,7 @@ com/emma/action/AttendanceAction.class
 com/emma/action/LoginAction.class
 com/emma/action/UserAction.class
 com/emma/filter/AuthFilter.class
+com/emma/action/BaseAction.class
 com/emma/event/AppInit.class
 com/emma/action/EmployeeAction.class
+com/emma/app/bean/UserBean.class
