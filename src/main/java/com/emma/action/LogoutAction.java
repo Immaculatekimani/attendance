@@ -1,4 +1,4 @@
-package com.emma.auth;
+package com.emma.action;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/logout")
-public class Logout extends HttpServlet {
+public class LogoutAction extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException{
         req.getSession().invalidate();

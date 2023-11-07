@@ -1,11 +1,9 @@
-package com.emma.auth;
+package com.emma.action;
 
 import com.emma.app.model.entity.User;
 import com.emma.database.Database;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,7 @@ import java.util.Date;
 
 @WebServlet(urlPatterns = "/login")
 
-public class Login extends HttpServlet {
+public class LoginAction extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
 
