@@ -4,8 +4,17 @@ public class User {
     private String userId;
     private String username;
     private String password;
+    private String confirmPassword;
 
     public User() {
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public User(String userId, String username, String password) {

@@ -4,7 +4,6 @@ import com.emma.app.bean.EmployeeBean;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.entity.Employee;
 import com.emma.app.model.entity.EmployeeRole;
-import com.emma.app.view.html.AppPage;
 import com.emma.database.Database;
 
 import javax.servlet.ServletException;
@@ -34,4 +33,3 @@ public class AddEmployeeAction extends HttpServlet {
 
     }
 }
-
