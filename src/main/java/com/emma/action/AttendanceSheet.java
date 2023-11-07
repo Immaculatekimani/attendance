@@ -34,26 +34,27 @@ public class AttendanceSheet extends HttpServlet {
         trBuilder.append("<th>Employee Name</th>");
         trBuilder.append("<th>Attendance Time</th>");
         trBuilder.append("<th>Attendance Status</th>");
+        trBuilder.append("<th>Submit Attendance</th>");
         trBuilder.append("</tr>");
         trBuilder.append("</thead>");
 
         for (Employee employee : Database.getDbInstance().getEmployees()) {
+            trBuilder.append(" <form action=\"add-attendance\" method=\"post\">");
             trBuilder.append("<tr>");
             trBuilder.append("<td>").append(employee.getEmployeeId().strip()).append("</td>");
-            trBuilder.append("<td>").append(employee.getFirstName().strip()).append(" ").append(employee.getLastName()).append("</td>");
+            trBuilder.append("<td>" + employee.getFirstName().strip()).append(" ").append(employee.getLastName()).append("</td>");
             trBuilder.append("<td>").append(displayTime).append("</td>");
             trBuilder.append("<td>");
             trBuilder.append("<input type=\"radio\" name=\"attendanceStatus_" + employee.getEmployeeId() + "\" value=\"Present\"> Present");
             trBuilder.append("<input type=\"radio\" name=\"attendanceStatus_" + employee.getEmployeeId() + "\" value=\"Absent\"> Absent");
             trBuilder.append("</td>");
+            trBuilder.append("<td><input type=\"submit\" class = \"submit-button\" value=\"Submit\"></td>");
             trBuilder.append("</tr>");
+            trBuilder.append("</form>");
+
         }
 
         trBuilder.append("</table>");
-        trBuilder.append("<div style=\"text-align: center; margin-top: 2%\">");
-        trBuilder.append("<input type=\"submit\" class=\"submit-button\" value=\"Add Attendance\">");
-        trBuilder.append("</div>");
-        trBuilder.append("</form>");
 
 
         new AppPage().renderHtml(req, resp, 1, "<h2>Adding and updating daily attendances</h2> " + trBuilder.toString());

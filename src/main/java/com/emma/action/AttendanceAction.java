@@ -29,11 +29,16 @@ public class AttendanceAction extends HttpServlet {
             String employeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName()+" "+ employee.getLastName();
             String attendStatus =  req.getParameter("attendanceStatus_" + employeeId);
-            LocalTime currentTime =  LocalTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
 
-            database.getAttendances().add(new Attendance(employeeId, employeeName, LocalDate.now(),displayTime,attendStatus));
+
+            if (attendStatus != null){
+                LocalTime currentTime =  LocalTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
+                database.getAttendances().add(new Attendance(employeeId, employeeName, LocalDate.now(),displayTime,attendStatus));
+
+            }
+
         }
         resp.sendRedirect("./home");
 
