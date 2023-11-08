@@ -34,9 +34,9 @@ public class EmployeeAction extends HttpServlet {
                 "  <form action=\"./add-employee\" method=\"post\" class=\"modal-content\">" +
                 "    <span class=\"close\" id=\"closePopup\">&times;</span>" +
                 "    <h2>Employee activity</h2>" +
-                "    <input type=\"text\" id=\"employee-id\" placeholder=\"Enter Employee ID\" name=\"employee-id\" class=\"form-control\">" +
-                "    <input type=\"text\" id=\"firstname\" placeholder=\"Enter First Name \"name=\"firstname\" class=\"form-control\">" +
-                "    <input type=\"text\" id=\"lastname\" placeholder=\"Enter Last Name \"name=\"lastname\" class=\"form-control\">" +
+                "    <input type=\"text\" id=\"employee-id\" placeholder=\"Enter Employee ID\" name=\"employeeId\" class=\"form-control\">" +
+                "    <input type=\"text\" id=\"firstname\" placeholder=\"Enter First Name \"name=\"firstName\" class=\"form-control\">" +
+                "    <input type=\"text\" id=\"lastname\" placeholder=\"Enter Last Name \"name=\"lastName\" class=\"form-control\">" +
                 rolesDropDown.toString() +
                 "    <input type=\"submit\" value=\"Submit\" class=\"submit-button\">" +
                 "  </form>" +

@@ -40,7 +40,7 @@ public class AttendanceAction extends HttpServlet {
             }
 
         }
-        resp.sendRedirect("./home");
+        resp.sendRedirect("./attendance-sheet");
 
 
     }
