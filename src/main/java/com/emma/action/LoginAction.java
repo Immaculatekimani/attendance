@@ -1,48 +1,50 @@
 package com.emma.action;
 
+import com.emma.app.bean.AuthBean;
+import com.emma.app.bean.AuthBeanI;
 import com.emma.app.model.entity.User;
-import com.emma.database.Database;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
-
 
 
 @WebServlet(urlPatterns = "/login")
 
-public class LoginAction extends HttpServlet {
+public class LoginAction extends BaseAction {
+
+    AuthBeanI authBean = new AuthBean();
+
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
 
-        if(httpSession.getAttribute("loggedInId") != null){
+        if (httpSession.getAttribute("loggedInId") != null) {
             resp.sendRedirect("./home");
         } else
             resp.sendRedirect("./");
     }
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User loginUser = new User();
+        serializeForm(loginUser, req.getParameterMap());
 
-        Database database =  Database.getDbInstance();
+        User userDetails = authBean.authenticate(loginUser);
 
-        for (User user : database.getUsers()){
-            if (username.equals(user.getUsername()) && password.equals(user.getPassword())){
-                HttpSession httpSession = req.getSession(true);
 
-                httpSession.setAttribute("loggedInId", new Date().getTime()+"");
-                httpSession.setAttribute("username", username);
+        if (userDetails != null) {
+            HttpSession httpSession = req.getSession(true);
 
-                resp.sendRedirect("./home");
-            }
+            httpSession.setAttribute("loggedInId", new Date().getTime() + "");
+            httpSession.setAttribute("username", loginUser.getUsername());
+
+            resp.sendRedirect("./home");
         }
+
 
         PrintWriter print = resp.getWriter();
         print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");

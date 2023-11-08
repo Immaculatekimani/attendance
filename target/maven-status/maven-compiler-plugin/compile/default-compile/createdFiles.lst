@@ -18,10 +18,12 @@ com/emma/database/Database.class
 com/emma/action/AttendanceSheet.class
 com/emma/action/EmployeeTypeConverter.class
 com/emma/action/HomeAction.class
+com/emma/app/bean/AuthBeanI.class
 com/emma/action/LogoutAction.class
 com/emma/app/model/entity/EmployeeRole.class
 com/emma/app/model/entity/Employee.class
 com/emma/action/AttendanceAction.class
+com/emma/app/bean/AuthBean.class
 com/emma/action/LoginAction.class
 com/emma/action/UserAction.class
 com/emma/filter/AuthFilter.class
