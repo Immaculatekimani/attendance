@@ -61,17 +61,5 @@ public class Employee {
         this.role = role;
     }
 
-    public String tableRow() {
-        StringBuilder trBuilder = new StringBuilder();
 
-        trBuilder.append("<tr>");
-        trBuilder.append("<td>").append(getEmployeeId().strip()).append("</td>");
-        trBuilder.append("<td>").append(getFirstName().strip()).append("</td>");
-        trBuilder.append("<td>").append(getLastName().strip()).append("</td>");
-        trBuilder.append("<td>").append(getRole()).append("</td>");
-        trBuilder.append("<tr>");
-
-        return trBuilder.toString();
-
-    }
 }
