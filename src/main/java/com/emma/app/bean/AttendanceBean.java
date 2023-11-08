@@ -2,6 +2,7 @@ package com.emma.app.bean;
 
 import com.emma.app.model.entity.Attendance;
 import com.emma.app.model.entity.Employee;
+import com.emma.app.view.html.HtmlComponent;
 import com.emma.database.Database;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,15 +14,11 @@ import java.time.format.DateTimeFormatter;
 public class AttendanceBean implements AttendanceBeanI, Serializable {
     @Override
     public String attendanceRecord() {
+        StringBuilder title = new StringBuilder();
+        title.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">LATEST ATTENDANCE RECORDS </h2>");
 
-        StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">LATEST ATTENDANCE RECORDS </h2>" + "<table>" + "        <thead>" + "            <tr>" + "                <th>Employee ID</th>" + "                <th>Employee Name</th>" + "                <th>Date</th>" + "                <th>Time</th> " + "                <th>Attendance Status</th>" + "             </tr>" + "        </thead>");
 
-        for (Attendance attendance : Database.getDbInstance().getAttendances()) {
-            trBuilder.append(attendance.tableRow());
-        }
-        trBuilder.append("</table>");
-        return trBuilder.toString();
+        return title.toString() + HtmlComponent.table(Database.getDbInstance().getAttendances());
     }
 
     @Override
