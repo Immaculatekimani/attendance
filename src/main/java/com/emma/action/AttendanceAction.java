@@ -1,5 +1,7 @@
 package com.emma.action;
 
+import com.emma.app.bean.AttendanceBean;
+import com.emma.app.bean.AttendanceBeanI;
 import com.emma.app.bean.EmployeeBean;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.entity.Attendance;
@@ -20,26 +22,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Formatter;
 
 @WebServlet("/add-attendance")
-public class AttendanceAction extends HttpServlet {
+public class AttendanceAction extends BaseAction {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Database database = Database.getDbInstance();
+        Attendance attendance = new Attendance();
+        AttendanceBeanI attendanceBean = new AttendanceBean();
 
-        for(Employee employee : database.getEmployees()){
-            String employeeId = employee.getEmployeeId();
-            String employeeName = employee.getFirstName()+" "+ employee.getLastName();
-            String attendStatus =  req.getParameter("attendanceStatus_" + employeeId);
+        HttpSession httpSession = req.getSession();
 
+        serializeForm(attendance, req.getParameterMap());
 
-            if (attendStatus != null){
-                LocalTime currentTime =  LocalTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
-                database.getAttendances().add(new Attendance(employeeId, employeeName, LocalDate.now(),displayTime,attendStatus));
-
-            }
-
+        try {
+            attendanceBean.addorUpdateAttendance(attendance, req);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
+
         resp.sendRedirect("./attendance-sheet");
 
 

@@ -30,6 +30,26 @@ public class Attendance implements Serializable {
         return employeeName;
     }
 
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public void setAttendanceDate(LocalDate attendanceDate) {
+        this.attendanceDate = attendanceDate;
+    }
+
+    public void setAttendanceTime(LocalTime attendanceTime) {
+        this.attendanceTime = attendanceTime;
+    }
+
+    public void setAttendanceStatus(String attendanceStatus) {
+        this.attendanceStatus = attendanceStatus;
+    }
+
     public LocalDate getAttendanceDate() {
         return attendanceDate;
     }

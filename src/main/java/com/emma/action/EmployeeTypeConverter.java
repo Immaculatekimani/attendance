@@ -17,7 +17,7 @@ public class EmployeeTypeConverter implements Converter {
             try {
                 return (T) EmployeeRole.valueOf(stringValue);
             } catch (IllegalArgumentException e) {
-                throw new ConversionException("Invalid HouseType value: " + stringValue);
+                throw new ConversionException("Invalid Employee type value: " + stringValue);
             }
         } else {
             throw new ConversionException("Value is not a String");
