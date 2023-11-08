@@ -1,9 +1,22 @@
 package com.emma.app.model.entity;
 
+import com.emma.app.view.html.MyHtmlForm;
+import com.emma.app.view.html.MyHtmlFormField;
+import com.emma.app.view.html.MyTableColHeader;
+
+@MyHtmlForm(label = "Add Employee", url = "./add-employee")
 public class Employee {
+    @MyHtmlFormField(placeholder = "Enter Employee ID")
+    @MyTableColHeader(header = "Employee ID")
     private String employeeId;
+    @MyHtmlFormField(placeholder = "Enter First Name")
+    @MyTableColHeader(header = "Employee First Name")
     private String firstName;
+    @MyHtmlFormField(placeholder = "Enter Last Name")
+    @MyTableColHeader(header = "Employee Last Name")
     private String lastName;
+    @MyHtmlFormField(label = "Choose Employee Role")
+    @MyTableColHeader(header = "Employee Role")
     private EmployeeRole role;
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role) {
@@ -47,6 +60,7 @@ public class Employee {
     public void setRole(EmployeeRole role) {
         this.role = role;
     }
+
     public String tableRow() {
         StringBuilder trBuilder = new StringBuilder();
 

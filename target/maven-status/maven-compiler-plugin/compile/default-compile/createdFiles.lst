@@ -23,7 +23,9 @@ com/emma/app/bean/AuthBeanI.class
 com/emma/action/LogoutAction.class
 com/emma/app/model/entity/EmployeeRole.class
 com/emma/app/model/entity/Employee.class
+com/emma/app/view/html/MyHtmlForm.class
 com/emma/action/AttendanceAction.class
+com/emma/app/view/html/MyHtmlFormField.class
 com/emma/app/view/html/HtmlComponent.class
 com/emma/app/bean/AuthBean.class
 com/emma/action/LoginAction.class
