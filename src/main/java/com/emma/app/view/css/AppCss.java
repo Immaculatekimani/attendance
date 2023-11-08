@@ -51,9 +51,6 @@ public class AppCss implements Serializable {
             "table tbody tr:nth-child(odd) { " +
             "    background-color: #C08261; " +
             "} " +
-            "table tbody tr:nth-child(even) { " +
-            "    background-color: #f2f2f2; " +
-            "} " +
             "table tbody tr:hover { " +
             "    background-color: #d1d1d1; " +
             "} " +
@@ -83,7 +80,7 @@ public class AppCss implements Serializable {
             ".modal-content {" +
             "  background-color: #F9DEC9;" +
             "  border: 1px solid #ccc;" +
-            "  border-radius: 5px;"+
+            "  border-radius: 5px;" +
             "  padding: 20px;" +
             "  width: 400px;" +
             "  margin: 15% auto;" +

@@ -1,14 +1,21 @@
 package com.emma.app.model.entity;
 
+import com.emma.app.view.html.MyTableColHeader;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Attendance implements Serializable {
+    @MyTableColHeader(header = "Employee ID")
     private String employeeID;
+    @MyTableColHeader(header = "Employee Name")
     private String employeeName;
+    @MyTableColHeader(header = "Attendance Date")
     private LocalDate attendanceDate;
+    @MyTableColHeader(header = "Attendance Time")
     private LocalTime attendanceTime;
+    @MyTableColHeader(header = "Attendance Status")
     private String attendanceStatus;
 
     public Attendance() {
@@ -62,19 +69,5 @@ public class Attendance implements Serializable {
         return attendanceStatus;
     }
 
-    public String tableRow() {
-        StringBuilder trBuilder = new StringBuilder();
-
-        trBuilder.append("<tr>");
-        trBuilder.append("<td>").append(getEmployeeID().strip()).append("</td>");
-        trBuilder.append("<td>").append(getEmployeeName().strip()).append("</td>");
-        trBuilder.append("<td>").append(getAttendanceDate()).append("</td>");
-        trBuilder.append("<td>").append(getAttendanceTime()).append("</td>");
-        trBuilder.append("<td>").append(getAttendanceStatus().strip()).append("</td>");
-        trBuilder.append("<tr>");
-
-        return trBuilder.toString();
-
-    }
 
 }
