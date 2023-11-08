@@ -16,6 +16,7 @@ com/emma/app/bean/UserBeanI.class
 com/emma/app/model/entity/Attendance.class
 com/emma/database/Database.class
 com/emma/action/AttendanceSheet.class
+com/emma/action/EmployeeTypeConverter.class
 com/emma/action/HomeAction.class
 com/emma/action/LogoutAction.class
 com/emma/app/model/entity/EmployeeRole.class
