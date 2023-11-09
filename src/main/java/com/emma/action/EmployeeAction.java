@@ -3,26 +3,21 @@ package com.emma.action;
 import com.emma.app.bean.EmployeeBean;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.entity.Employee;
-import com.emma.app.view.html.AppPage;
 import com.emma.app.view.html.HtmlComponent;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("employee")
-public class EmployeeAction extends HttpServlet {
+public class EmployeeAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        HttpSession session = req.getSession();
 
         EmployeeBeanI employeeBean = new EmployeeBean();
 
-        new AppPage().renderHtml(req, resp, 2, "<button id=\"openPopup\" class=\"submit-button\">Add Employee</button>" +
+        renderPage(req, resp, 2, "<button id=\"openPopup\" class=\"submit-button\">Add Employee</button>" +
                 "<div id=\"popupForm\" class=\"modal\">" +
                 "    <span class=\"close\" id=\"closePopup\">&times;</span>" +
                 HtmlComponent.form(Employee.class) +
