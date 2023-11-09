@@ -2,24 +2,20 @@ package com.emma.action;
 
 import com.emma.app.bean.AttendanceBean;
 import com.emma.app.bean.AttendanceBeanI;
-import com.emma.app.view.html.AppPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
 @WebServlet("/attendance-sheet")
-public class AttendanceSheet extends HttpServlet {
+public class AttendanceSheet extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         AttendanceBeanI attendanceBean = new AttendanceBean();
-
-        new AppPage().renderHtml(req, resp, 1,  attendanceBean.displayAttendanceSheet());
-
+        renderPage(req, resp, 1, attendanceBean.displayAttendanceSheet());
 
     }
 }

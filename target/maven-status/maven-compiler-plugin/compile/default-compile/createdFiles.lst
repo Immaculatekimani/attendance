@@ -3,10 +3,7 @@ com/emma/app/view/toolbar/Menu.class
 com/emma/action/ReportAction.class
 com/emma/app/model/view/MenuLinkStatus.class
 com/emma/app/view/toolbar/TopBar.class
-com/emma/app/view/css/AppCss.class
-com/emma/app/view/html/AppPage.class
 com/emma/app/model/view/MenuLink.class
-com/emma/action/InvalidLogin.class
 com/emma/app/model/entity/User.class
 com/emma/action/AddEmployeeAction.class
 com/emma/app/view/html/MyTableColHeader.class
