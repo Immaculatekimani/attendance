@@ -52,9 +52,52 @@ public class AttendanceBean implements AttendanceBeanI, Serializable {
 
     }
 
+    @Override
+    public String displayAttendanceSheet() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
+        StringBuilder trBuilder = new StringBuilder();
+        trBuilder.append("<h2 style=\"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">TODAY'S ATTENDANCE! </h2>");
+        trBuilder.append("<form action=\"./add-attendance\" method=\"post\">");
+
+        trBuilder.append("<table>");
+        trBuilder.append("<thead>");
+        trBuilder.append("<tr>");
+        trBuilder.append("<th>Employee ID</th>");
+        trBuilder.append("<th>Employee Name</th>");
+        trBuilder.append("<th>Attendance Time</th>");
+        trBuilder.append("<th>Attendance Status</th>");
+        trBuilder.append("<th>Submit Attendance</th>");
+        trBuilder.append("</tr>");
+        trBuilder.append("</thead>");
+
+        for (Employee employee : Database.getDbInstance().getEmployees()) {
+            trBuilder.append(" <form action=\"add-attendance\" method=\"post\">");
+            trBuilder.append("<tr>");
+            trBuilder.append("<td>").append(employee.getEmployeeId().strip()).append("</td>");
+            trBuilder.append("<td>" + employee.getFirstName().strip()).append(" ").append(employee.getLastName()).append("</td>");
+            trBuilder.append("<td>").append(displayTime).append("</td>");
+            trBuilder.append("<td>");
+            trBuilder.append("<input type=\"radio\" name=\"attendanceStatus_" + employee.getEmployeeId() + "\" value=\"Present\"> Present");
+            trBuilder.append("<input type=\"radio\" name=\"attendanceStatus_" + employee.getEmployeeId() + "\" value=\"Absent\"> Absent");
+            trBuilder.append("</td>");
+            trBuilder.append("<td><input type=\"submit\" class = \"submit-button\" value=\"Submit\"></td>");
+            trBuilder.append("</tr>");
+            trBuilder.append("</form>");
+
+        }
+
+        trBuilder.append("</table>");
+
+        return trBuilder.toString();
+
+    }
 
     @Override
     public void deleteAttendance(Attendance attendance) {
 
     }
+
+
 }

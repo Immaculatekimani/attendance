@@ -1,6 +1,8 @@
 package com.emma.filter;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +25,9 @@ public class AuthFilter implements Filter {
 
         String servletPath = req.getServletPath();
 
-        if (session.isNew()) {
+        if (session.isNew() || StringUtils.isBlank((String) session.getAttribute("loggedInId"))) {
             session.invalidate();
-            if(servletPath.equals("/login") || servletPath.equals("/index.html") || servletPath.equals("/user") || servletPath.equals("/invalid-login")){
+            if(servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/user") || servletPath.equals("/invalid-login")){
                 filterChain.doFilter(req, res);
             } else {
                 res.sendRedirect(req.getContextPath() + "/");
