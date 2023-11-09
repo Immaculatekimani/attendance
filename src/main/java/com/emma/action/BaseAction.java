@@ -34,4 +34,10 @@ public class BaseAction extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("./app/index.jsp");
         dispatcher.forward(request, response);
     }
+
+    public void renderAttendanceSheetPage(HttpServletRequest request, HttpServletResponse response, int activeMenu) throws ServletException, IOException {
+        request.setAttribute("activeMenu", activeMenu);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./app/attendanceSheet.jsp");
+        dispatcher.forward(request, response);
+    }
 }

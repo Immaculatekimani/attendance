@@ -15,7 +15,7 @@ public class AttendanceSheet extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         AttendanceBeanI attendanceBean = new AttendanceBean();
-        renderPage(req, resp, 1, attendanceBean.displayAttendanceSheet());
+        renderAttendanceSheetPage(req, resp, 1);
 
     }
 }
