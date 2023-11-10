@@ -1,4 +1,7 @@
-<%@ page import="com.emma.app.view.toolbar.TopBar" %>
+<jsp:useBean id="topBar" class="com.emma.app.view.toolbar.TopBar" scope="request"/>
+<jsp:useBean id="contentBean" class="com.emma.app.displaybean.ContentBean" scope="request"/>
+<jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -6,8 +9,14 @@
     <link rel="stylesheet" type="text/css" href="./app/indexStyle.css">
 </head>
 <body>
-    <%= new TopBar().menu((int)request.getAttribute("activeMenu")) %>
+
+    <% menuBean.setActiveMenu((int)request.getAttribute("activeMenu")); %>
+    <%= topBar.menu(menuBean.getActiveMenu()) %>
+
     <h2>Welcome <%= session.getAttribute("username") %></h2>
-       <%= request.getAttribute("content") %>
+
+    <% contentBean.setContent((String)request.getAttribute("content")); %>
+    <%= contentBean.getContent() %>
+
 </body>
 </html>
