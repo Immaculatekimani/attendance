@@ -10,5 +10,4 @@ public interface AttendanceBeanI {
     Attendance addorUpdateAttendance(Attendance attendance, HttpServletRequest req) throws Exception;
 
     void deleteAttendance(Attendance attendance);
-    String displayAttendanceSheet();
 }

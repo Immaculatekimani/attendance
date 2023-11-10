@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 @WebServlet("/attendance-sheet")
-public class AttendanceSheet extends BaseAction {
+public class AttendanceSheetAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         AttendanceBeanI attendanceBean = new AttendanceBean();

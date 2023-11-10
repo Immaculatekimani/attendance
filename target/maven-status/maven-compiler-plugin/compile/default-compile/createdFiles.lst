@@ -13,7 +13,6 @@ com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/model/entity/Attendance.class
 com/emma/database/Database.class
-com/emma/action/AttendanceSheet.class
 com/emma/action/EmployeeTypeConverter.class
 com/emma/action/HomeAction.class
 com/emma/app/bean/AuthBeanI.class
@@ -23,6 +22,7 @@ com/emma/app/model/entity/Employee.class
 com/emma/app/view/html/MyHtmlForm.class
 com/emma/action/AttendanceAction.class
 com/emma/app/view/html/MyHtmlFormField.class
+com/emma/action/AttendanceSheetAction.class
 com/emma/app/view/html/HtmlComponent.class
 com/emma/app/bean/AuthBean.class
 com/emma/action/LoginAction.class

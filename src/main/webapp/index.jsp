@@ -2,62 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./loginStyle.css">
     <title>Login or Register</title>
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #3D0C11;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
- h1 {
-            text-align: center;
-            color: #186F65;
-   }
-.login-container {
-    background-color: #F9DEC9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 20px;
-    width: 400px;
-}
 
-.login-container h2 {
-    text-align: center;
-    color: #068DA9;
-}
-
-.login-form {
-    text-align: center;
-}
-
-.login-form input[type="text"],
-.login-form input[type="password"] {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-form button {
-    background-color: #068DA9;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: #1f77c6;
-}
-
-    </style>
 </head>
 
 <body>

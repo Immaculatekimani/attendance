@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
 
         if (session.isNew() || StringUtils.isBlank((String) session.getAttribute("loggedInId"))) {
             session.invalidate();
-            if(servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/user") || servletPath.equals("/invalid-login")){
+            if(servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/user") || servletPath.contains(".css")){
                 filterChain.doFilter(req, res);
             } else {
                 res.sendRedirect(req.getContextPath() + "/");
