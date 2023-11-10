@@ -14,6 +14,8 @@ com/emma/app/bean/UserBeanI.class
 com/emma/app/model/entity/Attendance.class
 com/emma/database/Database.class
 com/emma/action/EmployeeTypeConverter.class
+com/emma/app/displaybean/MenuBean.class
+com/emma/app/displaybean/ContentBean.class
 com/emma/action/HomeAction.class
 com/emma/app/bean/AuthBeanI.class
 com/emma/action/LogoutAction.class

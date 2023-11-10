@@ -1,8 +1,10 @@
-<%@ page import="com.emma.app.view.toolbar.TopBar" %>
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.emma.app.model.entity.Employee" %>
 <%@ page import="com.emma.database.Database" %>
+<jsp:useBean id="topBar" class="com.emma.app.view.toolbar.TopBar" scope="request"/>
+<jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,8 +12,10 @@
     <link rel="stylesheet" type="text/css" href="./app/indexStyle.css">
 </head>
 <body>
-    <%= new TopBar().menu((int)request.getAttribute("activeMenu")) %>
-    <h2>Welcome <%= session.getAttribute("username") %></h2>
+    <% menuBean.setActiveMenu((int)request.getAttribute("activeMenu")); %>
+    <%= topBar.menu(menuBean.getActiveMenu()) %>
+
+     <h2>Welcome <%= session.getAttribute("username") %></h2>
     <% LocalTime currentTime = LocalTime.now();
                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
                        LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
