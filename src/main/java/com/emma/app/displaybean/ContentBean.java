@@ -1,6 +1,8 @@
 package com.emma.app.displaybean;
 
-public class ContentBean {
+import java.io.Serializable;
+
+public class ContentBean implements Serializable {
     private String content;
 
     public String getContent() {
