@@ -8,4 +8,4 @@ COPY target/attendance.war /opt/jboss/wildfly/standalone/deployments/
 EXPOSE 8080 9990
 
 # Start WildFly in standalone mode
-CMD ["sudo", "/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
