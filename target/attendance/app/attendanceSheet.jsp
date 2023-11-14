@@ -22,19 +22,17 @@
 
      <h2>Welcome <%= session.getAttribute("username") %></h2>
     <% LocalTime currentTime = LocalTime.now();
-                       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                       LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
 
-                           List<Attendance> allAttendances = Database.getDbInstance().getAttendances();
+       List<Attendance> allAttendances = Database.getDbInstance().getAttendances();
+       LocalDate currentDate = LocalDate.now();
 
-                           // Get the current date
-                           LocalDate currentDate = LocalDate.now();
-
-                           // Filter the attendances for the current date
-                           List<Attendance> todaysAttendances = allAttendances.stream()
-                                   .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
-                                   .collect(Collectors.toList());
-                       %>
+       // Filter the attendances for the current date
+       List<Attendance> todaysAttendances = allAttendances.stream()
+               .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
+               .collect(Collectors.toList());
+    %>
     <h2 style="text-align: center; color: #533535; background-color: #fff; padding: 10px;">TODAY'S ATTENDANCE! </h2>
 
     <form action="./add-attendance" onsubmit= "showAttendanceAlert()" method="post">
@@ -50,29 +48,30 @@
             </thead>
 
              <% for (Employee employee : Database.getDbInstance().getEmployees()) { %>
-                            <%-- Check if attendance for today has been entered for this employee --%>
-                            <% boolean isAttendanceEntered = todaysAttendances.stream()
-                                    .anyMatch(attendance -> attendance.getEmployeeID().equals(employee.getEmployeeId())); %>
+                <%-- Check if attendance for today has been entered for this employee --%>
+                <% boolean isAttendanceEntered = todaysAttendances.stream()
+                    .anyMatch(attendance -> attendance.getEmployeeID().equals(employee.getEmployeeId()));
+                %>
 
-                            <% if (!isAttendanceEntered) { %>
-                                <tr id="row_<%= employee.getEmployeeId() %>">
-                                    <td><%= employee.getEmployeeId().strip() %></td>
-                                    <td><%= employee.getFirstName().strip() + " " + employee.getLastName() %></td>
-                                    <td><%= displayTime %></td>
-                                    <td>
-                                        <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Present"> Present
-                                        <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Absent"> Absent
-                                    </td>
-                                    <td><input type="submit" class="submit-button" value="Submit"></td>
-                                </tr>
-                            <% } %>
-                        <% } %>
+                <% if (!isAttendanceEntered) { %>
+                    <tr id="row_<%= employee.getEmployeeId() %>">
+                        <td><%= employee.getEmployeeId().strip() %></td>
+                        <td><%= employee.getFirstName().strip() + " " + employee.getLastName() %></td>
+                        <td><%= displayTime %></td>
+                        <td>
+                            <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Present"> Present
+                            <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Absent"> Absent
+                        </td>
+                        <td><input type="submit" class="submit-button" value="Submit"></td>
+                    </tr>
+                <% } %>
+            <% } %>
         </table>
     </form>
 <script>
-        function showAttendanceAlert() {
-            alert("Attendance submitted successfully!");
-        }
-    </script>
+    function showAttendanceAlert() {
+        alert("Attendance submitted successfully!");
+    }
+</script>
 </body>
 </html>
