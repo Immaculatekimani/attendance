@@ -1,5 +1,5 @@
+<%@ page isELIgnored="false" %>
 <jsp:useBean id="topBar" class="com.emma.app.view.toolbar.TopBar" scope="request"/>
-<jsp:useBean id="contentBean" class="com.emma.app.displaybean.ContentBean" scope="request"/>
 <jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
 
 
@@ -10,13 +10,14 @@
 </head>
 <body>
 
-    <% menuBean.setActiveMenu((int)request.getAttribute("activeMenu")); %>
-    <%= topBar.menu(menuBean.getActiveMenu()) %>
+     <c:set var="activeMenu" value='${requestScope.activeMenu}' />
+        ${menuBean.setActiveMenu(activeMenu)}
+        ${topBar.menu(menuBean.activeMenu)}
+    </c:set>
 
-    <h2>Welcome <%= session.getAttribute("username") %></h2>
+    <h2>Welcome ${sessionScope.username} </h2>
 
-    <% contentBean.setContent((String)request.getAttribute("content")); %>
-    <%= contentBean.getContent() %>
+    ${requestScope.content}
 
 </body>
 </html>
