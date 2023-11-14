@@ -24,7 +24,7 @@
     </c:set>
 
 
-     <h2>Welcome sessionScope.username </h2>
+     <h2>Welcome ${sessionScope.username} </h2>
     <% LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
