@@ -1,4 +1,5 @@
 <%@ page import="java.time.LocalTime" %>
+<%@ page isELIgnored="false" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.emma.app.model.entity.Employee" %>
@@ -17,10 +18,13 @@
     <link rel="stylesheet" type="text/css" href="./app/indexStyle.css">
 </head>
 <body>
-    <% menuBean.setActiveMenu((int)request.getAttribute("activeMenu")); %>
-    <%= topBar.menu(menuBean.getActiveMenu()) %>
+    <c:set var="activeMenu" value='${requestScope.activeMenu}' />
+            ${menuBean.setActiveMenu(activeMenu)}
+            ${topBar.menu(menuBean.activeMenu)}
+    </c:set>
 
-     <h2>Welcome <%= session.getAttribute("username") %></h2>
+
+     <h2>Welcome sessionScope.username </h2>
     <% LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
