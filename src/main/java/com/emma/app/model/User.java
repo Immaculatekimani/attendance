@@ -1,4 +1,4 @@
-package com.emma.app.model.entity;
+package com.emma.app.model;
 
 public class User {
     private String userId;

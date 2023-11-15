@@ -1,4 +1,4 @@
-package com.emma.app.model.view;
+package com.emma.app.view.helper;
 
 import java.io.Serializable;
 

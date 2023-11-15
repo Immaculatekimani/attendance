@@ -1,7 +1,4 @@
-package com.emma.app.view.toolbar;
-
-import com.emma.app.model.view.MenuLink;
-import com.emma.app.model.view.MenuLinkStatus;
+package com.emma.app.view.helper;
 
 import java.io.Serializable;
 import java.util.ArrayList;

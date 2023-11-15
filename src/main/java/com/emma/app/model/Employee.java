@@ -1,8 +1,8 @@
-package com.emma.app.model.entity;
+package com.emma.app.model;
 
-import com.emma.app.view.html.MyHtmlForm;
-import com.emma.app.view.html.MyHtmlFormField;
-import com.emma.app.view.html.MyTableColHeader;
+import com.emma.app.view.helper.MyHtmlForm;
+import com.emma.app.view.helper.MyHtmlFormField;
+import com.emma.app.view.helper.MyTableColHeader;
 
 @MyHtmlForm(label = "Add Employee", url = "./add-employee")
 public class Employee {

@@ -1,9 +1,9 @@
 package com.emma.event;
 
-import com.emma.app.model.entity.Attendance;
-import com.emma.app.model.entity.Employee;
-import com.emma.app.model.entity.EmployeeRole;
-import com.emma.app.model.entity.User;
+import com.emma.app.model.Attendance;
+import com.emma.app.model.Employee;
+import com.emma.app.model.EmployeeRole;
+import com.emma.app.model.User;
 import com.emma.database.Database;
 
 import javax.servlet.ServletContextEvent;

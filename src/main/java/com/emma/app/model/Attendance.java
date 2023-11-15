@@ -1,6 +1,6 @@
-package com.emma.app.model.entity;
+package com.emma.app.model;
 
-import com.emma.app.view.html.MyTableColHeader;
+import com.emma.app.view.helper.MyTableColHeader;
 
 import java.io.Serializable;
 import java.time.LocalDate;

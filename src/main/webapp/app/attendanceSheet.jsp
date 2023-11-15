@@ -2,14 +2,13 @@
 <%@ page isELIgnored="false" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="com.emma.app.model.entity.Employee" %>
+<%@ page import="com.emma.app.model.Employee" %>
 <%@ page import="com.emma.database.Database" %>
-<jsp:useBean id="topBar" class="com.emma.app.view.toolbar.TopBar" scope="request"/>
+<jsp:useBean id="topBar" class="com.emma.app.view.helper.TopBar" scope="request"/>
 <jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
 <%@ page import="java.util.stream.Collectors" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.emma.app.model.entity.Attendance" %>
-<%@ page import="com.emma.app.model.entity.Employee" %>
+<%@ page import="com.emma.app.model.Attendance" %>
 
 
 <!DOCTYPE html>

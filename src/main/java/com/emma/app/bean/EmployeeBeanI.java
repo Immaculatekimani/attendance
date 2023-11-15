@@ -1,6 +1,6 @@
 package com.emma.app.bean;
 
-import com.emma.app.model.entity.Employee;
+import com.emma.app.model.Employee;
 
 public interface EmployeeBeanI {
     String employeeRecords();

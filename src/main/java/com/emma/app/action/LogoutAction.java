@@ -1,4 +1,4 @@
-package com.emma.action;
+package com.emma.app.action;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
