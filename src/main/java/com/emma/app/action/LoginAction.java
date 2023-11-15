@@ -1,8 +1,8 @@
-package com.emma.action;
+package com.emma.app.action;
 
 import com.emma.app.bean.AuthBean;
 import com.emma.app.bean.AuthBeanI;
-import com.emma.app.model.entity.User;
+import com.emma.app.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +47,7 @@ public class LoginAction extends BaseAction {
 
 
         PrintWriter print = resp.getWriter();
-        print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
+        print.write("<helper><body>Invalid login details <a href=\".\"> Login again </a></body></helper>");
     }
 
 }

@@ -1,8 +1,8 @@
-package com.emma.action;
+package com.emma.app.action;
 
 import com.emma.app.bean.UserBean;
 import com.emma.app.bean.UserBeanI;
-import com.emma.app.model.entity.User;
+import com.emma.app.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

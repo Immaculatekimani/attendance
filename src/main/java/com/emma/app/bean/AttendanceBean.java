@@ -1,8 +1,8 @@
 package com.emma.app.bean;
 
-import com.emma.app.model.entity.Attendance;
-import com.emma.app.model.entity.Employee;
-import com.emma.app.view.html.HtmlComponent;
+import com.emma.app.model.Attendance;
+import com.emma.app.model.Employee;
+import com.emma.app.view.helper.HtmlComponent;
 import com.emma.database.Database;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
 package com.emma.database;
 
-import com.emma.app.model.entity.Attendance;
-import com.emma.app.model.entity.Employee;
-import com.emma.app.model.entity.User;
+import com.emma.app.model.Attendance;
+import com.emma.app.model.Employee;
+import com.emma.app.model.User;
 
 import java.io.Serializable;
 import java.text.DateFormat;

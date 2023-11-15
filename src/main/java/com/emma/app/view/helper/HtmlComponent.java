@@ -1,4 +1,4 @@
-package com.emma.app.view.html;
+package com.emma.app.view.helper;
 
 import org.apache.commons.lang3.StringUtils;
 

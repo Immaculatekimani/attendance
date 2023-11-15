@@ -1,6 +1,6 @@
 package com.emma.app.bean;
 
-import com.emma.app.model.entity.User;
+import com.emma.app.model.User;
 import com.emma.database.Database;
 
 public class AuthBean implements AuthBeanI {

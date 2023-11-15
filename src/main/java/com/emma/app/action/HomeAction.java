@@ -1,4 +1,4 @@
-package com.emma.action;
+package com.emma.app.action;
 
 import com.emma.app.bean.AttendanceBean;
 import com.emma.app.bean.AttendanceBeanI;

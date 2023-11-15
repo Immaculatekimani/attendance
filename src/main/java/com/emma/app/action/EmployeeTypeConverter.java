@@ -1,6 +1,6 @@
-package com.emma.action;
+package com.emma.app.action;
 
-import com.emma.app.model.entity.EmployeeRole;
+import com.emma.app.model.EmployeeRole;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
