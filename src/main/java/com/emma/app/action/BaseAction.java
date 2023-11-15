@@ -1,11 +1,9 @@
 package com.emma.app.action;
 
-import com.emma.app.model.Attendance;
 import com.emma.app.model.EmployeeRole;
 import com.emma.app.view.helper.HtmlComponent;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,14 +21,19 @@ public class BaseAction extends HttpServlet {
         ConvertUtils.register(new EmployeeTypeConverter(), EmployeeRole.class);
     }
 
-    public void serializeForm(Object bean, Map<String, ? extends Object> requestMap) {
+    public <T> T serializeForm(Class<?> clazz, Map<String, ?> requestMap) {
+        T clazzInstance;
+
         try {
-            BeanUtils.populate(bean, requestMap);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
+            clazzInstance = (T) clazz.getDeclaredConstructor().newInstance();
+            BeanUtils.populate(clazzInstance, requestMap);
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+
+        return clazzInstance;
+
     }
 
     public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu, String header, Class<?> entity,

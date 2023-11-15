@@ -38,4 +38,18 @@ public class EmployeeAction extends BaseAction {
 
 
     }
+
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        EmployeeBeanI employeeBean = new EmployeeBean();
+
+        try {
+            employeeBean.addorUpdateEmployee(serializeForm(Employee.class, req.getParameterMap()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        resp.sendRedirect("./employee");
+
+
+    }
 }

@@ -4,7 +4,7 @@ import com.emma.app.view.helper.MyHtmlForm;
 import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
 
-@MyHtmlForm(label = "Add Employee", url = "./add-employee")
+@MyHtmlForm(label = "Add Employee", url = "./employee")
 public class Employee {
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")

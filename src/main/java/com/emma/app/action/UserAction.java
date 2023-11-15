@@ -15,10 +15,9 @@ public class UserAction extends BaseAction {
     UserBeanI userBean = new UserBean();
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User registerUser = new User();
-        serializeForm(registerUser, req.getParameterMap());
 
-        userBean.register(registerUser);
+
+        userBean.register(serializeForm(User.class, req.getParameterMap()));
 
         resp.sendRedirect("./");
         ;

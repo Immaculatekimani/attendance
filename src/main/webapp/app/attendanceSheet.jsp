@@ -38,7 +38,7 @@
     %>
     <h2 style="text-align: center; color: #533535; background-color: #fff; padding: 10px;">TODAY'S ATTENDANCE! </h2>
 
-    <form action="./add-attendance" onsubmit= "showAttendanceAlert()" method="post">
+    <form action="./attendance-sheet" onsubmit= "showAttendanceAlert()" method="post">
         <table>
             <thead>
                 <tr>
