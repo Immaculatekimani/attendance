@@ -16,14 +16,13 @@ public class HomeAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         AttendanceBeanI attendanceBean = new AttendanceBean();
-        renderPage(req, resp, 0 , Attendance.class, attendanceBean.list()
-//                " <div class=\"image-container\">" +
-//                " <div> " + "<img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +
-//                "</div>" +
-//                "</div>" + attendanceBean.attendanceRecord()
-               );
+        renderPage(req, resp, 0, " <div class=\"image-container\">" + " <div> " +
+                        "<img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +
+                        "</div>" +
+                        "</div>",
+                Attendance.class, attendanceBean.list()
 
-        System.out.println("#############attend list #########");
-        System.out.println(attendanceBean.list());
+        );
+
     }
 }

@@ -33,13 +33,11 @@ public class BaseAction extends HttpServlet {
         }
     }
 
-    public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu, Class<?> entity,
+    public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu, String header, Class<?> entity,
                            List<?> entityList) throws ServletException, IOException {
         request.setAttribute("activeMenu", activeMenu);
-       if(StringUtils.trimToEmpty(request.getParameter("action")).equals("add"))
-           request.setAttribute("content", HtmlComponent.form(entity));
-       else
-           request.setAttribute("content", HtmlComponent.table(entityList, entity));
+        request.setAttribute("header", header);
+        request.setAttribute("content", HtmlComponent.table(entityList, entity));
         RequestDispatcher dispatcher = request.getRequestDispatcher("./app/index.jsp");
         dispatcher.forward(request, response);
     }

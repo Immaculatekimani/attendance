@@ -1,7 +1,6 @@
 package com.emma.app.bean;
 
 import com.emma.app.model.Employee;
-import com.emma.app.view.helper.HtmlComponent;
 import com.emma.database.Database;
 
 import java.io.Serializable;

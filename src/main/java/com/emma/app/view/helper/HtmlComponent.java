@@ -1,5 +1,6 @@
 package com.emma.app.view.helper;
 
+import com.emma.app.model.Employee;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -8,15 +9,8 @@ import java.util.List;
 public class HtmlComponent {
     public static String table(List<?> dataList, Class<?> dataClass) {
 
-        if (!dataClass.isAnnotationPresent(HtmlTable.class)) {
-            return StringUtils.EMPTY;
-        }
-
-        HtmlTable htmlTable = dataClass.getAnnotation(HtmlTable.class);
-
         StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<a class=\"linkBtn\" href=\"").append(htmlTable.addUrl())
-                .append("\" target=\"_blank\">Add</a><br/>").append("<table><tr>");
+        trBuilder.append("<table><tr>");
 
         Field[] fields = dataClass.getDeclaredFields();
 
