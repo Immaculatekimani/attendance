@@ -6,25 +6,7 @@ import com.emma.database.Database;
 import java.io.Serializable;
 import java.util.List;
 
-public class EmployeeBean implements EmployeeBeanI, Serializable {
+public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI {
 
 
-    @Override
-    public List<Employee> list() {
-        return Database.getDbInstance().getEmployees();
-    }
-
-    @Override
-    public Employee addorUpdateEmployee(Employee employee) throws Exception {
-        Database database = Database.getDbInstance();
-
-        database.getEmployees().add(employee);
-
-        return employee;
-    }
-
-    @Override
-    public void deleteEmployee(Employee employee) {
-
-    }
 }

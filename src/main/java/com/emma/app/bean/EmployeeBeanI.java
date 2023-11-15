@@ -4,10 +4,6 @@ import com.emma.app.model.Employee;
 
 import java.util.List;
 
-public interface EmployeeBeanI {
+public interface EmployeeBeanI extends GenericBeanI<Employee> {
 
-    List<Employee> list();
-    Employee addorUpdateEmployee(Employee employee) throws Exception;
-
-    void deleteEmployee(Employee employee);
 }

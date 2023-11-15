@@ -43,7 +43,7 @@ public class EmployeeAction extends BaseAction {
         EmployeeBeanI employeeBean = new EmployeeBean();
 
         try {
-            employeeBean.addorUpdateEmployee(serializeForm(Employee.class, req.getParameterMap()));
+            employeeBean.addOrUpdateRecord(serializeForm(Employee.class, req.getParameterMap()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
