@@ -2,6 +2,8 @@ com/emma/app/bean/AttendanceBean.class
 com/emma/app/view/helper/MenuLink.class
 com/emma/app/action/LogoutAction.class
 com/emma/app/action/HomeAction.class
+com/emma/app/bean/GenericBean.class
+com/emma/app/bean/GenericBeanI.class
 com/emma/app/action/AttendanceAction.class
 com/emma/app/view/helper/MyHtmlForm.class
 com/emma/app/action/ReportAction.class

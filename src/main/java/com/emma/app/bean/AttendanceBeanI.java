@@ -5,10 +5,7 @@ import com.emma.app.model.Attendance;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public interface AttendanceBeanI {
+public interface AttendanceBeanI extends GenericBeanI<Attendance> {
 
-    List<Attendance> list();
-    Attendance addorUpdateAttendance(Attendance attendance, HttpServletRequest req) throws Exception;
 
-    void deleteAttendance(Attendance attendance);
 }

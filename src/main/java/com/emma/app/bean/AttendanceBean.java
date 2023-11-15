@@ -12,49 +12,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AttendanceBean implements AttendanceBeanI, Serializable {
-
-
-    @Override
-    public List<Attendance> list() {
-        return Database.getDbInstance().getAttendances();
-    }
-
-    @Override
-    public Attendance addorUpdateAttendance(Attendance attendance, HttpServletRequest req) throws Exception {
-        Database database = Database.getDbInstance();
-
-
-        for (Employee employee : database.getEmployees()) {
-            String employeeId = employee.getEmployeeId();
-            String employeeName = employee.getFirstName() + " " + employee.getLastName();
-            String attendStatus = req.getParameter("attendanceStatus_" + employeeId);
-            if (attendStatus != null) {
-                LocalTime currentTime = LocalTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
-
-                attendance.setEmployeeID(employeeId);
-                attendance.setEmployeeName(employeeName);
-                attendance.setAttendanceDate(LocalDate.now());
-                attendance.setAttendanceTime(displayTime);
-                attendance.setAttendanceStatus(attendStatus);
-
-
-                // Add the new attendance record to the database
-                database.getAttendances().add(attendance);
-            }
-
-
-        }
-        return attendance;
-
-    }
-
-    @Override
-    public void deleteAttendance(Attendance attendance) {
-
-    }
+public class AttendanceBean extends GenericBean<Attendance> implements AttendanceBeanI {
 
 
 }
