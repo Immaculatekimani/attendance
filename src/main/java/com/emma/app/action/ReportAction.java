@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ReportAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 3, "<h2>Employee attendance info goes here</h2> ");
+//        renderPage(req, resp, 3, "<h2>Employee attendance info goes here</h2> ");
 
 
     }

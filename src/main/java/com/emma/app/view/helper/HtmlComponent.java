@@ -6,15 +6,19 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class HtmlComponent {
-    public static String table(List<? extends Object> models) {
+    public static String table(List<?> dataList, Class<?> dataClass) {
 
-        if (models == null || models.isEmpty()) {
+        if (!dataClass.isAnnotationPresent(HtmlTable.class)) {
             return StringUtils.EMPTY;
         }
-        Field[] fields = models.get(0).getClass().getDeclaredFields();
+
+        HtmlTable htmlTable = dataClass.getAnnotation(HtmlTable.class);
 
         StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<table><tr>");
+        trBuilder.append("<a class=\"linkBtn\" href=\"").append(htmlTable.addUrl())
+                .append("\" target=\"_blank\">Add</a><br/>").append("<table><tr>");
+
+        Field[] fields = dataClass.getDeclaredFields();
 
         for (Field field : fields) {
             if (!field.isAnnotationPresent(MyTableColHeader.class))
@@ -23,21 +27,23 @@ public class HtmlComponent {
             trBuilder.append("<th>" + field.getAnnotation(MyTableColHeader.class).header() + "</th>");
         }
         trBuilder.append("</tr>");
-
-        for (Object model : models) {
-            trBuilder.append("<tr>");
-            for (Field field : fields) {
-                if (!field.isAnnotationPresent(MyTableColHeader.class)) continue;
-                try {
-                    field.setAccessible(true);
-                    trBuilder.append("<td>").append(field.get(model)).append("</td>");
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+        if (dataList != null && !dataList.isEmpty()) {
+            for (Object model : dataList) {
+                trBuilder.append("<tr>");
+                for (Field field : fields) {
+                    if (!field.isAnnotationPresent(MyTableColHeader.class)) continue;
+                    try {
+                        field.setAccessible(true);
+                        trBuilder.append("<td>").append(field.get(model)).append("</td>");
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            trBuilder.append("</tr>");
+                trBuilder.append("</tr>");
 
+            }
         }
+
         trBuilder.append("</table>");
         return trBuilder.toString();
 

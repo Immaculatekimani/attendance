@@ -10,15 +10,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class AttendanceBean implements AttendanceBeanI, Serializable {
+
+
     @Override
-    public String attendanceRecord() {
-        StringBuilder title = new StringBuilder();
-        title.append("<h2 style = \"text-align: center; color: #533535; background-color: #fff; padding: 10px;\">LATEST ATTENDANCE RECORDS </h2>");
-
-
-        return title.toString() + HtmlComponent.table(Database.getDbInstance().getAttendances());
+    public List<Attendance> list() {
+        return Database.getDbInstance().getAttendances();
     }
 
     @Override
