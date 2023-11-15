@@ -1,8 +1,11 @@
 package com.emma.app.action;
 
+import com.emma.app.model.Attendance;
 import com.emma.app.model.EmployeeRole;
+import com.emma.app.view.helper.HtmlComponent;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.List;
+
 
 public class BaseAction extends HttpServlet {
     static {
@@ -28,9 +33,11 @@ public class BaseAction extends HttpServlet {
         }
     }
 
-    public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu, String content) throws ServletException, IOException {
+    public void renderPage(HttpServletRequest request, HttpServletResponse response, int activeMenu, String header, Class<?> entity,
+                           List<?> entityList) throws ServletException, IOException {
         request.setAttribute("activeMenu", activeMenu);
-        request.setAttribute("content", content);
+        request.setAttribute("header", header);
+        request.setAttribute("content", HtmlComponent.table(entityList, entity));
         RequestDispatcher dispatcher = request.getRequestDispatcher("./app/index.jsp");
         dispatcher.forward(request, response);
     }

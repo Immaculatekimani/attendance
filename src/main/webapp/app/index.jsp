@@ -17,6 +17,7 @@
 
     <h2>Welcome ${sessionScope.username} </h2>
 
+    ${requestScope.header}
     ${requestScope.content}
 
 </body>

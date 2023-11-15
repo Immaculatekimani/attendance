@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("employee")
 public class EmployeeAction extends BaseAction {
@@ -22,7 +23,7 @@ public class EmployeeAction extends BaseAction {
                 "    <span class=\"close\" id=\"closePopup\">&times;</span>" +
                 HtmlComponent.form(Employee.class) +
                 "</div>" +
-                employeeBean.employeeRecords() +
+
                 "<script> document.getElementById(\"openPopup\").addEventListener(\"click\", function() {" +
                 "  document.getElementById(\"popupForm\").style.display = \"block\";" +
                 "});" +
@@ -33,7 +34,7 @@ public class EmployeeAction extends BaseAction {
                 "  if (event.target == document.getElementById(\"popupForm\")) {" +
                 "    document.getElementById(\"popupForm\").style.display = \"none\";" +
                 "  }" +
-                "});</script>");
+                "});</script>", Employee.class, employeeBean.list());
 
 
     }
