@@ -19,7 +19,8 @@ public class HomeAction extends BaseAction {
         renderPage(req, resp, 0, " <div class=\"image-container\">" + " <div> " +
                         "<img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +
                         "</div>" +
-                        "</div>",
+                        "</div>" +"<h1 style=\" color: #3D0C11;\n" +
+                        "    text-align: center; \"> RECENT ATTENDANCE RECORDS</h1>",
                 Attendance.class, attendanceBean.list()
 
         );
