@@ -28,13 +28,13 @@ public class TopBar implements Menu, Serializable {
     public String menu(int activeMenu) {
 
         this.activateLink(activeMenu);
-        String menuBar = "<div class=\"topnav\">";
+        String menuBar = "<nav class=\"topnav\">";
 
         for (MenuLink link : links)
             menuBar += "<a " + (link.getStatus() == MenuLinkStatus.ACTIVE ? "class=\"active\"" : "")
                     + " href=\"" + link.getLink() + "\">" + link.getLabel() + "</a>";
 
-        menuBar += "</div>";
+        menuBar += "</nav>";
         return menuBar;
     }
 }
