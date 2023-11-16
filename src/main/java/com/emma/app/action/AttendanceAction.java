@@ -25,34 +25,7 @@ public class AttendanceAction extends BaseAction {
 
         Database database = Database.getDbInstance();
 
-
-        for (Employee employee : database.getEmployees()) {
-            String employeeId = employee.getEmployeeId();
-            String employeeName = employee.getFirstName() + " " + employee.getLastName();
-            String attendStatus = req.getParameter("attendanceStatus_" + employeeId);
-            if (attendStatus != null) {
-                LocalTime currentTime = LocalTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
-
-                attendance.setEmployeeID(employeeId);
-                attendance.setEmployeeName(employeeName);
-                attendance.setAttendanceDate(LocalDate.now());
-                attendance.setAttendanceTime(displayTime);
-                attendance.setAttendanceStatus(attendStatus);
-
-
-                // Add the new attendance record to the database
-                try {
-                    attendanceBean.addOrUpdateRecord(attendance);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-
-        }
-
+        attendanceBean.logAttendance(attendance, database, req);
 
         resp.sendRedirect("./attendance-sheet");
 
