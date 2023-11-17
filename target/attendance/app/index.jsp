@@ -2,6 +2,8 @@
 <jsp:useBean id="topBar" class="com.emma.app.view.helper.TopBar" scope="request"/>
 <jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
 
+<c:set var="username" value="${sessionScope.username}" />
+${topBar.setSessionUsername(username)}
 
 <!DOCTYPE html>
 <html>
@@ -10,14 +12,15 @@
     <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class= "body-style">
 
      <c:set var="activeMenu" value='${requestScope.activeMenu}' />
         ${menuBean.setActiveMenu(activeMenu)}
         ${topBar.menu(menuBean.activeMenu)}
     </c:set>
 
-    <h2>Welcome ${sessionScope.username} </h2>
+    <c:set var="username" value="${sessionScope.username}" />
+    ${topBar.setSessionUsername(username)}
 
     ${requestScope.header}
     ${requestScope.content}

@@ -19,7 +19,7 @@
     <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class= "body-style">
     <c:set var="activeMenu" value='${requestScope.activeMenu}' />
             ${menuBean.setActiveMenu(activeMenu)}
             ${topBar.menu(menuBean.activeMenu)}

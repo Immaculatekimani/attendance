@@ -1,11 +1,17 @@
 package com.emma.app.view.helper;
 
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopBar implements Menu, Serializable {
     private final List<MenuLink> links = new ArrayList<>();
+    private String sessionUsername;
+
+    public void setSessionUsername(String sessionUsername) {
+        this.sessionUsername = sessionUsername;
+    }
 
     {
         links.add(new MenuLink("./home", "Home", MenuLinkStatus.ACTIVE));
@@ -26,6 +32,7 @@ public class TopBar implements Menu, Serializable {
     @Override
     public String menu(int activeMenu) {
         this.activateLink(activeMenu);
+
 
         StringBuilder menuBar = new StringBuilder();
         menuBar.append("<nav class=\"navbar  navbar-expand bg-gradient-primary topbar mb-4 static-top\">");
@@ -48,7 +55,7 @@ public class TopBar implements Menu, Serializable {
         menuBar.append("<a class=\"nav-link\" href=\"./logout\" id=\"userDropdown\" role=\"button\" ");
         menuBar.append("aria-haspopup=\"true\" aria-expanded=\"false\">");
         menuBar.append("<img class=\"img-profile rounded-circle\" src=\"images/user-icn.png\" style=\"max-width: 60px\">");
-        menuBar.append("<span class=\"ml-2 d-none d-lg-inline text-white small\"><b>Logout ").append("USERNAME").append("</b></span>");
+        menuBar.append("<span class=\"ml-2 d-none d-lg-inline text-white small\"><b>Logout ").append(sessionUsername).append("</b></span>");
         menuBar.append("</a>");
 
         menuBar.append("</li>");
