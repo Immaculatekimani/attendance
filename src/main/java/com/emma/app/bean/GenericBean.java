@@ -9,31 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenericBean<T> implements GenericBeanI<T> {
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public List<T> list() {
-        Class clazz = ((Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0]);
+    public List<T> list(Class<?> entity) {
+        return (List<T>) Database.getDbInstance().getData(entity);
 
-        if (clazz.equals(Employee.class))
-            return (List<T>) Database.getDbInstance().getEmployees();
-        if (clazz.equals(Attendance.class))
-            return (List<T>) Database.getDbInstance().getAttendances();
-
-        return new ArrayList<>();
     }
 
     @Override
-    public T addOrUpdateRecord(T entity) {
+    public void addOrUpdateRecord(T entity) {
         Database database = Database.getDbInstance();
 
-
-        if (entity instanceof Employee) {
-            database.getEmployees().add((Employee) entity);
-        }
-        if (entity instanceof Attendance) {
-            database.getAttendances().add((Attendance) entity);
-        }
-        return entity;
+        database.getData().add(entity);
 
     }
 

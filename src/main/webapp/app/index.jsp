@@ -19,8 +19,6 @@ ${topBar.setSessionUsername(username)}
         ${topBar.menu(menuBean.activeMenu)}
     </c:set>
 
-    <c:set var="username" value="${sessionScope.username}" />
-    ${topBar.setSessionUsername(username)}
 
     ${requestScope.header}
     ${requestScope.content}

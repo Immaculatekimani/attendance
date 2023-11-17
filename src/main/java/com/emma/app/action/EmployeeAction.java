@@ -34,7 +34,7 @@ public class EmployeeAction extends BaseAction {
                 "  if (event.target == document.getElementById(\"popupForm\")) {" +
                 "    document.getElementById(\"popupForm\").style.display = \"none\";" +
                 "  }" +
-                "});</script>", Employee.class, employeeBean.list());
+                "});</script>", Employee.class, employeeBean.list(Employee.class));
 
 
     }

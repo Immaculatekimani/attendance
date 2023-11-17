@@ -10,6 +10,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.emma.app.model.Attendance" %>
 
+<c:set var="username" value="${sessionScope.username}" />
+${topBar.setSessionUsername(username)}
 
 <!DOCTYPE html>
 <html>
@@ -28,14 +30,14 @@
     <% LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
+        LocalDate currentDate = LocalDate.now();
 
-       List<Attendance> allAttendances = Database.getDbInstance().getAttendances();
-       LocalDate currentDate = LocalDate.now();
+         List<Employee> allEmployees = (List<Employee>) (List<?>) Database.getDbInstance().getData(Employee.class);
+             List<Attendance> allAttendances = (List<Attendance>) (List<?>) Database.getDbInstance().getData(Attendance.class);
 
-       // Filter the attendances for the current date
-       List<Attendance> todaysAttendances = allAttendances.stream()
-               .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
-               .collect(Collectors.toList());
+             List<Attendance> todaysAttendances = allAttendances.stream()
+                     .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
+                     .collect(Collectors.toList());
     %>
     <h2 style="text-align: center; color: #533535; background-color: #fff; padding: 10px;">TODAY'S ATTENDANCE! </h2>
 
@@ -43,7 +45,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Employee ID</th>
+                    <th>Employee ID</th>a
                     <th>Employee Name</th>
                     <th>Attendance Time</th>
                     <th>Attendance Status</th>
@@ -51,7 +53,7 @@
                 </tr>
             </thead>
 
-             <% for (Employee employee : Database.getDbInstance().getEmployees()) { %>
+             <% for (Employee employee : allEmployees) { %>
                 <%-- Check if attendance for today has been entered for this employee --%>
                 <% boolean isAttendanceEntered = todaysAttendances.stream()
                     .anyMatch(attendance -> attendance.getEmployeeID().equals(employee.getEmployeeId()));
