@@ -1,8 +1,15 @@
 package com.emma.app.model;
 
+import com.emma.database.helper.DbTable;
+import com.emma.database.helper.DbTableColumn;
+
+@DbTable(name = "users")
 public class User {
-    private String userId;
+    @DbTableColumn(name = "id", definition = "int")
+    private int userId;
+    @DbTableColumn(name = "username")
     private String username;
+    @DbTableColumn(name = "password")
     private String password;
     private String confirmPassword;
 
@@ -17,17 +24,17 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public User(String userId, String username, String password) {
+    public User(int userId, String username, String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

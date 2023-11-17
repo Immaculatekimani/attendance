@@ -5,8 +5,10 @@ com/emma/app/action/HomeAction.class
 com/emma/app/bean/GenericBean.class
 com/emma/app/bean/GenericBeanI.class
 com/emma/app/action/AttendanceAction.class
+com/emma/database/helper/DbTableColumn.class
 com/emma/app/view/helper/MyHtmlForm.class
 com/emma/app/action/ReportAction.class
+com/emma/database/helper/DbTable.class
 com/emma/app/action/EmployeeAction.class
 com/emma/app/bean/EmployeeBeanI.class
 com/emma/app/view/helper/Menu.class
@@ -15,6 +17,7 @@ com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/view/helper/MenuLinkStatus.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/HtmlComponent.class
+com/emma/database/SqlDatabase.class
 com/emma/app/model/Attendance.class
 com/emma/database/Database.class
 com/emma/app/action/LoginAction.class
