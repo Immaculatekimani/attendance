@@ -17,9 +17,9 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
     @Override
     public Attendance logAttendance(Attendance attendance, Database database, HttpServletRequest req) {
+        EmployeeBeanI employeeBean = new EmployeeBean();
 
-
-        for (Employee employee : database.getEmployees()) {
+        for (Employee employee : employeeBean.list(Employee.class)) {
             String employeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
             String attendStatus = req.getParameter("attendanceStatus_" + employeeId);
