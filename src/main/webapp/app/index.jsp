@@ -8,9 +8,9 @@ ${topBar.setSessionUsername(username)}
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
     <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
 </head>
 <body class= "body-style">
 

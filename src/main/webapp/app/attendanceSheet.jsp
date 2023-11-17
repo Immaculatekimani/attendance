@@ -14,10 +14,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
-    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
     <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
+
 </head>
 <body class= "body-style">
     <c:set var="activeMenu" value='${requestScope.activeMenu}' />
@@ -25,8 +25,6 @@
             ${topBar.menu(menuBean.activeMenu)}
     </c:set>
 
-
-     <h2>Welcome ${sessionScope.username} </h2>
     <% LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
