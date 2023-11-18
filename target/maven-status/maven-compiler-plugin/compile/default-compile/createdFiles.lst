@@ -26,12 +26,14 @@ com/emma/app/action/BaseAction.class
 com/emma/app/displaybean/MenuBean.class
 com/emma/app/bean/AuthBeanI.class
 com/emma/app/view/helper/MyTableColHeader.class
+com/emma/app/view/helper/design/EmployeeDesign.class
 com/emma/app/action/UserAction.class
 com/emma/app/model/EmployeeRole.class
 com/emma/app/view/helper/TopBar.class
 com/emma/app/view/helper/MyHtmlFormField.class
 com/emma/app/bean/AuthBean.class
 com/emma/app/action/EmployeeTypeConverter.class
+com/emma/app/view/helper/design/HomeDesign.class
 com/emma/filter/AuthFilter.class
 com/emma/event/AppInit.class
 com/emma/app/model/Employee.class
