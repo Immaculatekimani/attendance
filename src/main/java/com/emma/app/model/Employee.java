@@ -3,20 +3,27 @@ package com.emma.app.model;
 import com.emma.app.view.helper.MyHtmlForm;
 import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
+import com.emma.database.helper.DbTable;
+import com.emma.database.helper.DbTableColumn;
 
+@DbTable(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee")
-public class Employee {
+public class Employee extends BaseEntity {
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")
+    @DbTableColumn(name = "employee_id")
     private String employeeId;
     @MyHtmlFormField(placeholder = "Enter First Name")
     @MyTableColHeader(header = "Employee First Name")
+    @DbTableColumn(name = "firstname")
     private String firstName;
     @MyHtmlFormField(placeholder = "Enter Last Name")
     @MyTableColHeader(header = "Employee Last Name")
+    @DbTableColumn(name = "lastname")
     private String lastName;
     @MyHtmlFormField(label = "Choose Employee Role")
     @MyTableColHeader(header = "Employee Role")
+    @DbTableColumn(name = "role")
     private EmployeeRole role;
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role) {

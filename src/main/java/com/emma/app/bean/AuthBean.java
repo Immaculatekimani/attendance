@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AuthBean implements AuthBeanI {
-    Database database = Database.getDbInstance();
-
     @Override
     public User authenticate(User loginUser) throws SQLException {
         PreparedStatement statement = SqlDatabase.getInstance().getConnection()
@@ -22,7 +20,7 @@ public class AuthBean implements AuthBeanI {
         User user = new User();
 
         while (result.next()) {
-            user.setUserId(result.getInt("id"));
+            user.setId(result.getLong("id"));
             user.setUsername(result.getString("username"));
 
         }

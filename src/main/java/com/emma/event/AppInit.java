@@ -24,38 +24,7 @@ import java.util.List;
 public class AppInit implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("#################### Init Database ###############");
-
-        try {
-            Connection connection = SqlDatabase.getInstance().getConnection();
-
-            List<Class<?>> entities = new ArrayList<>();
-            entities.add(User.class);
-            entities.add(Employee.class);
-            entities.add(Attendance.class);
-
-            for (Class<?> clazz : entities) {
-                if (!clazz.isAnnotationPresent(DbTable.class))
-                    continue;
-
-                DbTable dbTable = clazz.getAnnotation(DbTable.class);
-                StringBuilder sqlBuilder = new StringBuilder();
-
-                sqlBuilder.append("create table if not exists ").append(dbTable.name()).append("(");
-                for (Field field : clazz.getDeclaredFields()) {
-                    if (!field.isAnnotationPresent(DbTableColumn.class))
-                        continue;
-                    DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
-                    sqlBuilder.append(dbTableColumn.name()).append(" ").append(dbTableColumn.definition())
-                            .append(",");
-                }
-                sqlBuilder.append(")");
-
-                connection.prepareStatement(sqlBuilder.toString().replace(",)", ")")).executeUpdate();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+        SqlDatabase.updateScheme();
         Database db = Database.getDbInstance();
         db.getData().add(new Attendance("E12345", "John Doe", LocalDate.of(2023, 11, 5), LocalTime.of(8, 30), "Present"));
         db.getData().add(new Attendance("E38292", "Taylor Swift", LocalDate.of(2023, 11, 5), LocalTime.of(8, 50), "Present"));

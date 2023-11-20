@@ -28,6 +28,8 @@ com/emma/app/bean/AuthBeanI.class
 com/emma/app/view/helper/MyTableColHeader.class
 com/emma/app/view/helper/design/EmployeeDesign.class
 com/emma/app/action/UserAction.class
+com/emma/database/helper/DbTableId.class
+com/emma/app/model/BaseEntity.class
 com/emma/app/model/EmployeeRole.class
 com/emma/app/view/helper/TopBar.class
 com/emma/app/view/helper/MyHtmlFormField.class
