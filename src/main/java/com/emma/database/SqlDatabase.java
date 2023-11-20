@@ -1,25 +1,32 @@
 package com.emma.database;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SqlDatabase implements Serializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/attendance";
-    private static final String USER = "tatu";
-    private static final String PASSWORD = "tatu";
     private static SqlDatabase database;
     private Connection connection;
 
-    private SqlDatabase() throws SQLException {
-        connection = DriverManager.getConnection(URL, USER, PASSWORD);
+    private SqlDatabase() throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/attendance");
+        connection = dataSource.getConnection();
     }
 
     public static SqlDatabase getInstance() throws SQLException {
-        if (database == null)
-            database = new SqlDatabase();
+        if (database == null) {
+            try {
+                database = new SqlDatabase();
+
+            } catch (SQLException | NamingException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         return database;
     }

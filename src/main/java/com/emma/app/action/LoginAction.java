@@ -7,6 +7,7 @@ import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeRole;
 import com.emma.app.model.User;
 import com.emma.database.Database;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,18 +42,18 @@ public class LoginAction extends BaseAction {
 
         try {
             User userDetails = authBean.authenticate(loginUser);
-            if (userDetails != null) {
+            if (userDetails != null && StringUtils.isNotBlank(userDetails.getUsername())) {
                 HttpSession httpSession = req.getSession(true);
 
                 httpSession.setAttribute("loggedInId", new Date().getTime() + "");
-                httpSession.setAttribute("username", loginUser.getUsername());
+                httpSession.setAttribute("username", userDetails.getUsername());
 
                 resp.sendRedirect("./home");
             }
 
 
             PrintWriter print = resp.getWriter();
-            print.write("<helper><body>Invalid login details <a href=\".\"> Login again </a></body></helper>");
+            print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
