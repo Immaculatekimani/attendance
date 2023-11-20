@@ -25,13 +25,18 @@ public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Role")
     @DbTableColumn(name = "role")
     private EmployeeRole role;
+    @MyTableColHeader(header = "Employee Image")
+    @DbTableColumn(name = "employeeImage")
+    private String employeeImage;
 
-    public Employee(String employeeId, String firstName, String lastName, EmployeeRole role) {
+    public Employee(String employeeId, String firstName, String lastName, EmployeeRole role, String employeeImage) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.employeeImage = employeeImage;
     }
+
 
     public Employee() {
     }
@@ -66,6 +71,14 @@ public class Employee extends BaseEntity {
 
     public void setRole(EmployeeRole role) {
         this.role = role;
+    }
+
+    public String getEmployeeImage() {
+        return employeeImage;
+    }
+
+    public void setEmployeeImage(String employeeImage) {
+        this.employeeImage = employeeImage;
     }
 
 
