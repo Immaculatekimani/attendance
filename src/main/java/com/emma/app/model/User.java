@@ -4,9 +4,8 @@ import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
 @DbTable(name = "users")
-public class User {
-    @DbTableColumn(name = "id", definition = "int")
-    private int userId;
+public class User extends BaseEntity {
+
     @DbTableColumn(name = "username")
     private String username;
     @DbTableColumn(name = "password")
@@ -24,18 +23,10 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public User(int userId, String username, String password) {
-        this.userId = userId;
+    public User(Long userId, String username, String password) {
+        setId(userId);
         this.username = username;
         this.password = password;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

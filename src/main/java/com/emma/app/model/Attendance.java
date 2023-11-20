@@ -1,21 +1,29 @@
 package com.emma.app.model;
 
 import com.emma.app.view.helper.MyTableColHeader;
+import com.emma.database.helper.DbTable;
+import com.emma.database.helper.DbTableColumn;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Attendance implements Serializable {
+@DbTable(name = "attendances")
+public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Employee ID")
+    @DbTableColumn(name = "employee_id")
     private String employeeID;
     @MyTableColHeader(header = "Employee Name")
+    @DbTableColumn(name = "employee_name")
     private String employeeName;
     @MyTableColHeader(header = "Attendance Date")
+    @DbTableColumn(name = "attendance_date", definition = "DATE")
     private LocalDate attendanceDate;
     @MyTableColHeader(header = "Attendance Time")
+    @DbTableColumn(name = "attendance_time", definition = "TIME")
     private LocalTime attendanceTime;
     @MyTableColHeader(header = "Attendance Status")
+    @DbTableColumn(name = "attendance_status")
     private String attendanceStatus;
 
     public Attendance() {
