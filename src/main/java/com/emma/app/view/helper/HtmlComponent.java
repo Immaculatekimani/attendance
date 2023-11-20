@@ -28,7 +28,11 @@ public class HtmlComponent {
                     if (!field.isAnnotationPresent(MyTableColHeader.class)) continue;
                     try {
                         field.setAccessible(true);
-                        trBuilder.append("<td>").append(field.get(model)).append("</td>");
+                        if (field.getName().equals("employeeImage")) {
+                            trBuilder.append("<td><img src='" + field.get(model) + "' alt='Employee Image' class = \"prof\"></td>");
+                        } else {
+                            trBuilder.append("<td>").append(field.get(model)).append("</td>");
+                        }
                     } catch (IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
