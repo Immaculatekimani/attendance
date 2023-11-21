@@ -13,7 +13,7 @@ public class GenericBean<T> implements GenericBeanI<T> {
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public List<T> list(Class<?> entity) {
-        return (List<T>) Database.getDbInstance().getData(entity);
+        return (List<T>) SqlDatabase.select(entity);
 
     }
 

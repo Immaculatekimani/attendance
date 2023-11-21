@@ -16,7 +16,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
 
     @Override
-    public Attendance logAttendance(Attendance attendance, Database database, HttpServletRequest req) {
+    public Attendance logAttendance(Attendance attendance, HttpServletRequest req) {
         EmployeeBeanI employeeBean = new EmployeeBean();
 
         for (Employee employee : employeeBean.list(Employee.class)) {

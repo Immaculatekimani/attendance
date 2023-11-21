@@ -81,5 +81,14 @@ public class Employee extends BaseEntity {
         this.employeeImage = employeeImage;
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId='" + employeeId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", employeeImage='" + employeeImage + '\'' +
+                '}';
+    }
 }

@@ -23,9 +23,8 @@ public class AttendanceAction extends BaseAction {
         Attendance attendance = serializeForm(Attendance.class, req.getParameterMap());
         AttendanceBeanI attendanceBean = new AttendanceBean();
 
-        Database database = Database.getDbInstance();
 
-        attendanceBean.logAttendance(attendance, database, req);
+        attendanceBean.logAttendance(attendance, req);
 
         resp.sendRedirect("./attendance-sheet");
 
