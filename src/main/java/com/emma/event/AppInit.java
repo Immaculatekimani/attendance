@@ -25,6 +25,7 @@ public class AppInit implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         SqlDatabase.updateScheme();
+/*
         Database db = Database.getDbInstance();
         db.getData().add(new Attendance("E12345", "John Doe", LocalDate.of(2023, 11, 5), LocalTime.of(8, 30), "Present"));
         db.getData().add(new Attendance("E38292", "Taylor Swift", LocalDate.of(2023, 11, 5), LocalTime.of(8, 50), "Present"));
@@ -43,6 +44,7 @@ public class AppInit implements ServletContextListener {
         db.getData().add(new Employee("E40283","Jack", "Ireri",EmployeeRole.QA,"images/prof/6.png"));
         db.getData().add(new Employee("E10392","Cynthia", "Wangari",EmployeeRole.QA,"images/prof/7.png"));
         db.getData().add(new Employee("E29390","Grace", "Emily",EmployeeRole.DEVELOPER,"images/prof/8.png"));
+*/
 
     }
 
