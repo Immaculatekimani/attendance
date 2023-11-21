@@ -4,6 +4,13 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.emma.app.model.Employee" %>
 <%@ page import="com.emma.database.Database" %>
+<%@ page import="com.emma.app.bean.AttendanceBeanI" %>
+<%@ page import=" com.emma.app.bean.EmployeeBeanI" %>
+<%@ page import="com.emma.app.bean.AttendanceBean" %>
+<%@ page import=" com.emma.app.bean.EmployeeBean" %>
+
+
+
 <jsp:useBean id="topBar" class="com.emma.app.view.helper.TopBar" scope="request"/>
 <jsp:useBean id="menuBean" class="com.emma.app.displaybean.MenuBean" scope="request"/>
 <%@ page import="java.util.stream.Collectors" %>
@@ -31,9 +38,13 @@ ${topBar.setSessionUsername(username)}
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
         LocalDate currentDate = LocalDate.now();
+        EmployeeBeanI employeeBean = new EmployeeBean();
+        AttendanceBeanI attendanceBean = new AttendanceBean();
 
-         List<Employee> allEmployees = (List<Employee>) (List<?>) Database.getDbInstance().getData(Employee.class);
-             List<Attendance> allAttendances = (List<Attendance>) (List<?>) Database.getDbInstance().getData(Attendance.class);
+            List<Employee> allEmployees = employeeBean.list(Employee.class);
+             List<Attendance> allAttendances = attendanceBean.list(Attendance.class);
+              System.out.println("$$$$$$$$$" + allEmployees);
+              System.out.println("$$$$$$$$$" + allAttendances);
 
              List<Attendance> todaysAttendances = allAttendances.stream()
                      .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))

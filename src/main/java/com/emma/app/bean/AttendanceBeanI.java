@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface AttendanceBeanI extends GenericBeanI<Attendance> {
 
-    public Attendance logAttendance(Attendance attendance, Database database, HttpServletRequest req);
+    public Attendance logAttendance(Attendance attendance, HttpServletRequest req);
 }

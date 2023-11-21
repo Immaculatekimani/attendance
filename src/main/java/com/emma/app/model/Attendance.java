@@ -45,6 +45,17 @@ public class Attendance extends BaseEntity {
         return employeeName;
     }
 
+    @Override
+    public String toString() {
+        return "Attendance{" +
+                "employeeID='" + employeeID + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", attendanceDate=" + attendanceDate +
+                ", attendanceTime=" + attendanceTime +
+                ", attendanceStatus='" + attendanceStatus + '\'' +
+                '}';
+    }
+
     public void setEmployeeID(String employeeID) {
         this.employeeID = employeeID;
     }
