@@ -3,7 +3,6 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.emma.app.model.Employee" %>
-<%@ page import="com.emma.database.Database" %>
 <%@ page import="com.emma.app.bean.AttendanceBeanI" %>
 <%@ page import=" com.emma.app.bean.EmployeeBeanI" %>
 <%@ page import="com.emma.app.bean.AttendanceBean" %>
@@ -43,9 +42,6 @@ ${topBar.setSessionUsername(username)}
 
             List<Employee> allEmployees = employeeBean.list(Employee.class);
              List<Attendance> allAttendances = attendanceBean.list(Attendance.class);
-              System.out.println("$$$$$$$$$" + allEmployees);
-              System.out.println("$$$$$$$$$" + allAttendances);
-
              List<Attendance> todaysAttendances = allAttendances.stream()
                      .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
                      .collect(Collectors.toList());
