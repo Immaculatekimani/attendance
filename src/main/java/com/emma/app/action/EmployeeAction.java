@@ -5,6 +5,7 @@ import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
 import com.emma.app.view.helper.design.EmployeeDesign;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

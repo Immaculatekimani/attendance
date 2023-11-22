@@ -5,6 +5,7 @@ import com.emma.app.model.Employee;
 import com.emma.app.view.helper.HtmlComponent;
 import com.emma.database.Database;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,11 +15,8 @@ import java.util.List;
 
 public class AttendanceBean extends GenericBean<Attendance> implements AttendanceBeanI {
 
-
-    @Override
     public Attendance logAttendance(Attendance attendance, HttpServletRequest req) {
         EmployeeBeanI employeeBean = new EmployeeBean();
-
         for (Employee employee : employeeBean.list(Employee.class)) {
             String employeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
