@@ -1,5 +1,11 @@
 package com.emma.app.action;
 
+import com.emma.app.bean.AttendanceBean;
+import com.emma.app.bean.AttendanceBeanI;
+import com.emma.app.bean.EmployeeBean;
+import com.emma.app.bean.EmployeeBeanI;
+import com.emma.app.model.Attendance;
+import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeRole;
 import com.emma.app.view.helper.HtmlComponent;
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,8 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class BaseAction extends HttpServlet {
@@ -47,6 +57,22 @@ public class BaseAction extends HttpServlet {
 
     public void renderAttendanceSheetPage(HttpServletRequest request, HttpServletResponse response, int activeMenu) throws ServletException, IOException {
         request.setAttribute("activeMenu", activeMenu);
+        EmployeeBeanI employeeBean = new EmployeeBean();
+        AttendanceBeanI attendanceBean = new AttendanceBean();
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
+        LocalDate currentDate = LocalDate.now();
+
+        List<Employee> allEmployees = employeeBean.list(Employee.class);
+        List<Attendance> allAttendances = attendanceBean.list(Attendance.class);
+        List<Attendance> todaysAttendances = allAttendances.stream()
+                .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
+                .collect(Collectors.toList());
+
+        request.setAttribute("allEmployees", allEmployees);
+        request.setAttribute("todaysAttendances", todaysAttendances);
+        request.setAttribute("displayTime", displayTime);
         RequestDispatcher dispatcher = request.getRequestDispatcher("./app/attendanceSheet.jsp");
         dispatcher.forward(request, response);
     }
