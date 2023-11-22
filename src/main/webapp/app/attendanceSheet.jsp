@@ -53,10 +53,10 @@ ${topBar.setSessionUsername(username)}
                     <td><%= employee.getEmployeeId().strip() %></td>
                     <td><%= employee.getFirstName().strip() + " " + employee.getLastName() %></td>
                     <td><%= displayTime %></td>
-                    <td>
-                        <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Present"> Present
-                        <input type="radio" name="attendanceStatus_<%= employee.getEmployeeId() %>" value="Absent"> Absent
-                    </td>
+                     <td>
+                            <input type="radio" name="attendanceStatus" value="<%= employee.getEmployeeId() %>_Present"> Present
+                            <input type="radio" name="attendanceStatus" value="<%= employee.getEmployeeId() %>_Absent"> Absent
+                     </td>
                     <td><input type="submit" class="submit-button" value="Submit"></td>
                 </tr>
             <% } %>

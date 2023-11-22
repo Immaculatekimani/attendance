@@ -1,8 +1,6 @@
 package com.emma.app.action;
 
-import com.emma.app.bean.AttendanceBean;
 import com.emma.app.bean.AttendanceBeanI;
-import com.emma.app.bean.EmployeeBean;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
@@ -11,6 +9,7 @@ import com.emma.app.view.helper.HtmlComponent;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +29,11 @@ public class BaseAction extends HttpServlet {
     static {
         ConvertUtils.register(new EmployeeTypeConverter(), EmployeeRole.class);
     }
+
+    @EJB
+    AttendanceBeanI attendanceBean;
+    @EJB
+    EmployeeBeanI employeeBean;
 
     public <T> T serializeForm(Class<?> clazz, Map<String, ?> requestMap) {
         T clazzInstance;
@@ -57,8 +61,6 @@ public class BaseAction extends HttpServlet {
 
     public void renderAttendanceSheetPage(HttpServletRequest request, HttpServletResponse response, int activeMenu) throws ServletException, IOException {
         request.setAttribute("activeMenu", activeMenu);
-        EmployeeBeanI employeeBean = new EmployeeBean();
-        AttendanceBeanI attendanceBean = new AttendanceBean();
         LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);

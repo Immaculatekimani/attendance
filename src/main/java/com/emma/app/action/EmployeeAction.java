@@ -14,9 +14,9 @@ import java.io.IOException;
 
 @WebServlet("employee")
 public class EmployeeAction extends BaseAction {
+    @EJB
+    EmployeeBeanI employeeBean;
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        EmployeeBeanI employeeBean = new EmployeeBean();
 
         renderPage(req, resp, 2, EmployeeDesign.design(), Employee.class, employeeBean.list(Employee.class));
 
@@ -24,8 +24,6 @@ public class EmployeeAction extends BaseAction {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        EmployeeBeanI employeeBean = new EmployeeBean();
-
         try {
             employeeBean.addOrUpdateRecord(serializeForm(Employee.class, req.getParameterMap()));
         } catch (Exception e) {
