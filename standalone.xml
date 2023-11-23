@@ -127,11 +127,11 @@
         <subsystem xmlns="urn:jboss:domain:datasources:7.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/attendance" pool-name="attendance" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:mysql://localhost:3306/attendance</connection-url>
+                    <connection-url>jdbc:mysql://mysqld:3306/attendance</connection-url>
                     <driver>mysql</driver>
                     <security>
-                        <user-name>tatu</user-name>
-                        <password>tatu</password>
+                        <user-name>root</user-name>
+                        <password>root</password>
                     </security>
                 </datasource>
                 <drivers>
@@ -511,8 +511,6 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="attendance.war" runtime-name="attendance.war">
-            <content sha1="7ae265e695522c309be0baf083ecb51a8919cbfc"/>
-        </deployment>
+
     </deployments>
 </server>
