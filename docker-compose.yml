@@ -1,0 +1,29 @@
+  version: '3'
+
+  services:
+    mysqld:
+      image: mysql:latest
+      container_name: attendance
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: attendance
+      volumes:
+        - mysql-data:/var/lib/mysql
+
+    attenance-app:
+      image: attendance-img
+      ports:
+        - "8080:8080"
+      depends_on:
+        mysqld:
+          condition: service_healthy
+      environment:
+        MYSQL_HOST: mysqld
+        MYSQL_PORT: 3306
+        MYSQL_USER: tatu
+        MYSQL_PASSWORD: tatu
+        MYSQL_DATABASE: attendance
+
+  volumes:
+    mysql-data:
