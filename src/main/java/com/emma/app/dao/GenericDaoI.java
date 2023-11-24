@@ -9,5 +9,6 @@ public interface GenericDaoI <T> extends Serializable {
     void addOrUpdateRecord(T entity);
 
     void deleteAccount(T entity);
+    public int countRecords(Class<?> entity);
 
 }

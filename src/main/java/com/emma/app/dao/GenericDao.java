@@ -4,7 +4,7 @@ import com.emma.database.SqlDatabase;
 
 import java.util.List;
 
-public class GenericDao<T> implements GenericDaoI<T>{
+public class GenericDao<T> implements GenericDaoI<T> {
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public List<T> list(Class<?> entity) {
@@ -21,5 +21,11 @@ public class GenericDao<T> implements GenericDaoI<T>{
     @Override
     public void deleteAccount(T entity) {
 
+    }
+
+    @Override
+    public int countRecords(Class<?> entity) {
+        List<T> resultList = this.list(entity);
+        return resultList.size();
     }
 }
