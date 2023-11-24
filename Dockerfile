@@ -1,26 +1,26 @@
-# Stage 1: Build stage
-FROM maven:3.6.0-jdk-13-alpine AS build
+FROM maven:3.8.4-openjdk-11-slim AS build
 
-# Set the working directory inside the container
-WORKDIR /tatu
+WORKDIR /app
 
-# Copy the contents of the current directory to the working directory
+
+# Copy the source code
 COPY . .
 
-# Build the Maven project, skipping tests
-RUN mvn clean install -DskipTests -X
+# Build the project
+RUN mvn compile package
 
-# Remove Maven and its dependencies to reduce image size
-RUN apk --no-cache del maven
+# Continue with the rest of your Dockerfile
+FROM quay.io/wildfly/wildfly:26.1.3.Final-jdk11 AS deploy
 
-# Stage 2: WildFly stage
-FROM jboss/wildfly:latest AS deploy
+RUN rm /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
-# Copy the built WAR file from the build stage to the WildFly deployment directory
-COPY --from=build /tatu/target/attendance.war /opt/jboss/wildfly/standalone/deployments/
+COPY --from=build /app/target/attendance.war /opt/jboss/wildfly/standalone/deployments/
+COPY --from=build /app/standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
-# Expose port 8080 for the application
+RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY --from=build /app/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY --from=build /app/mysql-connector-java-8.0.17.jar /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+
 EXPOSE 8080
 
-# Start WildFly
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
