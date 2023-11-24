@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GenericBean<T> implements GenericBeanI<T> {
     private final GenericDaoI<T> genricDao = new GenericDao<>();
+
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public List<T> list(Class<?> entity) {
@@ -24,6 +25,11 @@ public class GenericBean<T> implements GenericBeanI<T> {
     public void addOrUpdateRecord(T entity) {
         genricDao.addOrUpdateRecord(entity);
 
+    }
+
+    @Override
+    public int countRecords(Class<?> entity) {
+        return genricDao.countRecords(entity);
     }
 
     @Override

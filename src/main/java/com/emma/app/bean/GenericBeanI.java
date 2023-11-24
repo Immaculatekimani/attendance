@@ -8,6 +8,8 @@ public interface GenericBeanI<T> extends Serializable {
 
     void addOrUpdateRecord(T entity);
 
+    public int countRecords(Class<?> entity);
+
     void deleteAccount(T entity);
 
 
