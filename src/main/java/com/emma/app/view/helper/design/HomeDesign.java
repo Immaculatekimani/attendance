@@ -6,10 +6,7 @@ import com.emma.app.model.Employee;
 import javax.ejb.EJB;
 
 public class HomeDesign {
-    @EJB
-    EmployeeBeanI employeeBean;
-
-    public static String design(EmployeeBeanI employeeBean) {
+       public static String design(EmployeeBeanI employeeBean) {
 
         int noOfEmployees = employeeBean.countRecords(Employee.class);
         String homeHTML = " <div class=\"image-container\">" + " <div> " +
