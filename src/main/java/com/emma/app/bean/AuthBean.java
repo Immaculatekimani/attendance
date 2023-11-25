@@ -1,7 +1,6 @@
 package com.emma.app.bean;
 
 import com.emma.app.model.User;
-import com.emma.database.Database;
 import com.emma.database.SqlDatabase;
 
 import java.sql.PreparedStatement;

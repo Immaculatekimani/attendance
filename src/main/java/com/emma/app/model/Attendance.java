@@ -1,5 +1,6 @@
 package com.emma.app.model;
 
+import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
@@ -10,6 +11,9 @@ import java.time.LocalTime;
 
 @DbTable(name = "attendances")
 public class Attendance extends BaseEntity {
+    @MyTableColHeader(header = "Employee Image")
+    @DbTableColumn(name = "employeeImage")
+    private String employeeImage;
     @MyTableColHeader(header = "Employee ID")
     @DbTableColumn(name = "employee_id")
     private String employeeID;
@@ -29,7 +33,8 @@ public class Attendance extends BaseEntity {
     public Attendance() {
     }
 
-    public Attendance(String employeeID, String employeeName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
+    public Attendance(String employeeImage, String employeeID, String employeeName, LocalDate attendanceDate, LocalTime attendanceTime, String attendanceStatus) {
+        this.employeeImage = employeeImage;
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.attendanceDate = attendanceDate;
@@ -86,6 +91,10 @@ public class Attendance extends BaseEntity {
 
     public String getAttendanceStatus() {
         return attendanceStatus;
+    }
+
+    public void setEmployeeImage(String employeeImage) {
+        this.employeeImage = employeeImage;
     }
 
 

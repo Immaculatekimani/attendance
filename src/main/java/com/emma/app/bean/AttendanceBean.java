@@ -2,6 +2,7 @@ package com.emma.app.bean;
 
 import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -24,12 +25,14 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         for (Employee employee : employeeBean.list(Employee.class)) {
             String currentEmployeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
+            String employeeImage = employee.getEmployeeImage();
 
             if (attendStatus != null && currentEmployeeId.equals(employeeId)) {
                 LocalTime currentTime = LocalTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
                 LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
 
+                attendance.setEmployeeImage(employeeImage);
                 attendance.setEmployeeID(employeeId);
                 attendance.setEmployeeName(employeeName);
                 attendance.setAttendanceDate(LocalDate.now());
