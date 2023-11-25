@@ -2,11 +2,7 @@ package com.emma.app.action;
 
 import com.emma.app.bean.AuthBean;
 import com.emma.app.bean.AuthBeanI;
-import com.emma.app.model.Attendance;
-import com.emma.app.model.Employee;
-import com.emma.app.model.EmployeeRole;
 import com.emma.app.model.User;
-import com.emma.database.Database;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -17,8 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
 

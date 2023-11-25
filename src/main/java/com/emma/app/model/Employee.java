@@ -9,6 +9,10 @@ import com.emma.database.helper.DbTableColumn;
 @DbTable(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee")
 public class Employee extends BaseEntity {
+    @MyTableColHeader(header = "Employee Image")
+    @DbTableColumn(name = "employeeImage")
+    @MyHtmlFormField(label = "Add Employee image")
+    private String employeeImage;
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")
     @DbTableColumn(name = "employee_id")
@@ -25,9 +29,7 @@ public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Role")
     @DbTableColumn(name = "role")
     private EmployeeRole role;
-    @MyTableColHeader(header = "Employee Image")
-    @DbTableColumn(name = "employeeImage")
-    private String employeeImage;
+
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role, String employeeImage) {
         this.employeeId = employeeId;

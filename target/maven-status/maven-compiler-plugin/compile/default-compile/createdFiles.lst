@@ -20,7 +20,6 @@ com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/HtmlComponent.class
 com/emma/database/SqlDatabase.class
 com/emma/app/model/Attendance.class
-com/emma/database/Database.class
 com/emma/app/action/LoginAction.class
 com/emma/app/dao/GenericDaoI.class
 com/emma/app/model/User.class

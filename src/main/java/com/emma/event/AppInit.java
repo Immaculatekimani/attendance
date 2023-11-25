@@ -1,24 +1,10 @@
 package com.emma.event;
 
-import com.emma.app.model.Attendance;
-import com.emma.app.model.Employee;
-import com.emma.app.model.EmployeeRole;
-import com.emma.app.model.User;
-import com.emma.database.Database;
 import com.emma.database.SqlDatabase;
-import com.emma.database.helper.DbTable;
-import com.emma.database.helper.DbTableColumn;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebListener
 public class AppInit implements ServletContextListener {

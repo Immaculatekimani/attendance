@@ -32,6 +32,7 @@ ${topBar.setSessionUsername(username)}
         <table>
             <thead>
                 <tr>
+                    <th>Employee Image</th>
                     <th>Employee ID</th>
                     <th>Employee Name</th>
                     <th>Attendance Time</th>
@@ -50,6 +51,7 @@ ${topBar.setSessionUsername(username)}
 
             <% if (!isAttendanceEntered) { %>
                 <tr id="row_<%= employee.getEmployeeId() %>">
+                    <td><img src = "images/prof/<%= employee.getEmployeeImage().strip() %>" class="prof"></td>
                     <td><%= employee.getEmployeeId().strip() %></td>
                     <td><%= employee.getFirstName().strip() + " " + employee.getLastName() %></td>
                     <td><%= displayTime %></td>
