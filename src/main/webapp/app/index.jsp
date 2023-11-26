@@ -22,7 +22,9 @@ ${topBar.setSessionUsername(username)}
 
     ${requestScope.header}
     ${requestScope.content}
- <script src="./app/style/jquery/jquery.min.js"></script>
+
+ <jsp:include page="script.jsp"/>
+  <script src="./app/style/jquery/jquery.min.js"></script>
   <script src="./app/style/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="./app/style/jquery-easing/jquery.easing.min.js"></script>
 </body>
