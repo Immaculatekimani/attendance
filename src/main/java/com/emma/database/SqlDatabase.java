@@ -7,6 +7,9 @@ import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 import com.emma.database.helper.DbTableId;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,43 +25,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
+@Singleton
+@Startup()
 public class SqlDatabase implements Serializable {
     private static SqlDatabase database;
     private Connection connection;
 
-    private SqlDatabase() throws SQLException, NamingException {
+    @PostConstruct
+    private void init() throws SQLException, NamingException {
         Context ctx = new InitialContext();
         DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/attendance");
         connection = dataSource.getConnection();
+
+        this.updateScheme();
     }
 
-    public static SqlDatabase getInstance() throws SQLException {
-        if (database == null) {
-            try {
-                database = new SqlDatabase();
 
-            } catch (SQLException | NamingException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return database;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-    public static void updateScheme() {
+    public void updateScheme() {
         System.out.println("#################### Init Database ###############");
 
         try {
-            Connection connection = SqlDatabase.getInstance().getConnection();
 
             List<Class<?>> entities = new ArrayList<>();
             entities.add(User.class);
@@ -99,7 +85,7 @@ public class SqlDatabase implements Serializable {
     }
 
 
-    public static void insert(Object entity) {
+    public void insert(Object entity) {
         try {
             Class<?> clazz = entity.getClass();
             if (!clazz.isAnnotationPresent(DbTable.class))
@@ -136,7 +122,7 @@ public class SqlDatabase implements Serializable {
                     ") values(" + placeHolder + ")";
             String sqlQuery = queryBuilder.replace(",)", ")");
 
-            try (PreparedStatement statement = SqlDatabase.getInstance().getConnection().prepareStatement(sqlQuery)) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 int paramId = 1;
                 for (Object param : parameters) {
                     if (param instanceof Enum) {
@@ -162,7 +148,7 @@ public class SqlDatabase implements Serializable {
         }
     }
 
-    public static <T> List<T> select(Class<T> filter, String whereClause, Object... parameters) {
+    public <T> List<T> select(Class<T> filter, String whereClause, Object... parameters) {
         try {
             Class<?> clazz = filter;
             System.out.println();
@@ -180,8 +166,7 @@ public class SqlDatabase implements Serializable {
 
             stringBuilder.append(";");
 
-            Connection conn = SqlDatabase.getInstance().getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(stringBuilder.toString());
+            PreparedStatement preparedStatement = connection.prepareStatement(stringBuilder.toString());
 
             // Set parameters for the WHERE clause
             for (int i = 0; i < parameters.length; i++) {
@@ -230,7 +215,7 @@ public class SqlDatabase implements Serializable {
             throw new RuntimeException(ex);
         }
     }
-    public static void update(Object entity, String idFieldName) {
+    public void update(Object entity, String idFieldName) {
         try {
             Class<?> clazz = entity.getClass();
             if (!clazz.isAnnotationPresent(DbTable.class))
@@ -271,7 +256,7 @@ public class SqlDatabase implements Serializable {
                     " WHERE " + idFieldName + " = ?";
             String sqlQuery = queryBuilder.replace(",)", ")");
 
-            try (PreparedStatement statement = SqlDatabase.getInstance().getConnection().prepareStatement(sqlQuery)) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 int paramId = 1;
                 for (Object param : parameters) {
                     if (param instanceof Enum) {
