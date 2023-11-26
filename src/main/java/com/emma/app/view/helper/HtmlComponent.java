@@ -41,11 +41,10 @@ public class HtmlComponent {
             MyTableColHeader colHeaderAnnotation = field.getAnnotation(MyTableColHeader.class);
             trBuilder.append("<th>").append(colHeaderAnnotation.header()).append("</th>");
         }
-
+        trBuilder.append("<th>View Attendance</th>"); // New column for the "View Attendance" link
         if (includeActions) {
             trBuilder.append("<th>Actions</th>");
         }
-
         trBuilder.append("</tr>");
 
         if (dataList != null && !dataList.isEmpty()) {
@@ -61,12 +60,16 @@ public class HtmlComponent {
                             trBuilder.append("<td><img src=\"images/prof/").append(field.get(model)).append("\" alt='Employee Image' class = \"prof\"></td>");
                         } else {
                             trBuilder.append("<td>").append(field.get(model)).append("</td>");
+
                         }
                     } catch (IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 }
 
+                trBuilder.append("<td>\n" +
+                        "    <a href=\"#\" onclick=\"viewAttendance('" + getFieldValue(model, idFieldName) + "')\" class=\"submit-button\">View Attendance</a>\n" +
+                        "</td>");
                 if (includeActions) {
                     trBuilder.append("<td>");
                     trBuilder.append("<button type=\"button\" class=\"btn btn-sm btn-success\" onclick=\"editItem(")

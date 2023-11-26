@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Stateless(name = "attendance/AttendanceBean")
 @Remote
@@ -22,7 +23,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         String employeeId = parts[0];
         String attendStatus = parts[1];
 
-        for (Employee employee : employeeBean.list(Employee.class,"")) {
+        for (Employee employee : employeeBean.list(Employee.class, "")) {
             String currentEmployeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
             String employeeImage = employee.getEmployeeImage();
@@ -50,5 +51,16 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         }
         return attendance;
     }
+
+    @Override
+    public List<Attendance> getEmployeeAttendance(String employeeId) {
+        try {
+            String whereClause = "employee_id = ?";
+            return list(Attendance.class, whereClause, employeeId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
