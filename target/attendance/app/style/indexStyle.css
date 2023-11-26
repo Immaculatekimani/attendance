@@ -126,3 +126,14 @@ text-align: center;
 margin: auto;
 width: 50%;
 }
+ #currentTime {
+    font-size: 24px;
+    text-align: center;
+}
+
+.time-card{
+background-color: #3D0C11;
+color: white;
+text-align: center;
+border-radius: 20px;
+}

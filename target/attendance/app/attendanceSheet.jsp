@@ -27,8 +27,35 @@ ${topBar.setSessionUsername(username)}
     </c:set>
 
     <h2 style="text-align: center; color: #533535; background-color: #fff; padding: 10px;">TODAY'S ATTENDANCE! </h2>
+     <div class="row mb-3">
+         <!-- Time Card -->
+         <div class="col-xl-3 col-md-6 mb-4">
+             <div class="card h-100">
+                 <div class="card-body time-card">
+                     <div class="row no-gutters align-items-center">
+                         <div class="col mr-2">
+                             <h2>Current Time:<p id="currentTime"></p></h2>
+                         </div>
+                         <div class="col-auto">
+                             <i class="far fa-clock fa-2x text-info"></i>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
 
-    <form action="./attendance-sheet" onsubmit="showAttendanceAlert()" method="post">
+         <!-- Search Input -->
+         <div class="col-xl-3 col-md-6 mb-4">
+             <div class="card h-100">
+                 <div class="card-body time-card" style="width: 900px;">
+                     <div class="searchDiv" style="width: 80%;">
+                         <input type="text" id="searchInput" placeholder="Search" class="form-control" style="text-align:center; width:100%;">
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+      <form action="./attendance-sheet" onsubmit="showAttendanceAlert()" method="post">
         <table>
             <thead>
                 <tr>
@@ -66,10 +93,6 @@ ${topBar.setSessionUsername(username)}
         </table>
     </form>
 
-    <script>
-        function showAttendanceAlert() {
-            alert("Attendance submitted successfully!");
-        }
-    </script>
+    <jsp:include page="script.jsp"/>
 </body>
 </html>

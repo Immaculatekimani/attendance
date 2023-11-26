@@ -46,7 +46,6 @@ public class HtmlComponent {
 
         trBuilder.append("</table>");
 
-        trBuilder.append(getSearchScript());
         return trBuilder.toString();
 
     }
@@ -94,35 +93,5 @@ public class HtmlComponent {
         return htmlForm;
     }
 
-    private static String getSearchScript() {
-        StringBuilder scriptBuilder = new StringBuilder();
-        scriptBuilder.append("<script>");
-        scriptBuilder.append("function searchTable() {");
-        scriptBuilder.append("  var input, filter, table, tr, td, i, txtValue;");
-        scriptBuilder.append("  input = document.getElementById('searchInput');");
-        scriptBuilder.append("  filter = input.value.toUpperCase();");
-        scriptBuilder.append("  table = document.querySelector('table');");
-        scriptBuilder.append("  tr = table.querySelectorAll('tr');");
-        scriptBuilder.append("  for (i = 1; i < tr.length; i++) {");  // Start from 1 to skip the header row
-        scriptBuilder.append("    tds = tr[i].querySelectorAll('td');");
-        scriptBuilder.append("    for (j = 0; j < tds.length; j++) {");
-        scriptBuilder.append("      td = tds[j];");
-        scriptBuilder.append("      if (td) {");
-        scriptBuilder.append("        txtValue = td.textContent || td.innerText;");
-        scriptBuilder.append("        if (txtValue.toUpperCase().indexOf(filter) > -1) {");
-        scriptBuilder.append("          tr[i].style.display = '';");
-        scriptBuilder.append("          break;");
-        scriptBuilder.append("        } else {");
-        scriptBuilder.append("          tr[i].style.display = 'none';");
-        scriptBuilder.append("        }");
-        scriptBuilder.append("      }");
-        scriptBuilder.append("    }");
-        scriptBuilder.append("  }");
-        scriptBuilder.append("}");
-        scriptBuilder.append("document.getElementById('searchInput').addEventListener('input', searchTable);");
-        scriptBuilder.append("</script>");
-
-        return scriptBuilder.toString();
-    }
 
 }
