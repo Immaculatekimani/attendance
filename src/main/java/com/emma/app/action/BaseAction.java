@@ -66,8 +66,8 @@ public class BaseAction extends HttpServlet {
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
         LocalDate currentDate = LocalDate.now();
 
-        List<Employee> allEmployees = employeeBean.list(Employee.class);
-        List<Attendance> allAttendances = attendanceBean.list(Attendance.class);
+        List<Employee> allEmployees = employeeBean.list(Employee.class,"");
+        List<Attendance> allAttendances = attendanceBean.list(Attendance.class,"");
         List<Attendance> todaysAttendances = allAttendances.stream()
                 .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
                 .collect(Collectors.toList());

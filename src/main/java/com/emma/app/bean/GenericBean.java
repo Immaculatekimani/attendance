@@ -10,8 +10,8 @@ public class GenericBean<T> implements GenericBeanI<T> {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public List<T> list(Class<?> entity) {
-        return genricDao.list(entity);
+    public List<T> list(Class<?> entity,String whereClause, Object... parameters) {
+        return genricDao.list(entity, whereClause,parameters);
 
     }
 
@@ -24,6 +24,11 @@ public class GenericBean<T> implements GenericBeanI<T> {
     @Override
     public int countRecords(Class<?> entity) {
         return genricDao.countRecords(entity);
+    }
+
+    @Override
+    public void updateRecord(T entity, String idFieldName) {
+        genricDao.updateRecord(entity,idFieldName);
     }
 
     @Override
