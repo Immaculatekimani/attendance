@@ -22,7 +22,7 @@ public class HomeAction extends BaseAction {
 
         AttendanceBeanI attendanceBean = new AttendanceBean();
         renderPage(req, resp, 0, HomeDesign.design(employeeBean),
-                Attendance.class, attendanceBean.list(Attendance.class)
+                Attendance.class, attendanceBean.list(Attendance.class,"")
 
         );
 

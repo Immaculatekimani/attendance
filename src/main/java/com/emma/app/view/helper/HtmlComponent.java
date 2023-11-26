@@ -3,12 +3,19 @@ package com.emma.app.view.helper;
 import com.emma.app.model.Employee;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class HtmlComponent {
-    public static String table(List<?> dataList, Class<?> dataClass) {
 
+    public static String table(List<?> dataList, Class<?> dataClass) {
+        return table(dataList, dataClass, false);
+    }
+
+    public static String table(List<?> dataList, Class<?> dataClass, boolean defaultIncludeActions) {
         StringBuilder trBuilder = new StringBuilder();
         trBuilder.append("<div class= \"searchDiv\">");
         trBuilder.append("<input type=\"text\" id=\"searchInput\" placeholder=\"Search\" class =\"form-control\" style=\"text-align:center\" >");
@@ -17,21 +24,41 @@ public class HtmlComponent {
 
         Field[] fields = dataClass.getDeclaredFields();
 
+        String idFieldName = findIdField(fields);
+        if (idFieldName == null) {
+            throw new RuntimeException("No field with header 'Employee ID' found in class " + dataClass.getSimpleName());
+        }
+
+        boolean includeActions = defaultIncludeActions;
+        if (dataClass.isAnnotationPresent(MyTableSetting.class)) {
+            MyTableSetting tableSettingsAnnotation = dataClass.getAnnotation(MyTableSetting.class);
+            includeActions = tableSettingsAnnotation.includeActions();
+        }
+
         for (Field field : fields) {
             if (!field.isAnnotationPresent(MyTableColHeader.class)) continue;
 
-            trBuilder.append("<th>" + field.getAnnotation(MyTableColHeader.class).header() + "</th>");
+            MyTableColHeader colHeaderAnnotation = field.getAnnotation(MyTableColHeader.class);
+            trBuilder.append("<th>").append(colHeaderAnnotation.header()).append("</th>");
         }
+
+        if (includeActions) {
+            trBuilder.append("<th>Actions</th>");
+        }
+
         trBuilder.append("</tr>");
+
         if (dataList != null && !dataList.isEmpty()) {
             for (Object model : dataList) {
                 trBuilder.append("<tr>");
+
                 for (Field field : fields) {
                     if (!field.isAnnotationPresent(MyTableColHeader.class)) continue;
+
                     try {
                         field.setAccessible(true);
                         if (field.getName().equals("employeeImage")) {
-                            trBuilder.append("<td><img src=\"images/prof/" + field.get(model) + "\" alt='Employee Image' class = \"prof\"></td>");
+                            trBuilder.append("<td><img src=\"images/prof/").append(field.get(model)).append("\" alt='Employee Image' class = \"prof\"></td>");
                         } else {
                             trBuilder.append("<td>").append(field.get(model)).append("</td>");
                         }
@@ -39,16 +66,47 @@ public class HtmlComponent {
                         throw new RuntimeException(e);
                     }
                 }
-                trBuilder.append("</tr>");
 
+                if (includeActions) {
+                    trBuilder.append("<td>");
+                    trBuilder.append("<button type=\"button\" class=\"btn btn-sm btn-success\" onclick=\"editItem(")
+                            .append(getFieldValue(model, idFieldName)).append(")\">Edit</button>");
+                    trBuilder.append("<button type=\"button\" class=\"btn btn-sm btn-danger\" onclick=\"deleteItem(")
+                            .append(getFieldValue(model, idFieldName)).append(")\">Delete</button>");
+                    trBuilder.append("</td>");
+                }
+
+                trBuilder.append("</tr>");
             }
         }
 
         trBuilder.append("</table>");
 
         return trBuilder.toString();
-
     }
+
+    private static String findIdField(Field[] fields) {
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(MyTableColHeader.class)) {
+                MyTableColHeader headerAnnotation = field.getAnnotation(MyTableColHeader.class);
+                if ("Employee ID".equals(headerAnnotation.header())) {
+                    return field.getName();
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Object getFieldValue(Object model, String fieldName) {
+        try {
+            Field field = model.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(model);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static String form(Class<?> model) {
         MyHtmlForm myHtmlForm = null;
@@ -63,7 +121,7 @@ public class HtmlComponent {
 
             MyHtmlFormField formField = field.getAnnotation(MyHtmlFormField.class);
             String fieldName = field.getName();
-            String fieldType = String.valueOf(field.getType()); //recheck this later
+            String fieldType = String.valueOf(field.getType());
 
             boolean isEnum = field.getType().isEnum();
 
@@ -81,10 +139,7 @@ public class HtmlComponent {
                 } else {
                     htmlForm += "<input type=\"text\" id=\"" + (StringUtils.isBlank(formField.id()) ? fieldName : formField.id()) + "\" name=\"" + (StringUtils.isBlank((formField.name())) ? fieldName : formField.name()) + "\" placeholder=\"" + (StringUtils.isBlank((formField.placeholder())) ? fieldName : formField.placeholder()) + "\" class=\"form-control\">";
                 }
-
             }
-
-
         }
 
         htmlForm += "<input type=\"submit\" value=\"Submit\" class=\"submit-button\">";
@@ -92,6 +147,5 @@ public class HtmlComponent {
 
         return htmlForm;
     }
-
 
 }

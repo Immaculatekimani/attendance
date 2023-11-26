@@ -7,8 +7,8 @@ import java.util.List;
 public class GenericDao<T> implements GenericDaoI<T> {
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public List<T> list(Class<?> entity) {
-        return (List<T>) SqlDatabase.select(entity);
+    public List<T> list(Class<?> entity,String whereClause, Object... parameters) {
+        return (List<T>) SqlDatabase.select(entity, whereClause, parameters);
 
     }
 
@@ -16,6 +16,12 @@ public class GenericDao<T> implements GenericDaoI<T> {
     public void addOrUpdateRecord(T entity) {
         SqlDatabase.insert(entity);
 
+    }
+    public void updateRecord(T entity, String idFieldName) {
+        // You need to implement a method to update the record based on the entity and its ID.
+        // For simplicity, let's assume that there's a method named `update` in your SqlDatabase class.
+        // You may need to modify this based on your actual database schema and update logic.
+        SqlDatabase.update(entity, idFieldName);
     }
 
     @Override
@@ -25,7 +31,7 @@ public class GenericDao<T> implements GenericDaoI<T> {
 
     @Override
     public int countRecords(Class<?> entity) {
-        List<T> resultList = this.list(entity);
+        List<T> resultList = this.list(entity,"");
         return resultList.size();
     }
 }

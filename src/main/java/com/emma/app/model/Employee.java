@@ -3,11 +3,13 @@ package com.emma.app.model;
 import com.emma.app.view.helper.MyHtmlForm;
 import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
+import com.emma.app.view.helper.MyTableSetting;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
 @DbTable(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee")
+@MyTableSetting(includeActions = true)
 public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
     @DbTableColumn(name = "employeeImage")
@@ -29,7 +31,6 @@ public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Role")
     @DbTableColumn(name = "role")
     private EmployeeRole role;
-
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role, String employeeImage) {
         this.employeeId = employeeId;

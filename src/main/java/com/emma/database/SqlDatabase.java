@@ -162,7 +162,7 @@ public class SqlDatabase implements Serializable {
         }
     }
 
-    public static <T> List<T> select(Class<T> filter) {
+    public static <T> List<T> select(Class<T> filter, String whereClause, Object... parameters) {
         try {
             Class<?> clazz = filter;
             System.out.println();
@@ -172,10 +172,22 @@ public class SqlDatabase implements Serializable {
 
             DbTable dbTable = clazz.getAnnotation(DbTable.class);
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("SELECT * FROM ")
-                    .append(dbTable.name()).append(";");
+            stringBuilder.append("SELECT * FROM ").append(dbTable.name());
+
+            if (whereClause != null && !whereClause.isEmpty()) {
+                stringBuilder.append(" WHERE ").append(whereClause);
+            }
+
+            stringBuilder.append(";");
+
             Connection conn = SqlDatabase.getInstance().getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(stringBuilder.toString());
+
+            // Set parameters for the WHERE clause
+            for (int i = 0; i < parameters.length; i++) {
+                preparedStatement.setObject(i + 1, parameters[i]);
+            }
+
             ResultSet resultSet = preparedStatement.executeQuery();
             List<T> result = new ArrayList<>();
 
@@ -216,6 +228,78 @@ public class SqlDatabase implements Serializable {
         } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException |
                  NoSuchMethodException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+    public static void update(Object entity, String idFieldName) {
+        try {
+            Class<?> clazz = entity.getClass();
+            if (!clazz.isAnnotationPresent(DbTable.class))
+                return;
+
+            DbTable dbTable = clazz.getAnnotation(DbTable.class);
+
+            List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
+            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+
+            StringBuilder setClause = new StringBuilder();
+            List<Object> parameters = new ArrayList<>();
+
+            for (Field field : fields) {
+                if (!field.isAnnotationPresent(DbTableColumn.class) || field.isAnnotationPresent(DbTableId.class))
+                    continue;
+
+                field.setAccessible(true);
+                if (field.get(entity) == null)
+                    continue;
+
+                DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
+                setClause.append(dbTableColumn.name()).append(" = ?, ");
+
+                if (field.getType() == LocalDate.class) {
+                    parameters.add(java.sql.Date.valueOf((LocalDate) field.get(entity)));
+                } else if (field.getType() == LocalTime.class) {
+                    parameters.add(java.sql.Time.valueOf((LocalTime) field.get(entity)));
+                } else {
+                    parameters.add(field.get(entity));
+                }
+            }
+
+            // Remove the trailing comma and space
+            setClause.setLength(setClause.length() - 2);
+
+            String queryBuilder = "UPDATE " + dbTable.name() + " SET " + setClause +
+                    " WHERE " + idFieldName + " = ?";
+            String sqlQuery = queryBuilder.replace(",)", ")");
+
+            try (PreparedStatement statement = SqlDatabase.getInstance().getConnection().prepareStatement(sqlQuery)) {
+                int paramId = 1;
+                for (Object param : parameters) {
+                    if (param instanceof Enum) {
+                        statement.setString(paramId++, ((Enum<?>) param).name());
+                    } else if (param.getClass().isAssignableFrom(BigDecimal.class)) {
+                        statement.setBigDecimal(paramId++, (BigDecimal) param);
+                    } else if (param.getClass().isAssignableFrom(Long.class)) {
+                        statement.setLong(paramId++, (long) param);
+                    } else if (param.getClass().isAssignableFrom(java.sql.Date.class)) {
+                        statement.setDate(paramId++, (java.sql.Date) param);
+                    } else if (param.getClass().isAssignableFrom(java.sql.Time.class)) {
+                        statement.setTime(paramId++, (java.sql.Time) param);
+                    } else {
+                        statement.setString(paramId++, (String) param);
+                    }
+                }
+
+                // Set the value for the WHERE clause based on the ID field
+                Field idField = clazz.getDeclaredField(idFieldName);
+                idField.setAccessible(true);
+                statement.setObject(paramId, idField.get(entity));
+
+                statement.executeUpdate();
+            } catch (SQLException | NoSuchFieldException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
