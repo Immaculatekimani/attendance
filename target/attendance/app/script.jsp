@@ -43,4 +43,11 @@
     }
 
     document.getElementById('searchInput').addEventListener('input', searchTable);
+    function viewAttendance(employeeId) {
+        console.log("Viewing attendance for employee with ID: " + employeeId);
+
+        window.location.href = "./employeeAttendance?employeeId=" + employeeId;
+
+
+    }
 </script>
