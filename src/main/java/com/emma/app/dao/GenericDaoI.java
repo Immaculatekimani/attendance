@@ -1,5 +1,7 @@
 package com.emma.app.dao;
 
+import com.emma.database.SqlDatabase;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,5 +12,8 @@ public interface GenericDaoI <T> extends Serializable {
     void deleteAccount(T entity);
     public int countRecords(Class<?> entity);
     public void updateRecord(T entity, String idFieldName);
+    SqlDatabase getDatabase();
+
+    void setDatabse(SqlDatabase database);
 
 }

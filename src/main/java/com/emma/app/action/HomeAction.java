@@ -17,12 +17,13 @@ import java.io.IOException;
 public class HomeAction extends BaseAction {
     @EJB
     EmployeeBeanI employeeBean;
+    @EJB
+    AttendanceBeanI attendanceBean;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        AttendanceBeanI attendanceBean = new AttendanceBean();
         renderPage(req, resp, 0, HomeDesign.design(employeeBean),
-                Attendance.class, attendanceBean.list(Attendance.class,"")
+                Attendance.class, attendanceBean.list(Attendance.class, "")
 
         );
 

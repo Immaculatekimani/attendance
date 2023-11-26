@@ -4,6 +4,7 @@ import com.emma.app.bean.UserBean;
 import com.emma.app.bean.UserBeanI;
 import com.emma.app.model.User;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 
 @WebServlet("/user")
 public class UserAction extends BaseAction {
-    UserBeanI userBean = new UserBean();
+    @EJB
+    UserBeanI userBean;
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

@@ -38,7 +38,7 @@ public class UpdateEmployeeAction extends BaseAction{
         // Update other fields as needed
 
         // Update the employee in the database
-        SqlDatabase.update(existingEmployee, "employee_id");
+        //employeeBean.update(existingEmployee, "employee_id");
 
         // Redirect to a success page or display a success message
         response.sendRedirect("./employee");

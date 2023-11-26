@@ -41,6 +41,5 @@ com/emma/app/bean/AuthBean.class
 com/emma/app/action/EmployeeTypeConverter.class
 com/emma/app/view/helper/design/HomeDesign.class
 com/emma/filter/AuthFilter.class
-com/emma/event/AppInit.class
 com/emma/app/model/Employee.class
 com/emma/app/bean/UserBean.class
