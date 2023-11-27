@@ -5,13 +5,15 @@ import com.emma.app.dao.GenericDaoI;
 import com.emma.database.SqlDatabase;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import java.util.List;
 
 
 public class GenericBean<T> implements GenericBeanI<T> {
     @EJB
     SqlDatabase database;
-    private final GenericDaoI<T> genricDao = new GenericDao<>();
+    @Inject
+    private GenericDaoI<T> genricDao;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
@@ -22,9 +24,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void addOrUpdateRecord(T entity) {
+    public void addRecord(T entity) {
         genricDao.setDatabse(database);
-        genricDao.addOrUpdateRecord(entity);
+        genricDao.addRecord(entity);
 
     }
 
@@ -35,8 +37,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void updateRecord(T entity, String idFieldName) {
-        genricDao.updateRecord(entity, idFieldName);
+    public void update(Object entity, String columnName, Object columnValue) {
+        genricDao.setDatabse(database);
+        genricDao.update(entity,columnName,columnValue);
     }
 
     @Override

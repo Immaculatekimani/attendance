@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface GenericDaoI <T> extends Serializable {
     public List<T> list(Class<?> entity,String whereClause, Object... parameters);
-    void addOrUpdateRecord(T entity);
+    public void addRecord(T entity);
 
     void deleteAccount(T entity);
     public int countRecords(Class<?> entity);
-    public void updateRecord(T entity, String idFieldName);
+    public void update(Object entity, String columnName, Object columnValue);
     SqlDatabase getDatabase();
 
     void setDatabse(SqlDatabase database);

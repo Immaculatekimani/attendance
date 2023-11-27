@@ -215,72 +215,59 @@ public class SqlDatabase implements Serializable {
             throw new RuntimeException(ex);
         }
     }
-    public void update(Object entity, String idFieldName) {
+    public void update(Object entity, String columnName, Object columnValue) {
         try {
             Class<?> clazz = entity.getClass();
-            if (!clazz.isAnnotationPresent(DbTable.class))
-                return;
-
+            if (!clazz.isAnnotationPresent(DbTable.class)) {
+                throw new RuntimeException("Database Table Annotation Does Not Exist");
+            }
             DbTable dbTable = clazz.getAnnotation(DbTable.class);
 
             List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
             fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
 
-            StringBuilder setClause = new StringBuilder();
+            StringBuilder setBuilder = new StringBuilder();
             List<Object> parameters = new ArrayList<>();
 
             for (Field field : fields) {
-                if (!field.isAnnotationPresent(DbTableColumn.class) || field.isAnnotationPresent(DbTableId.class))
+                if (!field.isAnnotationPresent(DbTableColumn.class) || field.isAnnotationPresent(DbTableId.class)) {
                     continue;
-
+                }
                 field.setAccessible(true);
-                if (field.get(entity) == null)
-                    continue;
-
                 DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
-                setClause.append(dbTableColumn.name()).append(" = ?, ");
+
+                setBuilder.append(dbTableColumn.name()).append(" = ?, ");
 
                 if (field.getType() == LocalDate.class) {
                     parameters.add(java.sql.Date.valueOf((LocalDate) field.get(entity)));
                 } else if (field.getType() == LocalTime.class) {
                     parameters.add(java.sql.Time.valueOf((LocalTime) field.get(entity)));
+                } else if (field.getType().isEnum()) {
+                    parameters.add(((Enum<?>) field.get(entity)).name());
                 } else {
                     parameters.add(field.get(entity));
                 }
             }
 
-            // Remove the trailing comma and space
-            setClause.setLength(setClause.length() - 2);
+            // Remove the trailing comma and space from setBuilder
+            setBuilder.delete(setBuilder.length() - 2, setBuilder.length());
 
-            String queryBuilder = "UPDATE " + dbTable.name() + " SET " + setClause +
-                    " WHERE " + idFieldName + " = ?";
-            String sqlQuery = queryBuilder.replace(",)", ")");
+            String sqlQuery = "UPDATE " + dbTable.name() + " SET " + setBuilder +
+                    " WHERE " + columnName + " = ?";
 
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 int paramId = 1;
+
+                // Set parameters for SET clause
                 for (Object param : parameters) {
-                    if (param instanceof Enum) {
-                        statement.setString(paramId++, ((Enum<?>) param).name());
-                    } else if (param.getClass().isAssignableFrom(BigDecimal.class)) {
-                        statement.setBigDecimal(paramId++, (BigDecimal) param);
-                    } else if (param.getClass().isAssignableFrom(Long.class)) {
-                        statement.setLong(paramId++, (long) param);
-                    } else if (param.getClass().isAssignableFrom(java.sql.Date.class)) {
-                        statement.setDate(paramId++, (java.sql.Date) param);
-                    } else if (param.getClass().isAssignableFrom(java.sql.Time.class)) {
-                        statement.setTime(paramId++, (java.sql.Time) param);
-                    } else {
-                        statement.setString(paramId++, (String) param);
-                    }
+                    statement.setObject(paramId++, param);
                 }
 
-                // Set the value for the WHERE clause based on the ID field
-                Field idField = clazz.getDeclaredField(idFieldName);
-                idField.setAccessible(true);
-                statement.setObject(paramId, idField.get(entity));
+                // Set parameter for WHERE clause (column value)
+                statement.setObject(paramId, columnValue);
 
                 statement.executeUpdate();
-            } catch (SQLException | NoSuchFieldException | IllegalAccessException e) {
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         } catch (IllegalAccessException e) {

@@ -25,7 +25,7 @@ public class EmployeeAction extends BaseAction {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            employeeBean.addOrUpdateRecord(serializeForm(Employee.class, req.getParameterMap()));
+            employeeBean.addRecord(serializeForm(Employee.class, req.getParameterMap()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

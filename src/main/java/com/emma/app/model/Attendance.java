@@ -4,6 +4,7 @@ import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
+import com.emma.database.helper.DbTableId;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -26,6 +27,15 @@ public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Attendance Time")
     @DbTableColumn(name = "attendance_time", definition = "TIME")
     private LocalTime attendanceTime;
+
+    @MyTableColHeader(header = "Time In")
+    @DbTableColumn(name = "time_in", definition = "TIME")
+    private LocalTime timeIn;
+
+    @MyTableColHeader(header = "Time Out")
+    @DbTableColumn(name = "time_out", definition = "TIME")
+    private LocalTime timeOut;
+
     @MyTableColHeader(header = "Attendance Status")
     @DbTableColumn(name = "attendance_status")
     private String attendanceStatus;
@@ -97,5 +107,24 @@ public class Attendance extends BaseEntity {
         this.employeeImage = employeeImage;
     }
 
+    public String getEmployeeImage() {
+        return employeeImage;
+    }
+
+    public LocalTime getTimeIn() {
+        return timeIn;
+    }
+
+    public void setTimeIn(LocalTime timeIn) {
+        this.timeIn = timeIn;
+    }
+
+    public LocalTime getTimeOut() {
+        return timeOut;
+    }
+
+    public void setTimeOut(LocalTime timeOut) {
+        this.timeOut = timeOut;
+    }
 
 }
