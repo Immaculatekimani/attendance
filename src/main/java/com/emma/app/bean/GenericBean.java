@@ -31,9 +31,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public int countRecords(Class<?> entity) {
+    public int countRecords(Class<?> entity, String whereClause, Object... parameters){
         genricDao.setDatabse(database);
-        return genricDao.countRecords(entity);
+        return genricDao.countRecords(entity, whereClause, parameters);
     }
 
     @Override

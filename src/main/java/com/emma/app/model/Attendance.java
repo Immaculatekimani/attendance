@@ -24,7 +24,6 @@ public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Attendance Date")
     @DbTableColumn(name = "attendance_date", definition = "DATE")
     private LocalDate attendanceDate;
-    @MyTableColHeader(header = "Attendance Time")
     @DbTableColumn(name = "attendance_time", definition = "TIME")
     private LocalTime attendanceTime;
 
@@ -36,9 +35,13 @@ public class Attendance extends BaseEntity {
     @DbTableColumn(name = "time_out", definition = "TIME")
     private LocalTime timeOut;
 
-    @MyTableColHeader(header = "Attendance Status")
+    @MyTableColHeader(header = "Day Status")
     @DbTableColumn(name = "attendance_status")
     private String attendanceStatus;
+    @MyTableColHeader(header = "Joining Status")
+    @DbTableColumn(name = "joining_status")
+    private String joiningStatus;
+
 
     public Attendance() {
     }
@@ -125,6 +128,14 @@ public class Attendance extends BaseEntity {
 
     public void setTimeOut(LocalTime timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public String getJoiningStatus() {
+        return joiningStatus;
+    }
+
+    public void setJoiningStatus(String joiningStatus) {
+        this.joiningStatus = joiningStatus;
     }
 
 }
