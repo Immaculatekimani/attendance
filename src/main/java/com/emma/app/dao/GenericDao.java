@@ -15,16 +15,16 @@ public class GenericDao<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public void addOrUpdateRecord(T entity) {
+    public void addRecord(T entity) {
         database.insert(entity);
 
     }
 
-    public void updateRecord(T entity, String idFieldName) {
+    public void update(Object entity, String columnName, Object columnValue) {
         // You need to implement a method to update the record based on the entity and its ID.
         // For simplicity, let's assume that there's a method named `update` in your SqlDatabase class.
         // You may need to modify this based on your actual database schema and update logic.
-        database.update(entity, idFieldName);
+        database.update(entity,columnName,columnValue);
     }
 
     @Override

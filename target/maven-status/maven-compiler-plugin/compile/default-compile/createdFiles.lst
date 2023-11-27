@@ -1,5 +1,6 @@
 com/emma/app/bean/AttendanceBean.class
 com/emma/app/view/helper/MenuLink.class
+com/emma/app/utility/HashText.class
 com/emma/app/action/LogoutAction.class
 com/emma/app/action/HomeAction.class
 com/emma/app/action/EmployeeAttendance.class

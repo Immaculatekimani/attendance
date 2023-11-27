@@ -23,6 +23,9 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         String employeeId = parts[0];
         String attendStatus = parts[1];
 
+        List<Attendance> existingRecords = getEmployeeAttendance(employeeId);
+        Attendance existingRecord = findExistingRecord(existingRecords, LocalDate.now());
+
         for (Employee employee : employeeBean.list(Employee.class, "")) {
             String currentEmployeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
@@ -38,18 +41,67 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                 attendance.setEmployeeName(employeeName);
                 attendance.setAttendanceDate(LocalDate.now());
                 attendance.setAttendanceTime(displayTime);
-                attendance.setAttendanceStatus(attendStatus);
 
-                try {
-                    addOrUpdateRecord(attendance);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                // No existing record, create a new one
+                if (existingRecord == null) {
+                    handleAttendanceStatus(attendance, attendStatus);
+
+                    try {
+                        addRecord(attendance);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    // Update existing record
+                    handleAttendanceStatus(attendance, attendStatus);
+                    existingRecord.setTimeOut(attendance.getAttendanceTime());
+                    existingRecord.setAttendanceStatus(attendance.getAttendanceStatus());
+
+                    try {
+                        update(existingRecord, "employee_id", employeeId);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-
-
         }
         return attendance;
+    }
+
+
+    private Attendance findExistingRecord(List<Attendance> records, LocalDate currentDate) {
+        for (Attendance record : records) {
+            if (record.getAttendanceDate().equals(currentDate)) {
+                return record;
+            }
+        }
+        return null;
+    }
+
+    private void handleAttendanceStatus(Attendance attendance, String attendStatus) {
+        switch (attendStatus) {
+            case "Entry":
+                if (attendance.getAttendanceTime().isAfter(LocalTime.parse("08:00", DateTimeFormatter.ofPattern("HH:mm")))) {
+                    attendance.setAttendanceStatus("Late");
+                } else {
+                    attendance.setAttendanceStatus("Present");
+                }
+                attendance.setTimeIn(attendance.getAttendanceTime());
+                break;
+            case "Exit":
+                attendance.setTimeOut(attendance.getAttendanceTime());
+
+                // Check if the exit time is before 5:00 PM
+                if (attendance.getTimeOut().isBefore(LocalTime.parse("17:00", DateTimeFormatter.ofPattern("HH:mm")))) {
+                    attendance.setAttendanceStatus("HalfDay");
+                } else {
+                    attendance.setAttendanceStatus("FullDay");
+                }
+                break;
+            case "Absent":
+                attendance.setAttendanceStatus("Absent");
+                break;
+        }
     }
 
     @Override
