@@ -83,8 +83,10 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
             case "Entry":
                 if (attendance.getAttendanceTime().isAfter(LocalTime.parse("08:00", DateTimeFormatter.ofPattern("HH:mm")))) {
                     attendance.setAttendanceStatus("Late");
+                    attendance.setJoiningStatus("Late");
                 } else {
                     attendance.setAttendanceStatus("Present");
+                    attendance.setJoiningStatus("In-Time");
                 }
                 attendance.setTimeIn(attendance.getAttendanceTime());
                 break;

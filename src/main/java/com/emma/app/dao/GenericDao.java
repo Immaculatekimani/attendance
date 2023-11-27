@@ -43,8 +43,8 @@ public class GenericDao<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public int countRecords(Class<?> entity) {
-        List<T> resultList = this.list(entity, "");
+    public int countRecords(Class<?> entity, String whereClause, Object... parameters) {
+        List<T> resultList = this.list(entity, whereClause,parameters);
         return resultList.size();
     }
 }
