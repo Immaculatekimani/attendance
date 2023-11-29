@@ -274,5 +274,24 @@ public class SqlDatabase implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    public void delete(Class<?> entityClass, String columnName, Object columnValue) {
+        try {
+            if (!entityClass.isAnnotationPresent(DbTable.class)) {
+                throw new RuntimeException("Database Table Annotation Does Not Exist");
+            }
+
+            DbTable dbTable = entityClass.getAnnotation(DbTable.class);
+            String sqlQuery = "DELETE FROM " + dbTable.name() + " WHERE " + columnName + " = ?";
+
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+                statement.setObject(1, columnValue);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

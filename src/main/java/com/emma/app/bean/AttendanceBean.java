@@ -2,10 +2,12 @@ package com.emma.app.bean;
 
 import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
+import com.emma.app.utility.TimeFormatter;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +19,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
     @EJB
     private EmployeeBeanI employeeBean;
+    @Inject
+    private TimeFormatter timeFormatter;
 
     public Attendance logAttendance(Attendance attendance, String selectedValue) {
         String[] parts = selectedValue.split("_");
@@ -32,10 +36,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
             String employeeImage = employee.getEmployeeImage();
 
             if (attendStatus != null && currentEmployeeId.equals(employeeId)) {
-                LocalTime currentTime = LocalTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
-
+                LocalTime displayTime = timeFormatter.timeDisplay();
                 attendance.setEmployeeImage(employeeImage);
                 attendance.setEmployeeID(employeeId);
                 attendance.setEmployeeName(employeeName);
@@ -69,7 +70,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
     }
 
 
-    private Attendance findExistingRecord(List<Attendance> records, LocalDate currentDate) {
+    public Attendance findExistingRecord(List<Attendance> records, LocalDate currentDate) {
         for (Attendance record : records) {
             if (record.getAttendanceDate().equals(currentDate)) {
                 return record;

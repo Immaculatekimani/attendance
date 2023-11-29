@@ -24,6 +24,7 @@ public class HtmlComponent {
 
         Field[] fields = dataClass.getDeclaredFields();
 
+
         String idFieldName = findIdField(fields);
         if (idFieldName == null) {
             throw new RuntimeException("No field with header 'Employee ID' found in class " + dataClass.getSimpleName());
@@ -72,10 +73,24 @@ public class HtmlComponent {
                         "</td>");
                 if (includeActions) {
                     trBuilder.append("<td>");
-                    trBuilder.append("<button type=\"button\" class=\"btn btn-sm btn-success\" onclick=\"editItem(")
-                            .append(getFieldValue(model, idFieldName)).append(")\">Edit</button>");
-                    trBuilder.append("<button type=\"button\" class=\"btn btn-sm btn-danger\" onclick=\"deleteItem(")
-                            .append(getFieldValue(model, idFieldName)).append(")\">Delete</button>");
+                    trBuilder.append("<div class=\"action-buttons\">");
+
+                    // Edit Form
+                    trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
+                    trBuilder.append("<input type=\"hidden\" name=\"action\" value=\"update\"/>"); // Added hidden field
+                    trBuilder.append("<input type=\"hidden\" name=\"itemId\" value=\"")
+                            .append(getFieldValue(model, idFieldName)).append("\"/>");
+                    trBuilder.append("<button type=\"submit\" class=\"btn btn-sm btn-primary\">Edit</button>");
+                    trBuilder.append("</form>");
+
+                    // Delete Form
+                    trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
+                    trBuilder.append("<input type=\"hidden\" name=\"action\" value=\"delete\"/>"); // Added hidden field
+                    trBuilder.append("<input type=\"hidden\" name=\"itemId\" value=\"")
+                            .append(getFieldValue(model, idFieldName)).append("\"/>");
+                    trBuilder.append("<button type=\"submit\" class=\"btn btn-sm btn-danger\">Delete</button>");
+                    trBuilder.append("</form>");
+                    trBuilder.append("</div>"); // Close the action-buttons div
                     trBuilder.append("</td>");
                 }
 

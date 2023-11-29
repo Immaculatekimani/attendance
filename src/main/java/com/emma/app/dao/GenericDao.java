@@ -38,7 +38,8 @@ public class GenericDao<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public void deleteAccount(T entity) {
+    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue) {
+        database.delete(entityClass, columnName, columnValue);
 
     }
 

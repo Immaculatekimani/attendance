@@ -43,7 +43,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void deleteAccount(T entity) {
+    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue) {
+        genricDao.setDatabse(database);
+        database.delete(entityClass, columnName,columnValue);
 
     }
 

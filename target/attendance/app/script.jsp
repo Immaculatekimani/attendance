@@ -46,7 +46,7 @@
     function viewAttendance(employeeId) {
         console.log("Viewing attendance for employee with ID: " + employeeId);
 
-        window.location.href = "./employeeAttendance?employeeId=" + employeeId;
+        window.location.href = "./employeeReport?employeeId=" + employeeId;
 
 
     }
