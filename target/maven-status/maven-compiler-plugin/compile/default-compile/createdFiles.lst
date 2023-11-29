@@ -9,6 +9,7 @@ com/emma/database/helper/DbTable.class
 com/emma/app/utility/EmployeeTypeConverter.class
 com/emma/app/view/helper/MyTableSetting.class
 com/emma/app/bean/EmployeeBean.class
+com/emma/app/action/report/RoleReportAction.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/design/DesignI.class
 com/emma/database/SqlDatabase.class
@@ -21,6 +22,7 @@ com/emma/app/view/helper/TableForm.class
 com/emma/app/bean/AuthBeanI.class
 com/emma/app/view/helper/MyTableColHeader.class
 com/emma/app/view/helper/design/EmployeeDesign.class
+com/emma/app/view/helper/design/SingleEmployee.class
 com/emma/database/helper/DbTableId.class
 com/emma/app/model/BaseEntity.class
 com/emma/app/bean/AuthBean.class
@@ -38,10 +40,11 @@ com/emma/app/view/helper/design/ReportDesign.class
 com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/view/helper/MenuLinkStatus.class
 com/emma/app/dao/GenericDao.class
+com/emma/app/bean/ReportBean.class
 com/emma/app/view/helper/HtmlComponent.class
 com/emma/app/model/Attendance.class
-com/emma/app/action/UpdateEmployeeAction.class
 com/emma/app/model/User.class
+com/emma/app/bean/ReportBeanI.class
 com/emma/app/action/report/ReportAction.class
 com/emma/app/action/UserAction.class
 com/emma/app/model/EmployeeRole.class

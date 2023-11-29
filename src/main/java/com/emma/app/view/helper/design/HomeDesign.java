@@ -20,7 +20,6 @@ public class HomeDesign implements DesignI {
         int noOfDevops = employeeBean.countRecords(Employee.class, "role = ?", EmployeeRole.DEVOPS.name());
         int noOfDeveloper = employeeBean.countRecords(Employee.class, "role = ?", EmployeeRole.DEVELOPER.name());
 
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%" + noOfQA);
         String homeHTML = " <div class=\"image-container\">" + " <div> " +
                 "<img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +
                 "</div>" +

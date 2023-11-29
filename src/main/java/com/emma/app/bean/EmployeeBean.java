@@ -1,5 +1,6 @@
 package com.emma.app.bean;
 
+import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
 
 import javax.ejb.Remote;
@@ -16,12 +17,12 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
         try {
 
             if ("update".equals(action)) {
-                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&"+employeeInput.toString());
+                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&" + employeeInput.toString());
                 // Perform update operation
                 update(employeeInput, "employee_id", employeeId);
             } else if ("delete".equals(action)) {
                 // Perform delete operation
-                deleteRecord(Employee.class, "employee_id", employeeId );
+                deleteRecord(Employee.class, "employee_id", employeeId);
             } else {
                 // Default to add operation if action is not specified
                 addRecord(employeeInput);
@@ -30,5 +31,15 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public List<Employee> getEmployeeByRole(String employeeRole) {
+        try {
+            String whereClause = "role = ?";
+            return list(Employee.class, whereClause, employeeRole);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -47,7 +47,22 @@
         console.log("Viewing attendance for employee with ID: " + employeeId);
 
         window.location.href = "./employeeReport?employeeId=" + employeeId;
+    }
+    function typeDropDown(selectedValue) {
+        console.log("Selected value:", selectedValue);
 
+        var singleDatePicker = document.getElementById('singleDatePicker');
+        var rangeDatePicker = document.getElementById('rangeDatePicker');
 
+        if (selectedValue === '2') {
+            singleDatePicker.style.display = 'block';
+            rangeDatePicker.style.display = 'none';
+        } else if (selectedValue === '3') {
+            singleDatePicker.style.display = 'none';
+            rangeDatePicker.style.display = 'block';
+        } else {
+            singleDatePicker.style.display = 'none';
+            rangeDatePicker.style.display = 'none';
+        }
     }
 </script>
