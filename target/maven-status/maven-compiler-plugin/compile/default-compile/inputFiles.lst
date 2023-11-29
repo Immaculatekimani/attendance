@@ -11,7 +11,6 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/DesignI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/displaybean/MenuBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/TimeFormatter.java
-/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/UpdateEmployeeAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AuthBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/UserAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/helper/DbTableId.java
@@ -25,10 +24,12 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/EmployeeAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/filter/AuthFilter.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/RoleReportAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/Attendance.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/TableForm.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/EmployeeRole.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/TopBar.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/SingleEmployee.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/dao/GenericDao.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/GenericBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/AttendanceAction.java
@@ -37,12 +38,14 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/EmployeeReport.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/Menu.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/HomeDesign.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/ReportBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/EmployeeTypeConverter.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/SqlDatabase.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/EmployeeDesign.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/MenuLink.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/LogoutAction.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/ReportBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/GenericBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/ReportAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/helper/DbTableColumn.java

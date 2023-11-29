@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet("/home")
 public class HomeAction extends BaseAction {
@@ -29,7 +30,7 @@ public class HomeAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         renderPage(req, resp, 0, design.designer(employeeBean),
-                Attendance.class, attendanceBean.list(Attendance.class, "")
+                Attendance.class, attendanceBean.list(Attendance.class, "attendance_date = ?", LocalDate.now())
 
         );
 

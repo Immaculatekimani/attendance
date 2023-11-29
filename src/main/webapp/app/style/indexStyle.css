@@ -142,3 +142,7 @@ border-radius: 20px;
     gap: 5px;
     margin-left: 30%;
 }
+.row {
+padding-left: 15px;
+padding-right:15px;
+}
