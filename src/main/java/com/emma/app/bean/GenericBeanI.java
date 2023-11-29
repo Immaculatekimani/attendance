@@ -10,7 +10,7 @@ public interface GenericBeanI<T> extends Serializable {
     public int countRecords(Class<?> entity, String whereClause, Object... parameters);
     public void update(Object entity, String columnName, Object columnValue);
 
-    void deleteAccount(T entity);
+    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue);
 
 
 }

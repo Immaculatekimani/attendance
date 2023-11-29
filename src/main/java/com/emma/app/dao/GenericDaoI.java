@@ -9,7 +9,7 @@ public interface GenericDaoI <T> extends Serializable {
     public List<T> list(Class<?> entity,String whereClause, Object... parameters);
     public void addRecord(T entity);
 
-    void deleteAccount(T entity);
+    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue);
     public int countRecords(Class<?> entity, String whereClause, Object... parameters);
     public void update(Object entity, String columnName, Object columnValue);
     SqlDatabase getDatabase();

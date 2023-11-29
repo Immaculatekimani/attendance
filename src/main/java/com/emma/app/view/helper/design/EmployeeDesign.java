@@ -1,10 +1,14 @@
 package com.emma.app.view.helper.design;
 
+import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
 import com.emma.app.view.helper.HtmlComponent;
 
-public class EmployeeDesign {
-    public static String design() {
+import javax.inject.Named;
+
+@Named("employee")
+public class EmployeeDesign implements DesignI {
+    public String designer() {
 
         String empHtml = "<button id=\"openPopup\" class=\"submit-button\">Add Employee</button>" +
                 "<div id=\"popupForm\" class=\"modal\">" +
@@ -25,5 +29,10 @@ public class EmployeeDesign {
                 "});</script>";
         return empHtml;
 
+    }
+
+    @Override
+    public String designer(EmployeeBeanI employeeBean) {
+        return null;
     }
 }

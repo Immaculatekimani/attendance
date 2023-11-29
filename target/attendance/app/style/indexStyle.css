@@ -137,3 +137,8 @@ color: white;
 text-align: center;
 border-radius: 20px;
 }
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    margin-left: 30%;
+}

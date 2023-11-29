@@ -5,11 +5,13 @@ import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeRole;
+import com.emma.app.utility.EmployeeTypeConverter;
 import com.emma.app.view.helper.HtmlComponent;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,14 @@ import java.util.stream.Collectors;
 
 
 public class BaseAction extends HttpServlet {
-    static {
-        ConvertUtils.register(new EmployeeTypeConverter(), EmployeeRole.class);
+    @Inject
+    private EmployeeTypeConverter employeeTypeConverter;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        ConvertUtils.register(employeeTypeConverter, EmployeeRole.class);
     }
 
     @EJB
@@ -66,8 +74,8 @@ public class BaseAction extends HttpServlet {
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
         LocalDate currentDate = LocalDate.now();
 
-        List<Employee> allEmployees = employeeBean.list(Employee.class,"");
-        List<Attendance> allAttendances = attendanceBean.list(Attendance.class,"");
+        List<Employee> allEmployees = employeeBean.list(Employee.class, "");
+        List<Attendance> allAttendances = attendanceBean.list(Attendance.class, "");
         List<Attendance> todaysAttendances = allAttendances.stream()
                 .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
                 .collect(Collectors.toList());

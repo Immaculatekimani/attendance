@@ -1,14 +1,12 @@
 package com.emma.app.model;
 
-import com.emma.app.view.helper.MyHtmlForm;
-import com.emma.app.view.helper.MyHtmlFormField;
-import com.emma.app.view.helper.MyTableColHeader;
-import com.emma.app.view.helper.MyTableSetting;
+import com.emma.app.view.helper.*;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
 @DbTable(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee")
+@TableForm(label = "Edit Employee", url = "./employee")
 @MyTableSetting(includeActions = true)
 public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
