@@ -105,7 +105,7 @@ public class HomeDesign implements DesignI {
 
 
                 "<h1 style=\" color: #3D0C11;\n" +
-                "    text-align: center; \"> RECENT ATTENDANCE RECORDS</h1>";
+                "    text-align: center; \"> TODAY'S ATTENDANCE RECORDS</h1>";
         return homeHTML;
 
     }
