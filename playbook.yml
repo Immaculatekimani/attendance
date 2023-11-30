@@ -1,0 +1,28 @@
+---
+- name: Deploy Application
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Recursively change ownership
+    file:
+      path: /home/tatu/Remote/
+      state: directory
+      recurse: yes
+      owner: tatu
+
+  - name: Copy Docker Compose file
+    copy:
+      src: ./docker-compose.yml
+      dest: /home/tatu/Remote/docker-compose.yml
+
+  - name: Copy Env file
+    copy:
+      src: ./.env
+      dest: /home/tatu/Remote/.env
+
+  - name: Start Docker Compose
+    # shell: |
+    #   docker compose -f /home/tatu/Remote/docker-compose.yml pull
+    #   docker compose -f /home/tatu/Remote/docker-compose.yml up -d
+    shell: docker compose -f /home/tatu/Remote/docker-compose.yml up -d

@@ -11,9 +11,9 @@ services:
       - mysql-data:/var/lib/mysql
 
   attenance-app:
-    image: attendance-img
+    image: tatu333/attendance-img:latest
     ports:
-      - "8080:8080"
+      - "8082:8082"
     depends_on:
       - mysqld
     environment:

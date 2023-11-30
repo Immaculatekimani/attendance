@@ -28,3 +28,9 @@ replay_pid*
 
 #env passwords
 .env
+/myvenv/
+
+# Virtual environment
+myvenv/
+env/
+*.env/
