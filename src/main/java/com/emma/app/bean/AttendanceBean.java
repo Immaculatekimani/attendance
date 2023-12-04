@@ -1,7 +1,7 @@
 package com.emma.app.bean;
 
 import com.emma.app.model.Attendance;
-import com.emma.app.model.AttendanceEvent;
+import com.emma.app.model.AttendanceLog;
 import com.emma.app.model.Employee;
 import com.emma.app.utility.TimeFormatter;
 
@@ -22,7 +22,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
     @EJB
     private EmployeeBeanI employeeBean;
     @Inject
-    private Event<AttendanceEvent> event;
+    private Event<AttendanceLog> event;
     @Inject
     private TimeFormatter timeFormatter;
 
@@ -53,8 +53,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
                     try {
                         addRecord(attendance);
-                        AttendanceEvent add = new AttendanceEvent();
-                        add.setAttendanceDetails("Attendance added for today");
+                        AttendanceLog add = new AttendanceLog();
+                        add.setAttendanceDetails("Attendance for " + employeeName + " has been added" + " at " + timeFormatter.timeDisplay());
                         event.fire(add);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -67,8 +67,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
                     try {
                         update(existingRecord, "employee_id", employeeId);
-                        AttendanceEvent editAttend = new AttendanceEvent();
-                        editAttend.setAttendanceDetails("Attendance updated for today");
+                        AttendanceLog editAttend = new AttendanceLog();
+                        editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated" + " at " + timeFormatter.timeDisplay());
                         event.fire(editAttend);
                     } catch (Exception e) {
                         throw new RuntimeException(e);

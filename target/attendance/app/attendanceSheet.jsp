@@ -5,7 +5,7 @@
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.emma.app.model.Attendance" %>
-<%@ page import="com.emma.app.model.AttendanceEvent" %>
+<%@ page import="com.emma.app.model.AttendanceLog" %>
 
 
 <jsp:useBean id="topBar" class="com.emma.app.view.helper.TopBar" scope="request"/>
@@ -111,21 +111,17 @@ ${topBar.setSessionUsername(username)}
         </table>
     </form>
    <!-- Logs Section (Fixed to Bottom) -->
-   <div class="fixed-bottom">
+   <div class="fixed-bottom" style="background-color: #068DA9; ">
        <div class="row">
            <div class="col-xl-6 col-xl-12">
                <div class="card">
-                   <div class="card-body">
-                       <h3>Logs</h3>
+                   <div class="card-body" style="background-color: #3D0C11;; color:white;">
+                       <h3>Recent Activities</h3>
                        <div id="logs">
                            <%-- Insert logs dynamically here --%>
-                           <table>
-                                <% for (AttendanceEvent event : (List<AttendanceEvent>)request.getAttribute("attendanceLogs")) { %>
-                                   <tr>
-                                       <td><%= event.getAttendanceDetails().strip() %></td>
-                                   </tr>
+                                <% for (AttendanceLog event : (List<AttendanceLog>)request.getAttribute("attendanceLogs")) { %>
+                                       <p><%= event.getAttendanceDetails().strip() %></p>
                                <% } %>
-                           </table>
                            </div>
                    </div>
                </div>
@@ -136,4 +132,7 @@ ${topBar.setSessionUsername(username)}
 
     <jsp:include page="script.jsp"/>
 </body>
+<footer>
+
+</footer>
 </html>

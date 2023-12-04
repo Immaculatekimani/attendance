@@ -1,9 +1,6 @@
 package com.emma.database;
 
-import com.emma.app.model.Attendance;
-import com.emma.app.model.AttendanceEvent;
-import com.emma.app.model.Employee;
-import com.emma.app.model.User;
+import com.emma.app.model.*;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 import com.emma.database.helper.DbTableId;
@@ -24,8 +21,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+
 @Singleton
 @Startup()
 public class SqlDatabase implements Serializable {
@@ -51,7 +48,8 @@ public class SqlDatabase implements Serializable {
             entities.add(User.class);
             entities.add(Employee.class);
             entities.add(Attendance.class);
-            entities.add(AttendanceEvent.class);
+            entities.add(AttendanceLog.class);
+            entities.add(EmployeeLog.class);
 
             for (Class<?> clazz : entities) {
                 if (!clazz.isAnnotationPresent(DbTable.class))
@@ -217,6 +215,7 @@ public class SqlDatabase implements Serializable {
             throw new RuntimeException(ex);
         }
     }
+
     public void update(Object entity, String columnName, Object columnValue) {
         try {
             Class<?> clazz = entity.getClass();
@@ -276,6 +275,7 @@ public class SqlDatabase implements Serializable {
             throw new RuntimeException(e);
         }
     }
+
     public void delete(Class<?> entityClass, String columnName, Object columnValue) {
         try {
             if (!entityClass.isAnnotationPresent(DbTable.class)) {

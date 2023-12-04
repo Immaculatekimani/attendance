@@ -146,3 +146,18 @@ border-radius: 20px;
 padding-left: 15px;
 padding-right:15px;
 }
+.fixed-bottom {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    top: 10%;
+    text-align: center;
+}
+.fixed-bottom-emp {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    margin-top: 10%
+}
