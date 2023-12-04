@@ -1,8 +1,10 @@
 package com.emma.app.action;
 
 import com.emma.app.bean.AttendanceBeanI;
+import com.emma.app.bean.AttendanceObserver;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Attendance;
+import com.emma.app.model.AttendanceEvent;
 import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeRole;
 import com.emma.app.utility.EmployeeTypeConverter;
@@ -42,6 +44,8 @@ public class BaseAction extends HttpServlet {
     AttendanceBeanI attendanceBean;
     @EJB
     EmployeeBeanI employeeBean;
+    @EJB
+    AttendanceObserver observer;
 
     public <T> T serializeForm(Class<?> clazz, Map<String, ?> requestMap) {
         T clazzInstance;
@@ -79,7 +83,9 @@ public class BaseAction extends HttpServlet {
         List<Attendance> todaysAttendances = allAttendances.stream()
                 .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
                 .collect(Collectors.toList());
-
+        List<AttendanceEvent> events = observer.attendanceLogs(AttendanceObserver.class, "");
+        System.out.println("$$$$$$$$$$$$$$$$$" +events);
+        request.setAttribute("attendanceLogs", events);
         request.setAttribute("allEmployees", allEmployees);
         request.setAttribute("todaysAttendances", todaysAttendances);
         request.setAttribute("displayTime", displayTime);

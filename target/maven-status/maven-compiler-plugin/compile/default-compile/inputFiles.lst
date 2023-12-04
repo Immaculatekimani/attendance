@@ -20,11 +20,11 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/HashText.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/ReportDesign.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/AttendanceEvent.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/Employee.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/EmployeeAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/filter/AuthFilter.java
-/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/RoleReportAction.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/Attendance.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/TableForm.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/EmployeeRole.java
@@ -38,6 +38,7 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/EmployeeReport.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/Menu.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/HomeDesign.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceObserver.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/ReportBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/EmployeeTypeConverter.java
@@ -48,6 +49,7 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/ReportBeanI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/GenericBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/report/ReportAction.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceObserverI.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/helper/DbTableColumn.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/MyHtmlForm.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/model/User.java

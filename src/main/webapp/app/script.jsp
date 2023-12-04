@@ -1,7 +1,8 @@
 <script>
-    function showAttendanceAlert() {
-        alert("Attendance submitted successfully!");
-    }
+     function showAttendanceAlert(message) {
+            alert(message);
+     }
+
 
     function updateDigitalClock() {
         var now = new Date();
@@ -64,5 +65,14 @@
             singleDatePicker.style.display = 'none';
             rangeDatePicker.style.display = 'none';
         }
+        function addLog(message) {
+                var logsDiv = document.getElementById("logs");
+                var logParagraph = document.createElement("p");
+                logParagraph.textContent = message;
+                logsDiv.appendChild(logParagraph);
+            }
+
+            // Example: add a log
+            addLog("This is a sample log message.");
     }
 </script>

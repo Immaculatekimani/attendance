@@ -1,6 +1,7 @@
 package com.emma.database;
 
 import com.emma.app.model.Attendance;
+import com.emma.app.model.AttendanceEvent;
 import com.emma.app.model.Employee;
 import com.emma.app.model.User;
 import com.emma.database.helper.DbTable;
@@ -50,6 +51,7 @@ public class SqlDatabase implements Serializable {
             entities.add(User.class);
             entities.add(Employee.class);
             entities.add(Attendance.class);
+            entities.add(AttendanceEvent.class);
 
             for (Class<?> clazz : entities) {
                 if (!clazz.isAnnotationPresent(DbTable.class))

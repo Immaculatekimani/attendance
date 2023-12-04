@@ -1,12 +1,14 @@
 package com.emma.app.bean;
 
 import com.emma.app.model.Attendance;
+import com.emma.app.model.AttendanceEvent;
 import com.emma.app.model.Employee;
 import com.emma.app.utility.TimeFormatter;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,6 +21,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
     @EJB
     private EmployeeBeanI employeeBean;
+    @Inject
+    private Event<AttendanceEvent> event;
     @Inject
     private TimeFormatter timeFormatter;
 
@@ -49,6 +53,9 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
                     try {
                         addRecord(attendance);
+                        AttendanceEvent add = new AttendanceEvent();
+                        add.setAttendanceDetails("Attendance added for today");
+                        event.fire(add);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -60,6 +67,9 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
                     try {
                         update(existingRecord, "employee_id", employeeId);
+                        AttendanceEvent editAttend = new AttendanceEvent();
+                        editAttend.setAttendanceDetails("Attendance updated for today");
+                        event.fire(editAttend);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
