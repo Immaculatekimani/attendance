@@ -1,7 +1,6 @@
 package com.emma.app.bean;
 
-import com.emma.app.model.Attendance;
-import com.emma.app.model.AttendanceEvent;
+import com.emma.app.model.AttendanceLog;
 import com.emma.database.SqlDatabase;
 
 import javax.ejb.EJB;
@@ -12,16 +11,22 @@ import java.util.List;
 
 @Stateless(name = "attendance/AttendanceObserver")
 @Remote
-public class AttendanceObserver  {
+public class AttendanceObserver {
     @EJB
     SqlDatabase database;
 
-    public void log(@Observes AttendanceEvent attendanceEvent){
-        System.out.println("Adding event log!!"+ attendanceEvent.getAttendanceDetails());
-        database.insert(attendanceEvent);
+    public void log(@Observes AttendanceLog attendanceLog) {
+        database.insert(attendanceLog);
     }
-    public List<AttendanceEvent> attendanceLogs( Class<?> entity, String whereClause, Object... parameters) {
-        return (List<AttendanceEvent>) database.select(entity, whereClause, parameters);
+
+    public List<AttendanceLog> attendanceLogs(Class<?> entity, String whereClause, Object... parameters) {
+        List<AttendanceLog> events = (List<AttendanceLog>) database.select(entity, whereClause, parameters);
+        if (events.size() > 2) {
+            List<AttendanceLog> lastTwoEvents = events.subList(events.size() - 2, events.size());
+            return lastTwoEvents;
+        } else {
+            return events;
+        }
 
     }
 }
