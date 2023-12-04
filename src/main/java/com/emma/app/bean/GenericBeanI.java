@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface GenericBeanI<T> extends Serializable {
-    public List<T> list(Class<?> entity,String whereClause, Object... parameters);
+    public List<T> list(Object entity);
     void addRecord(T entity);
 
     public int countRecords(Class<?> entity, String whereClause, Object... parameters);
-    public void update(Object entity, String columnName, Object columnValue);
+    public void update(T entity, String whereClause, Object... parameters) ;
 
-    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue);
+    public void deleteRecord(T entity);
+    public List<T> select(Class<T> entityClass, String whereClause, Object... parameters);
 
 
 }

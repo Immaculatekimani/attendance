@@ -3,9 +3,15 @@ package com.emma.app.model;
 import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
-@DbTable(name = "attendance_logs")
-public class AttendanceLog {
-    @DbTableColumn(name = "attendance_details", definition = "longtext")
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "attendance_logs")
+public class AttendanceLog extends BaseEntity{
+    @Column(name = "attendance_details", columnDefinition = "longtext")
     @MyTableColHeader(header = "Attendance log")
     private String attendanceDetails;
 

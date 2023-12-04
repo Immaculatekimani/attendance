@@ -6,40 +6,41 @@ import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 import com.emma.database.helper.DbTableId;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-@DbTable(name = "attendances")
+@Entity
+@Table(name = "attendances")
 public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
-    @DbTableColumn(name = "employeeImage")
+    @Column(name = "employeeImage")
     private String employeeImage;
     @MyTableColHeader(header = "Employee ID")
-    @DbTableColumn(name = "employee_id")
+    @Column(name = "employee_id")
     private String employeeID;
     @MyTableColHeader(header = "Employee Name")
-    @DbTableColumn(name = "employee_name")
+    @Column(name = "employee_name")
     private String employeeName;
     @MyTableColHeader(header = "Attendance Date")
-    @DbTableColumn(name = "attendance_date", definition = "DATE")
+    @Column(name = "attendance_date", columnDefinition = "DATE")
     private LocalDate attendanceDate;
-    @DbTableColumn(name = "attendance_time", definition = "TIME")
+    @Column(name = "attendance_time", columnDefinition = "TIME")
     private LocalTime attendanceTime;
 
     @MyTableColHeader(header = "Time In")
-    @DbTableColumn(name = "time_in", definition = "TIME")
+    @Column(name = "time_in", columnDefinition = "TIME")
     private LocalTime timeIn;
 
     @MyTableColHeader(header = "Time Out")
-    @DbTableColumn(name = "time_out", definition = "TIME")
+    @Column(name = "time_out", columnDefinition = "TIME")
     private LocalTime timeOut;
 
     @MyTableColHeader(header = "Day Status")
-    @DbTableColumn(name = "attendance_status")
+    @Column(name = "attendance_status")
     private String attendanceStatus;
     @MyTableColHeader(header = "Joining Status")
-    @DbTableColumn(name = "joining_status")
+    @Column(name = "joining_status")
     private String joiningStatus;
 
 

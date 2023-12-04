@@ -2,55 +2,60 @@ package com.emma.app.bean;
 
 import com.emma.app.dao.GenericDao;
 import com.emma.app.dao.GenericDaoI;
-import com.emma.database.SqlDatabase;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 public class GenericBean<T> implements GenericBeanI<T> {
-    @EJB
-    SqlDatabase database;
+    @PersistenceContext
+    private EntityManager em;
     @Inject
     private GenericDaoI<T> genricDao;
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public List<T> list(Class<?> entity, String whereClause, Object... parameters) {
-        genricDao.setDatabse(database);
-        return genricDao.list(entity, whereClause, parameters);
+    public List<T> list(Object entity) {
+        genricDao.setEm(em);
+        return genricDao.list(entity);
 
     }
 
     @Override
     public void addRecord(T entity) {
-        genricDao.setDatabse(database);
+        genricDao.setEm(em);
         genricDao.addRecord(entity);
 
     }
 
     @Override
-    public int countRecords(Class<?> entity, String whereClause, Object... parameters){
-        genricDao.setDatabse(database);
+    public int countRecords(Class<?> entity, String whereClause, Object... parameters) {
+        genricDao.setEm(em);
         return genricDao.countRecords(entity, whereClause, parameters);
     }
 
     @Override
-    public void update(Object entity, String columnName, Object columnValue) {
-        genricDao.setDatabse(database);
-        genricDao.update(entity,columnName,columnValue);
+    public void update(T entity, String whereClause, Object... parameters)  {
+        genricDao.setEm(em);
+        genricDao.update(entity,whereClause,parameters);
     }
 
     @Override
-    public void deleteRecord(Class<?> entityClass, String columnName, Object columnValue) {
-        genricDao.setDatabse(database);
-        database.delete(entityClass, columnName,columnValue);
+    public void deleteRecord(T entity) {
+        genricDao.setEm(em);
+        genricDao.deleteRecord(entity);
 
     }
 
+    @Override
+    public List<T> select(Class<T> entityClass, String whereClause, Object... parameters) {
+        genricDao.setEm(em);
+        return genricDao.select(entityClass,whereClause,parameters);
+    }
+
     public GenericDao<T> getDao() {
-        genricDao.setDatabse(database);
+        genricDao.setEm(em);
         return (GenericDao<T>) genricDao;
     }
 

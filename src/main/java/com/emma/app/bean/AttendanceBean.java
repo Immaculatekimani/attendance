@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Stateless(name = "attendance/AttendanceBean")
@@ -34,7 +35,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         List<Attendance> existingRecords = getEmployeeAttendance(employeeId);
         Attendance existingRecord = findExistingRecord(existingRecords, LocalDate.now());
 
-        for (Employee employee : employeeBean.list(Employee.class, "")) {
+        for (Employee employee : employeeBean.select(Employee.class,"")) {
             String currentEmployeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
             String employeeImage = employee.getEmployeeImage();
@@ -66,7 +67,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                     existingRecord.setAttendanceStatus(attendance.getAttendanceStatus());
 
                     try {
-                        update(existingRecord, "employee_id", employeeId);
+                        update(existingRecord, "employeeID = ?1", employeeId);
                         AttendanceLog editAttend = new AttendanceLog();
                         editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated" + " at " + timeFormatter.timeDisplay());
                         event.fire(editAttend);
@@ -120,8 +121,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
     @Override
     public List<Attendance> getEmployeeAttendance(String employeeId) {
         try {
-            String whereClause = "employee_id = ?";
-            return list(Attendance.class, whereClause, employeeId);
+            String whereClause = "employee_id = ?1";
+            return select(Attendance.class, whereClause, employeeId);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

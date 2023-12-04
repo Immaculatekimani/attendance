@@ -2,19 +2,20 @@ package com.emma.app.bean;
 
 import com.emma.app.model.User;
 import com.emma.app.utility.HashText;
-import com.emma.database.SqlDatabase;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.io.Serializable;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.sql.SQLException;
 import java.util.List;
 
 @Stateless
 @Remote
 public class UserBean extends GenericBean<User> implements UserBeanI {
+    @PersistenceContext
+    private EntityManager em;
     @Inject
     private HashText hashText;
 
@@ -23,8 +24,7 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
         if (!user.getPassword().equals(user.getConfirmPassword()))
             throw new RuntimeException("Password & confirm password do not match");
 
-        String whereClause = "username = ? AND password = ?"; // Adjust the condition based on your authentication logic
-        List<User> users = list(User.class, whereClause, user.getUsername(), user.getPassword());
+        List<User> users = list(user);
         if (!users.isEmpty())
             throw new RuntimeException("User already exists!");
 
@@ -36,7 +36,7 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
 
         //3. initiate event to send email ...Observer design pattern
 
-        getDao().addRecord(user);
+        em.merge(user);
 
         return false;
     }
