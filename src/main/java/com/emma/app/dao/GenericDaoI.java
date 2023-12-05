@@ -13,7 +13,7 @@ public interface GenericDaoI<T> extends Serializable {
 
     public int countRecords(Class<?> entity, String whereClause, Object... parameters) ;
 
-    public void update(T entity, String whereClause, Object... parameters);
+    public void update(Object entity, String columnName, Object columnValue);
 
     public EntityManager getEm();
 

@@ -35,7 +35,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         List<Attendance> existingRecords = getEmployeeAttendance(employeeId);
         Attendance existingRecord = findExistingRecord(existingRecords, LocalDate.now());
 
-        for (Employee employee : employeeBean.select(Employee.class,"")) {
+        for (Employee employee : employeeBean.select(Employee.class, "")) {
             String currentEmployeeId = employee.getEmployeeId();
             String employeeName = employee.getFirstName() + " " + employee.getLastName();
             String employeeImage = employee.getEmployeeImage();
@@ -67,7 +67,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                     existingRecord.setAttendanceStatus(attendance.getAttendanceStatus());
 
                     try {
-                        update(existingRecord, "employeeID = ?1", employeeId);
+                        update(existingRecord, "employee_id", employeeId);
                         AttendanceLog editAttend = new AttendanceLog();
                         editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated" + " at " + timeFormatter.timeDisplay());
                         event.fire(editAttend);

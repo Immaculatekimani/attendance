@@ -2,6 +2,7 @@ package com.emma.app.bean;
 
 import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeLog;
+import com.emma.app.model.EmployeeRole;
 import com.emma.app.utility.TimeFormatter;
 
 import javax.ejb.Remote;
@@ -25,7 +26,7 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
             if ("update".equals(action)) {
                 System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&" + employeeInput.toString());
                 // Perform update operation
-                update(employeeInput,"");
+                update(employeeInput, "employee_id", employeeId);
             } else if ("delete".equals(action)) {
                 // Perform delete operation
                 deleteRecord(new Employee());
@@ -49,7 +50,8 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
     @Override
     public List<Employee> getEmployeeByRole(String employeeRole) {
         try {
-            return select(Employee.class, "role = ?1", employeeRole);
+            EmployeeRole role = EmployeeRole.valueOf(employeeRole);
+            return select(Employee.class, "role = ?1", role);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

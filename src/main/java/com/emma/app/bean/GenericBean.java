@@ -36,9 +36,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void update(T entity, String whereClause, Object... parameters)  {
+    public void update(Object entity, String columnName, Object columnValue) {
         genricDao.setEm(em);
-        genricDao.update(entity,whereClause,parameters);
+        genricDao.update(entity, columnName, columnValue);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class GenericBean<T> implements GenericBeanI<T> {
     @Override
     public List<T> select(Class<T> entityClass, String whereClause, Object... parameters) {
         genricDao.setEm(em);
-        return genricDao.select(entityClass,whereClause,parameters);
+        return genricDao.select(entityClass, whereClause, parameters);
     }
 
     public GenericDao<T> getDao() {
