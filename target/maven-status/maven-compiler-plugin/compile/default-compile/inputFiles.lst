@@ -44,7 +44,6 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/ReportBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/EmployeeTypeConverter.java
-/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/SqlDatabase.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/EmployeeDesign.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/MenuLink.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/action/LogoutAction.java

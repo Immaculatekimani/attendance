@@ -4,30 +4,34 @@ import com.emma.app.view.helper.*;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
-@DbTable(name = "employees")
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee")
 @TableForm(label = "Edit Employee", url = "./employee")
 @MyTableSetting(includeActions = true)
 public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
-    @DbTableColumn(name = "employeeImage")
+    @Column(name = "employeeImage")
     @MyHtmlFormField(label = "Add Employee image")
     private String employeeImage;
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")
-    @DbTableColumn(name = "employee_id")
+    @Column(name = "employee_id")
     private String employeeId;
     @MyHtmlFormField(placeholder = "Enter First Name")
     @MyTableColHeader(header = "Employee First Name")
-    @DbTableColumn(name = "firstname")
+    @Column(name = "firstname")
     private String firstName;
     @MyHtmlFormField(placeholder = "Enter Last Name")
     @MyTableColHeader(header = "Employee Last Name")
-    @DbTableColumn(name = "lastname")
+    @Column(name = "lastname")
     private String lastName;
     @MyHtmlFormField(label = "Choose Employee Role")
     @MyTableColHeader(header = "Employee Role")
-    @DbTableColumn(name = "role")
+    @Column
+    @Enumerated(EnumType.STRING)
     private EmployeeRole role;
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role, String employeeImage) {

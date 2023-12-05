@@ -3,12 +3,17 @@ package com.emma.app.model;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
-@DbTable(name = "users")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User extends BaseEntity {
 
-    @DbTableColumn(name = "username")
+    @Column(name = "username")
     private String username;
-    @DbTableColumn(name = "password")
+    @Column(name = "password")
     private String password;
     private String confirmPassword;
 

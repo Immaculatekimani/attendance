@@ -25,7 +25,7 @@ public class EmployeeAction extends BaseAction {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.list(Employee.class, ""));
+        renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.select(Employee.class,""));
 
 
     }

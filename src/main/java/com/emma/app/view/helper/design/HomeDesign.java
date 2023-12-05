@@ -16,9 +16,9 @@ public class HomeDesign implements DesignI {
     public String designer(EmployeeBeanI employeeBean) {
 
         int noOfEmployees = employeeBean.countRecords(Employee.class, "");
-        int noOfQA = employeeBean.countRecords(Employee.class, "role = ?", EmployeeRole.QA.name());
-        int noOfDevops = employeeBean.countRecords(Employee.class, "role = ?", EmployeeRole.DEVOPS.name());
-        int noOfDeveloper = employeeBean.countRecords(Employee.class, "role = ?", EmployeeRole.DEVELOPER.name());
+        int noOfQA = employeeBean.countRecords(Employee.class, "role = ?1", EmployeeRole.QA);
+        int noOfDevops = employeeBean.countRecords(Employee.class, "role = ?1", EmployeeRole.DEVOPS);
+        int noOfDeveloper = employeeBean.countRecords(Employee.class, "role = ?1", EmployeeRole.DEVELOPER);
 
         String homeHTML = " <div class=\"image-container\">" + " <div> " +
                 "<img src=\"images/Slide1crop.jpg\" alt=\"Image 1\">" +

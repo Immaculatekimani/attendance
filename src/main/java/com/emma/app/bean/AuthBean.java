@@ -2,24 +2,21 @@ package com.emma.app.bean;
 
 import com.emma.app.model.User;
 import com.emma.app.utility.HashText;
-import com.emma.database.SqlDatabase;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Stateless(name = "attendance/AuthBean")
 @Remote
 public class AuthBean implements AuthBeanI, Serializable {
-    @EJB
-    SqlDatabase database;
+    @PersistenceContext
+    EntityManager em;
     @Inject
     private HashText hashText;
 
@@ -30,9 +27,10 @@ public class AuthBean implements AuthBeanI, Serializable {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        String whereClause = "username = ? AND password = ?"; // Adjust the condition based on your authentication logic
-        List<User> users = database.select(User.class, whereClause, loginUser.getUsername(), loginUser.getPassword());
-
+        List<User> users = em.createQuery("FROM User u WHERE u.password=:password AND u.username=:username", User.class)
+                .setParameter("password", loginUser.getPassword())
+                .setParameter("username", loginUser.getUsername())
+                .getResultList();
         if (users.isEmpty() || users.get(0) == null) {
             throw new RuntimeException("Invalid user!!");
         }

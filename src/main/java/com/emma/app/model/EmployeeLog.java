@@ -4,10 +4,15 @@ import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
-@DbTable(name = "employee_logs")
-public class EmployeeLog {
-    @DbTableColumn(name = "employee_details", definition = "longtext")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee_logs")
+public class EmployeeLog extends BaseEntity{
     @MyTableColHeader(header = "Employee logs")
+    @Column(name = "employee_details", columnDefinition = "longtext")
     private String employeeLogDetails;
 
     public String getEmployeeLogDetails() {

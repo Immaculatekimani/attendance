@@ -29,7 +29,7 @@ public class ReportAction extends BaseAction {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 3, design.designer(), Attendance.class, attendanceBean.list(Attendance.class, ""));
+        renderPage(req, resp, 3, design.designer(), Attendance.class, attendanceBean.select(Attendance.class,""));
 
 
     }
