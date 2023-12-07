@@ -42,9 +42,9 @@ public class GenericBean<T> implements GenericBeanI<T> {
     }
 
     @Override
-    public void deleteRecord(T entity) {
+    public void deleteRecord(Class<T> entityClass, String fieldName, Object columnValue) {
         genricDao.setEm(em);
-        genricDao.deleteRecord(entity);
+        genricDao.deleteRecord(entityClass, fieldName, columnValue);
 
     }
 

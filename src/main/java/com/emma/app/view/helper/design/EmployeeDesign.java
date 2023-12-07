@@ -11,7 +11,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import java.util.List;
 
-@Named("employee")
+@Named("employeeDesign")
 public class EmployeeDesign implements DesignI {
     @EJB
     EmployeeObserver employeeLogsObserver;

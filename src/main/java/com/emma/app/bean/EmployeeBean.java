@@ -29,7 +29,7 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
                 update(employeeInput, "employee_id", employeeId);
             } else if ("delete".equals(action)) {
                 // Perform delete operation
-                deleteRecord(new Employee());
+                deleteRecord(Employee.class, "employeeId", employeeId);
                 EmployeeLog log = new EmployeeLog();
                 log.setEmployeeLogDetails("Successfully deleted " + employeeId + " at " + timeFormatter.timeDisplay());
                 employeeLogEvent.fire(log);

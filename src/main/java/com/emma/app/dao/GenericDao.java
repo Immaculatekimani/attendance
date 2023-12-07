@@ -2,9 +2,6 @@ package com.emma.app.dao;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +28,11 @@ public class GenericDao<T> implements GenericDaoI<T> {
 
 
     @Override
-    public void deleteRecord(T entity) {
-        em.remove(entity);
+    public void deleteRecord(Class<T> entityClass, String fieldName, Object columnValue) {
+        String jpql = "DELETE FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
+        Query query = em.createQuery(jpql);
+        query.setParameter("value", columnValue);
+        query.executeUpdate();
 
     }
 
