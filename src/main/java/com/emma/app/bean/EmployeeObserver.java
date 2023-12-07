@@ -1,10 +1,12 @@
 package com.emma.app.bean;
 
 import com.emma.app.model.EmployeeLog;
+import com.emma.app.utility.EventLogger;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,22 +17,21 @@ import java.util.List;
 public class EmployeeObserver {
     @PersistenceContext
     EntityManager em;
+    @Inject
+    EventLogger eventLogger;
 
     public void log(@Observes EmployeeLog employeeLog) {
         em.merge(employeeLog);
     }
 
     public List<EmployeeLog> employeeLogs() {
-        String jpql = "SELECT e FROM EmployeeLog e";
 
-        TypedQuery<EmployeeLog> query = em.createQuery(jpql, EmployeeLog.class);
-
-        List<EmployeeLog> events = query.getResultList();
-        if (events.size() > 2) {
-            List<EmployeeLog> lastTwoEvents = events.subList(events.size() - 2, events.size());
+        List<EmployeeLog> EmployeeEvents = eventLogger.logEvent(EmployeeLog.class);
+        if (EmployeeEvents.size() > 2) {
+            List<EmployeeLog> lastTwoEvents = EmployeeEvents.subList(EmployeeEvents.size() - 2, EmployeeEvents.size());
             return lastTwoEvents;
         } else {
-            return events;
+            return EmployeeEvents;
         }
 
     }

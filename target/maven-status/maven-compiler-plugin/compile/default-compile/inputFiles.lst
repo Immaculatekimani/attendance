@@ -18,6 +18,7 @@
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/EmployeeObserver.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/database/helper/DbTable.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AuthBean.java
+/home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/EventLogger.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/utility/HashText.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/bean/AttendanceBean.java
 /home/tatu/Desktop/Tatu/Techie/JAVA ENT/attendance/src/main/java/com/emma/app/view/helper/design/ReportDesign.java

@@ -20,12 +20,12 @@ public class EmployeeAction extends BaseAction {
     @EJB
     EmployeeBeanI employeeBean;
     @Inject
-    @Named("employee")
+    @Named("employeeDesign")
     DesignI design;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.select(Employee.class,""));
+        renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.select(Employee.class, ""));
 
 
     }

@@ -12,7 +12,7 @@ public interface GenericBeanI<T> extends Serializable {
 
     public void update(Object entity, String columnName, Object columnValue);
 
-    public void deleteRecord(T entity);
+    public void deleteRecord(Class<T> entityClass, String fieldName, Object columnValue);
 
     public List<T> select(Class<T> entityClass, String whereClause, Object... parameters);
 

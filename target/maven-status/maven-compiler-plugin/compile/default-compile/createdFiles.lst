@@ -9,6 +9,7 @@ com/emma/database/helper/DbTable.class
 com/emma/app/utility/EmployeeTypeConverter.class
 com/emma/app/view/helper/MyTableSetting.class
 com/emma/app/bean/EmployeeBean.class
+com/emma/app/utility/EventLogger.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/design/DesignI.class
 com/emma/app/action/report/EmployeeReport.class
