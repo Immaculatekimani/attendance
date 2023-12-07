@@ -20,22 +20,11 @@ public class EmployeeObserver {
         em.merge(employeeLog);
     }
 
-    public List<EmployeeLog> employeeLogs(Class<?> entity, String whereClause, Object... parameters) {
-        String jpql = "SELECT e FROM " + entity.getSimpleName() + " e";
+    public List<EmployeeLog> employeeLogs() {
+        String jpql = "SELECT e FROM EmployeeLog e";
 
-        if (!whereClause.isEmpty()) {
-            jpql += " WHERE " + whereClause;
-        }
-
-        // Create a query
         TypedQuery<EmployeeLog> query = em.createQuery(jpql, EmployeeLog.class);
 
-        // Set parameters if available
-        if (parameters != null && parameters.length > 0) {
-            for (int i = 0; i < parameters.length; i++) {
-                query.setParameter(i + 1, parameters[i]);
-            }
-        }
         List<EmployeeLog> events = query.getResultList();
         if (events.size() > 2) {
             List<EmployeeLog> lastTwoEvents = events.subList(events.size() - 2, events.size());

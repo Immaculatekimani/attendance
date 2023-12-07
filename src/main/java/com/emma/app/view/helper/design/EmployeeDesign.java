@@ -17,7 +17,7 @@ public class EmployeeDesign implements DesignI {
     EmployeeObserver employeeLogsObserver;
 
     public String designer() {
-        List<EmployeeLog> employeeLogs = employeeLogsObserver.employeeLogs(EmployeeLog.class, "");
+        List<EmployeeLog> employeeLogs = employeeLogsObserver.employeeLogs();
 
         String empHtml = "<button id=\"openPopup\" class=\"submit-button\">Add Employee</button>" +
                 "<div id=\"popupForm\" class=\"modal\">" +
