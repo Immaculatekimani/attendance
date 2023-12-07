@@ -1,5 +1,6 @@
 package com.emma.app.bean;
 
+import com.emma.app.model.Attendance;
 import com.emma.app.model.AttendanceLog;
 
 import javax.ejb.Remote;
@@ -20,22 +21,11 @@ public class AttendanceObserver {
         em.merge(attendanceLog);
     }
 
-    public List<AttendanceLog> attendanceLogs(Class<?> entity, String whereClause, Object... parameters) {
-        String jpql = "SELECT e FROM " + entity.getSimpleName() + " e";
+    public List<AttendanceLog> attendanceLogs() {
+        String jpql = "SELECT e FROM  AttendanceLog  e";
 
-        if (!whereClause.isEmpty()) {
-            jpql += " WHERE " + whereClause;
-        }
-
-        // Create a query
         TypedQuery<AttendanceLog> query = em.createQuery(jpql, AttendanceLog.class);
 
-        // Set parameters if available
-        if (parameters != null && parameters.length > 0) {
-            for (int i = 0; i < parameters.length; i++) {
-                query.setParameter(i + 1, parameters[i]);
-            }
-        }
         List<AttendanceLog> events = query.getResultList();
         if (events.size() > 2) {
             List<AttendanceLog> lastTwoEvents = events.subList(events.size() - 2, events.size());

@@ -78,12 +78,12 @@ public class BaseAction extends HttpServlet {
         LocalTime displayTime = LocalTime.parse(currentTime.format(formatter), formatter);
         LocalDate currentDate = LocalDate.now();
 
-        List<Employee> allEmployees = employeeBean.select(Employee.class,"");
-        List<Attendance> allAttendances = attendanceBean.select(Attendance.class,"");
+        List<Employee> allEmployees = employeeBean.select(Employee.class, "");
+        List<Attendance> allAttendances = attendanceBean.select(Attendance.class, "");
         List<Attendance> todaysAttendances = allAttendances.stream()
                 .filter(attendance -> attendance.getAttendanceDate().equals(currentDate))
                 .collect(Collectors.toList());
-        List<AttendanceLog> events = observer.attendanceLogs(AttendanceLog.class, "");
+        List<AttendanceLog> events = observer.attendanceLogs();
 
         request.setAttribute("attendanceLogs", events);
         request.setAttribute("allEmployees", allEmployees);
