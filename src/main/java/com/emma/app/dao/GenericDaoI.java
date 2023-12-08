@@ -14,6 +14,7 @@ public interface GenericDaoI<T> extends Serializable {
     public int countRecords(Class<?> entity, String whereClause, Object... parameters);
 
     public void update(Object entity, String columnName, Object columnValue);
+    public T find(Class<T> entityClass, String fieldName, Object columnValue);
 
     public EntityManager getEm();
 

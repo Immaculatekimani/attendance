@@ -5,6 +5,8 @@ import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
@@ -16,9 +18,10 @@ public class Employee extends BaseEntity {
     @Column(name = "employeeImage")
     @MyHtmlFormField(label = "Add Employee image")
     private String employeeImage;
+    @TableColumnIdentifier(columnIdentifier = "Employee FK")
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")
-    @Column(name = "employee_id")
+    @Column(name = "employee_id", unique = true)
     private String employeeId;
     @MyHtmlFormField(placeholder = "Enter First Name")
     @MyTableColHeader(header = "Employee First Name")
@@ -33,6 +36,8 @@ public class Employee extends BaseEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Attendance> attendances;
 
     public Employee(String employeeId, String firstName, String lastName, EmployeeRole role, String employeeImage) {
         this.employeeId = employeeId;
@@ -86,6 +91,14 @@ public class Employee extends BaseEntity {
         this.employeeImage = employeeImage;
     }
 
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -95,5 +108,18 @@ public class Employee extends BaseEntity {
                 ", role=" + role +
                 ", employeeImage='" + employeeImage + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Employee employee = (Employee) obj;
+        return Objects.equals(employeeId, employee.employeeId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId);
     }
 }

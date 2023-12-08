@@ -53,6 +53,11 @@ public class GenericBean<T> implements GenericBeanI<T> {
         genricDao.setEm(em);
         return genricDao.select(entityClass, whereClause, parameters);
     }
+    public T find(Class<T> entityClass, String fieldName, Object columnValue){
+        genricDao.setEm(em);
+        return genricDao.find(entityClass, fieldName, columnValue);
+
+    }
 
     public GenericDao<T> getDao() {
         genricDao.setEm(em);

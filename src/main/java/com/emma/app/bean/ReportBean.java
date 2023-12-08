@@ -1,11 +1,18 @@
 package com.emma.app.bean;
 
+import com.emma.app.dao.GenericDao;
+import com.emma.app.dao.GenericDaoI;
 import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
+import com.emma.app.model.EmployeeRole;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +25,8 @@ public class ReportBean implements ReportBeanI {
     AttendanceBeanI attendanceBean;
     @EJB
     EmployeeBeanI employeeBean;
+    @Inject
+    GenericDaoI genericDao;
 
     public List<Attendance> getAttendanceData(String type, String singleDate, String startDate, String endDate, String role) {
         if ("2".equals(type)) {
@@ -50,24 +59,11 @@ public class ReportBean implements ReportBeanI {
 
     }
 
-    public List<Attendance> getAttendanceByRole(String role) {
+    public List<Attendance> getAttendanceByRole(String employeeRole) {
 
         try {
-            // Step 1: Get employee IDs for the specified role
-            List<String> employeeIds = employeeBean.getEmployeeByRole(role).stream()
-                    .map(Employee::getEmployeeId)
-                    .collect(Collectors.toList());
 
-            // Step 2: Get attendance records for the retrieved employee IDs
-            if (!employeeIds.isEmpty()) {
-                // You can adjust the WHERE clause as needed based on your database schema
-                String whereClause = new StringBuilder().append("employee_id IN (").append(String.join(",", Collections.nCopies(employeeIds.size(), "?1"))).append(")").toString();
-                Object[] parameters = employeeIds.toArray();
-                return attendanceBean.select(Attendance.class, whereClause, parameters);
-            } else {
-                // Return an empty list if no employees found for the specified role
-                return Collections.emptyList();
-            }
+            return attendanceBean.getAttendanceByRole(employeeRole);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

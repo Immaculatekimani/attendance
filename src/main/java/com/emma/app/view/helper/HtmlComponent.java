@@ -27,7 +27,7 @@ public class HtmlComponent {
 
         String idFieldName = findIdField(fields);
         if (idFieldName == null) {
-            throw new RuntimeException("No field with header 'Employee ID' found in class " + dataClass.getSimpleName());
+            throw new RuntimeException("No field with header 'Employee FK' found in class " + dataClass.getSimpleName());
         }
 
         boolean includeActions = defaultIncludeActions;
@@ -105,9 +105,9 @@ public class HtmlComponent {
 
     private static String findIdField(Field[] fields) {
         for (Field field : fields) {
-            if (field.isAnnotationPresent(MyTableColHeader.class)) {
-                MyTableColHeader headerAnnotation = field.getAnnotation(MyTableColHeader.class);
-                if ("Employee ID".equals(headerAnnotation.header())) {
+            if (field.isAnnotationPresent(TableColumnIdentifier.class)) {
+                TableColumnIdentifier identityAnnotation = field.getAnnotation(TableColumnIdentifier.class);
+                if ("Employee FK".equals(identityAnnotation.columnIdentifier())) {
                     return field.getName();
                 }
             }

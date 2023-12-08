@@ -49,6 +49,7 @@ com/emma/app/model/User.class
 com/emma/app/bean/ReportBeanI.class
 com/emma/app/action/report/ReportAction.class
 com/emma/app/action/UserAction.class
+com/emma/app/view/helper/TableColumnIdentifier.class
 com/emma/app/model/EmployeeRole.class
 com/emma/app/view/helper/TopBar.class
 com/emma/app/view/helper/MyHtmlFormField.class
