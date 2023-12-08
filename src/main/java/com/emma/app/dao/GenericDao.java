@@ -128,25 +128,13 @@ public class GenericDao<T> implements GenericDaoI<T> {
         }
     }
 
-    private String[] getFieldNames(Object entity) {
-        Class<?> clazz = entity.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        String[] fieldNames = new String[fields.length];
-        for (int i = 0; i < fields.length; i++) {
-            fieldNames[i] = fields[i].getName();
-        }
-        return fieldNames;
+    public T find(Class<T> entityClass, String fieldName, Object columnValue) {
+        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
+        TypedQuery<T> query = em.createQuery(jpql, entityClass);
+        query.setParameter("value", columnValue);
+        return query.getSingleResult();
     }
 
-    private Object getFieldValue(Object entity, String fieldName) {
-        try {
-            Field field = entity.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return field.get(entity);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Error getting field value", e);
-        }
-    }
 
     public EntityManager getEm() {
         return em;

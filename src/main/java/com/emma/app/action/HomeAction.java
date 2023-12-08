@@ -30,7 +30,7 @@ public class HomeAction extends BaseAction {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         renderPage(req, resp, 0, design.designer(employeeBean),
-                Attendance.class, attendanceBean.select(Attendance.class, "attendance_date BETWEEN ?1 AND ?2", LocalDate.now(), LocalDate.now()));
+                Attendance.class, attendanceBean.getTodaysAttendance());
 
 
     }

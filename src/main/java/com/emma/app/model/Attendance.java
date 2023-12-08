@@ -2,23 +2,37 @@ package com.emma.app.model;
 
 import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
+import com.emma.app.view.helper.TableColumnIdentifier;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
 import com.emma.database.helper.DbTableId;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 @Entity
 @Table(name = "attendances")
+@NamedQueries({
+        @NamedQuery(name = "Attendance.findByRole", query = "SELECT a FROM Attendance a WHERE a.employee.role = :role"),
+        @NamedQuery(name = "Attendance.findTodaysAttendance", query = "SELECT a FROM Attendance a WHERE a.attendanceDate = CURRENT_DATE")
+})
 public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
     @Column(name = "employeeImage")
     private String employeeImage;
-    @MyTableColHeader(header = "Employee ID")
-    @Column(name = "employee_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id") // Specify the foreign key column
+    private Employee employee;
+
+    @TableColumnIdentifier(columnIdentifier = "Employee FK")
+    @Formula("(employee_id)")
     private String employeeID;
+    @MyTableColHeader(header = "Employee ID")
+    @Column(name = "display_id")
+    private String displayId;
     @MyTableColHeader(header = "Employee Name")
     @Column(name = "employee_name")
     private String employeeName;
@@ -66,13 +80,7 @@ public class Attendance extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Attendance{" +
-                "employeeID='" + employeeID + '\'' +
-                ", employeeName='" + employeeName + '\'' +
-                ", attendanceDate=" + attendanceDate +
-                ", attendanceTime=" + attendanceTime +
-                ", attendanceStatus='" + attendanceStatus + '\'' +
-                '}';
+        return "Attendance{" + "employeeID='" + employeeID + '\'' + ", employeeName='" + employeeName + '\'' + ", attendanceDate=" + attendanceDate + ", attendanceTime=" + attendanceTime + ", attendanceStatus='" + attendanceStatus + '\'' + '}';
     }
 
     public void setEmployeeID(String employeeID) {
@@ -139,4 +147,19 @@ public class Attendance extends BaseEntity {
         this.joiningStatus = joiningStatus;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getDisplayId() {
+        return displayId;
+    }
+
+    public void setDisplayId(String displayId) {
+        this.displayId = displayId;
+    }
 }

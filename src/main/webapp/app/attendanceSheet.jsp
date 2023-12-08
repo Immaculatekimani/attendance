@@ -73,14 +73,13 @@ ${topBar.setSessionUsername(username)}
                LocalTime displayTime = (LocalTime)request.getAttribute("displayTime");
 
            for (Employee employee : (List<Employee>)request.getAttribute("allEmployees")) {
-               boolean isAttendanceEntered = todaysAttendances.stream()
-                   .anyMatch(attendance -> attendance.getEmployeeID().equals(employee.getEmployeeId()));
-               boolean isAbsent = todaysAttendances.stream().anyMatch(attendance -> attendance.getEmployeeID()
-                               .equals(employee.getEmployeeId()) && attendance.getAttendanceStatus().equals("Absent"));
-               boolean isExit = todaysAttendances.stream().anyMatch(attendance -> attendance.getEmployeeID()
-                              .equals(employee.getEmployeeId()) && attendance.getAttendanceStatus().equals("HalfDay"))
-                              || todaysAttendances.stream().anyMatch(attendance -> attendance.getEmployeeID()
-                               .equals(employee.getEmployeeId()) && attendance.getAttendanceStatus().equals("FullDay"));
+                boolean isAttendanceEntered = todaysAttendances.stream()
+                  .anyMatch(attendance -> attendance.getEmployee().equals(employee));
+              boolean isAbsent = todaysAttendances.stream().anyMatch(attendance ->
+                              attendance.getEmployee().equals(employee) && attendance.getAttendanceStatus().equals("Absent"));
+              boolean isExit = todaysAttendances.stream().anyMatch(attendance ->
+                              attendance.getEmployee().equals(employee) &&
+                              (attendance.getAttendanceStatus().equals("HalfDay") || attendance.getAttendanceStatus().equals("FullDay")));
              %>
                 <% if (!isAttendanceEntered) { %>
                <tr id="row_<%= employee.getEmployeeId() %>">

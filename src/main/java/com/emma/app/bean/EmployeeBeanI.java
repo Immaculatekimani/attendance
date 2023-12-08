@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface EmployeeBeanI extends GenericBeanI<Employee> {
     public void employeeAction(String action, String employeeId, Employee employeeInput);
-    public List<Employee> getEmployeeByRole( String employeeRole);
 }
