@@ -16,7 +16,6 @@ import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Stateless(name = "attendance/AttendanceBean")

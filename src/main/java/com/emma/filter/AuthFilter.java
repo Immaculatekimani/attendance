@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 @WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
@@ -19,7 +20,7 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req =  (HttpServletRequest) servletRequest;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();
 
@@ -27,7 +28,7 @@ public class AuthFilter implements Filter {
 
         if (session.isNew() || StringUtils.isBlank((String) session.getAttribute("loggedInId"))) {
             session.invalidate();
-            if(servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/user") || servletPath.contains(".css")){
+            if (servletPath.equals("/login") || servletPath.contains(".jsp") || servletPath.equals("/user") || servletPath.equals("/rest") || servletPath.contains(".css")) {
                 filterChain.doFilter(req, res);
             } else {
                 res.sendRedirect(req.getContextPath() + "/");
@@ -36,7 +37,7 @@ public class AuthFilter implements Filter {
         } else {
             if (session.getAttribute("loggedInId") != null) {
                 filterChain.doFilter(req, res);
-            }else {
+            } else {
                 res.sendRedirect(req.getContextPath() + "/");
                 res.getWriter().flush();
             }
