@@ -3,6 +3,7 @@ package com.emma.app.model;
 import com.emma.app.view.helper.*;
 import com.emma.database.helper.DbTable;
 import com.emma.database.helper.DbTableColumn;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Employee extends BaseEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
+    @JsonIgnore
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Attendance> attendances;
 

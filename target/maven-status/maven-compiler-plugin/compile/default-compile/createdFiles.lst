@@ -1,5 +1,6 @@
 com/emma/app/view/helper/MenuLink.class
 com/emma/app/utility/HashText.class
+com/emma/rest/config/Rest.class
 com/emma/app/utility/TimeFormatter.class
 com/emma/app/action/LogoutAction.class
 com/emma/app/bean/GenericBeanI.class
@@ -12,6 +13,8 @@ com/emma/app/bean/EmployeeBean.class
 com/emma/app/utility/EventLogger.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/design/DesignI.class
+com/emma/rest/api/EmployeeRestApi.class
+com/emma/rest/config/JacksonConfig.class
 com/emma/app/action/report/EmployeeReport.class
 com/emma/app/action/LoginAction.class
 com/emma/app/dao/GenericDaoI.class
@@ -28,6 +31,7 @@ com/emma/app/bean/EmployeeObserver.class
 com/emma/app/bean/AuthBean.class
 com/emma/app/view/helper/design/HomeDesign.class
 com/emma/filter/AuthFilter.class
+com/emma/rest/api/AttendanceRestApi.class
 com/emma/app/model/Employee.class
 com/emma/app/bean/AttendanceBean.class
 com/emma/app/action/HomeAction.class
@@ -41,6 +45,7 @@ com/emma/app/view/helper/design/ReportDesign.class
 com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/view/helper/MenuLinkStatus.class
 com/emma/app/dao/GenericDao.class
+com/emma/rest/api/BaseRestApi.class
 com/emma/app/model/EmployeeLog.class
 com/emma/app/bean/ReportBean.class
 com/emma/app/view/helper/HtmlComponent.class
@@ -49,9 +54,11 @@ com/emma/app/model/User.class
 com/emma/app/bean/ReportBeanI.class
 com/emma/app/action/report/ReportAction.class
 com/emma/app/action/UserAction.class
+com/emma/rest/api/RestResponseWrapper.class
 com/emma/app/view/helper/TableColumnIdentifier.class
 com/emma/app/model/EmployeeRole.class
 com/emma/app/view/helper/TopBar.class
 com/emma/app/view/helper/MyHtmlFormField.class
 com/emma/app/bean/AttendanceObserver.class
+com/emma/rest/api/UserRestApi.class
 com/emma/app/bean/UserBean.class

@@ -1,22 +1,14 @@
 package com.emma.app.bean;
 
-import com.emma.app.dao.GenericDao;
 import com.emma.app.dao.GenericDaoI;
 import com.emma.app.model.Attendance;
-import com.emma.app.model.Employee;
-import com.emma.app.model.EmployeeRole;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @Stateless(name = "attendance/ReportBean")
 @Remote

@@ -24,19 +24,19 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
         if (!user.getPassword().equals(user.getConfirmPassword()))
             throw new RuntimeException("Password & confirm password do not match");
 
-        List<User> users = list(user);
+        List<User> users = select(User.class, "username = ?1", user.getUsername());
         if (!users.isEmpty())
             throw new RuntimeException("User already exists!");
 
         try {
             user.setPassword(hashText.hash(user.getPassword()));
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
         }
 
         //3. initiate event to send email ...Observer design pattern
 
-        em.merge(user);
+        getDao().addRecord(user);
 
         return false;
     }
