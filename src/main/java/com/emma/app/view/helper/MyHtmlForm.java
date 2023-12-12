@@ -13,4 +13,11 @@ public @interface MyHtmlForm {
     String url();
 
     String httpMethod() default "POST";
+
+    String editLabel() default "";
+
+    String editURL() default "";
+    String editSubmit() default "";
+
+
 }

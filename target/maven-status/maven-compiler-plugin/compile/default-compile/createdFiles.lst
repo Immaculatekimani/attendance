@@ -10,13 +10,11 @@ com/emma/database/helper/DbTable.class
 com/emma/app/utility/EmployeeTypeConverter.class
 com/emma/app/view/helper/MyTableSetting.class
 com/emma/app/bean/EmployeeBean.class
-com/emma/app/action/UpdateEmployee.class
 com/emma/app/utility/EventLogger.class
 com/emma/app/bean/UserBeanI.class
 com/emma/app/view/helper/design/DesignI.class
 com/emma/rest/api/EmployeeRestApi.class
 com/emma/rest/config/JacksonConfig.class
-com/emma/app/view/helper/design/EditEmployeeDesign.class
 com/emma/app/action/report/EmployeeReport.class
 com/emma/app/action/LoginAction.class
 com/emma/app/dao/GenericDaoI.class
@@ -31,6 +29,7 @@ com/emma/database/helper/DbTableId.class
 com/emma/app/model/BaseEntity.class
 com/emma/app/bean/EmployeeObserver.class
 com/emma/app/bean/AuthBean.class
+com/emma/app/view/helper/BackgroundColor.class
 com/emma/app/view/helper/design/HomeDesign.class
 com/emma/filter/AuthFilter.class
 com/emma/rest/api/AttendanceRestApi.class
@@ -52,6 +51,7 @@ com/emma/app/model/EmployeeLog.class
 com/emma/app/bean/ReportBean.class
 com/emma/app/view/helper/HtmlComponent.class
 com/emma/app/model/Attendance.class
+com/emma/app/action/UpdateEmployeeAction.class
 com/emma/app/model/User.class
 com/emma/app/bean/ReportBeanI.class
 com/emma/app/action/report/ReportAction.class

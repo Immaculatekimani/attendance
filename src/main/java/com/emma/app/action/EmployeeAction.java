@@ -1,10 +1,8 @@
 package com.emma.app.action;
 
-import com.emma.app.bean.EmployeeBean;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
 import com.emma.app.view.helper.design.DesignI;
-import com.emma.app.view.helper.design.EmployeeDesign;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -32,10 +30,11 @@ public class EmployeeAction extends BaseAction {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String employeeId = req.getParameter("itemId");
+        String employeeId = req.getParameter("employeeId");
         Employee employeeInput = serializeForm(Employee.class, req.getParameterMap());
+        String itemID = req.getParameter("itemId");
 
-        employeeBean.employeeAction(action, employeeId, employeeInput);
+        employeeBean.employeeAction(action, employeeId, employeeInput, itemID);
         resp.sendRedirect("./employee");
 
 

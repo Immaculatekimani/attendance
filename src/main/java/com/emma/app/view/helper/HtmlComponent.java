@@ -1,5 +1,6 @@
 package com.emma.app.view.helper;
 
+import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,26 +58,40 @@ public class HtmlComponent {
 
                     try {
                         field.setAccessible(true);
+                        // Get the background color for the current field
+                        String cellBgColor = getCellBackgroundColor(field, model);
+                        String joinBgColor = getjoinBackgroundColor(field, model);
+
+
                         if (field.getName().equals("employeeImage")) {
                             trBuilder.append("<td><img src=\"images/prof/").append(field.get(model)).append("\" alt='Employee Image' class = \"prof\"></td>");
                         } else {
-                            trBuilder.append("<td>").append(field.get(model)).append("</td>");
+                            if (field.getName().equals("attendanceStatus")) {
+                                trBuilder.append("<td style=\"background-color: ").append(cellBgColor).append(";\">").append(field.get(model)).append("</td>");
+                            } else if (field.getName().equals("joiningStatus")) {
+                                trBuilder.append("<td style=\"background-color: ").append(joinBgColor).append(";\">").append(field.get(model)).append("</td>");
+
+                            } else {
+                                trBuilder.append("<td>").append(field.get(model)).append("</td>");
+                            }
+
 
                         }
+
                     } catch (IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 }
 
                 trBuilder.append("<td>\n" +
-                        "    <a href=\"#\" onclick=\"viewAttendance('" + getFieldValue(model, idFieldName) + "')\" class=\"submit-button\">View Attendance</a>\n" +
+                        " <button  class=\"submit-button\" onclick=\"viewAttendance('" + getFieldValue(model, idFieldName) + "')\">View Attendance</button>" +
                         "</td>");
                 if (includeActions) {
                     trBuilder.append("<td>");
                     trBuilder.append("<div class=\"action-buttons\">");
 
                     // Edit Form
-                    trBuilder.append("    <a href=\"#\" onclick=\"editEmployee('" + getFieldValue(model, idFieldName) + "')\" class=\"submit-button\">Update</a>\n" );
+                    trBuilder.append("<button  class=\"btn btn-sm btn-success\" onclick=\"editEmployee('" + getFieldValue(model, idFieldName) + "')\">Update</button>");
 
                     // Delete Form
                     trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
@@ -120,6 +135,59 @@ public class HtmlComponent {
         }
     }
 
+    private static String getCellBackgroundColor(Field field, Object model) {
+        if (field.isAnnotationPresent(BackgroundColor.class)) {
+            field.setAccessible(true);
+            Attendance attendance = (Attendance) model;
+            BackgroundColor bgColorAnnotation = field.getAnnotation(BackgroundColor.class);
+            String status = attendance.getAttendanceStatus();
+
+            switch (status) {
+                case "Present":
+                    return bgColorAnnotation.presentColor();
+                case "Late":
+                    return bgColorAnnotation.lateColor();
+                case "Absent":
+                    return bgColorAnnotation.absentColor();
+                case "HalfDay":
+                    return bgColorAnnotation.halfdayColor();
+                case "FullDay":
+                    return bgColorAnnotation.fulldayColor();
+                case "In-Time":
+                    return bgColorAnnotation.inTimeColor();
+
+
+                default:
+                    return bgColorAnnotation.value();
+            }
+
+        }
+        return "";
+    }
+
+    private static String getjoinBackgroundColor(Field field, Object model) {
+        if (field.isAnnotationPresent(BackgroundColor.class)) {
+            field.setAccessible(true);
+            Attendance attendance = (Attendance) model;
+            BackgroundColor bgColorAnnotation = field.getAnnotation(BackgroundColor.class);
+            String status = attendance.getJoiningStatus();
+            if (status != null) {
+                switch (status) {
+                    case "Late":
+                        return bgColorAnnotation.joiningLateColor();
+                    case "In-Time":
+                        return bgColorAnnotation.inTimeColor();
+                    default:
+                        return bgColorAnnotation.value();
+                }
+            }
+            return bgColorAnnotation.nullColor();
+
+        }
+        return "";
+
+    }
+
 
     public static String form(Class<?> model) {
         MyHtmlForm myHtmlForm = null;
@@ -160,12 +228,13 @@ public class HtmlComponent {
 
         return htmlForm;
     }
+
     public static String editForm(Class<?> model, Object entity) {
         MyHtmlForm myHtmlForm = null;
         if (model.isAnnotationPresent(MyHtmlForm.class)) myHtmlForm = model.getAnnotation(MyHtmlForm.class);
         if (myHtmlForm == null) return StringUtils.EMPTY;
 
-        String htmlForm = "<form method=\"POST\" action=\"./updateEmployee\" class=\"modal-content\"> " + "<h4 class=\"text-center mb-0 mt-0\">" + myHtmlForm.label() + "</h4>";
+        String htmlForm = "<form  id =\"editForm\" action=\"" + myHtmlForm.editURL() + "\" method=\"" + myHtmlForm.httpMethod() + "\" class=\"modal-content\"> " + "<h2>" + myHtmlForm.editLabel() + "</h2>";
         Field[] fields = model.getDeclaredFields();
 
         for (Field field : fields) {
@@ -181,7 +250,7 @@ public class HtmlComponent {
 
             if (isEnum) {
                 htmlForm += "<div class=\"col-md-4\">";
-                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label\">" + formField.label() + "</label>";
+                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label edit-form-label\">" + formField.editLabel() + "</label>";
                 htmlForm += "<select class=\"form-select form-select-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\">";
 
                 for (Object option : field.getType().getEnumConstants()) {
@@ -192,12 +261,12 @@ public class HtmlComponent {
                 htmlForm += "</div>";
             } else {
                 htmlForm += "<div class=\"col-md-4\">";
-                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label\">" + formField.label() + "</label>";
+                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label edit-form-label\">" + formField.editLabel() + "</label>";
 
                 if (field.getType() == String.class && fieldName.equals("employeeImage")) {
-                    htmlForm += "<input type=\"file\" class=\"form-control form-control-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\">";
+                    htmlForm += "<input type=\"file\" class=\"edit-form-control edit-form-label\" id=\"" + fieldName + "\" name=\"" + fieldName + "\" value=\"" + getFieldValue(entity, field) + "\">";
                 } else {
-                    htmlForm += "<input type=\"text\" class=\"form-control form-control-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\" value=\"" + getFieldValue(entity, field) + "\">";
+                    htmlForm += "<input type=\"text\" class=\"edit-form-control \" id=\"" + fieldName + "\" name=\"" + fieldName + "\" value=\"" + getFieldValue(entity, field) + "\">";
                 }
 
                 htmlForm += "</div>";
@@ -207,7 +276,8 @@ public class HtmlComponent {
         }
 
         htmlForm += "<div class=\"gap-2 p-2 d-flex justify-content-center\">";
-        htmlForm += "<button class=\"btn btn-lg btn-primary\" type=\"submit\">Update " + myHtmlForm.label() + "</button>";
+        htmlForm += ("<input type=\"hidden\" name=\"action\" value=\"update\"/>"); // Added hidden field
+        htmlForm += "<input type=\"submit\" value=\"" + myHtmlForm.editSubmit() + "\" class=\"submit-button\">";
         htmlForm += "</div>";
         htmlForm += "</form>";
 

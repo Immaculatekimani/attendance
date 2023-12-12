@@ -23,18 +23,21 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
     private AttendanceBeanI attendanceBean;
 
     @Override
-    public void employeeAction(String action, String employeeId, Employee employeeInput) {
+    public void employeeAction(String action, String employeeId, Employee employeeInput, String itemId) {
         try {
 
             if ("update".equals(action)) {
-                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&" + employeeInput.toString());
-                // Perform update operation
-                update(employeeInput, "employee_id", employeeId);
+                employeeInput.setEmployeeId(employeeId);
+                update(employeeInput);
+                EmployeeLog log = new EmployeeLog();
+                log.setEmployeeLogDetails("Details for " + employeeInput.getFirstName() + " have been updated at " + timeFormatter.timeDisplay());
+                employeeLogEvent.fire(log);
+
             } else if ("delete".equals(action)) {
                 // Perform delete operation
-                deleteEmployee(employeeId);
+                deleteEmployee(itemId);
                 EmployeeLog log = new EmployeeLog();
-                log.setEmployeeLogDetails("Successfully deleted " + employeeId + " at " + timeFormatter.timeDisplay());
+                log.setEmployeeLogDetails("Successfully deleted an employee at " + timeFormatter.timeDisplay());
                 employeeLogEvent.fire(log);
 
             } else {
@@ -92,7 +95,6 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
                 attendance.setDisplayId(existingEmployee.getEmployeeId());
                 attendance.setEmployee(existingEmployee);
 
-                // Use the same EntityManager to persist the changes to the Attendance
                 attendanceBean.addRecord(attendance);
             }
             // Flush changes to the database after updating all Attendance records
