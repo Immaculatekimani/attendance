@@ -1,8 +1,6 @@
 package com.emma.app.model;
 
 import com.emma.app.view.helper.*;
-import com.emma.database.helper.DbTable;
-import com.emma.database.helper.DbTableColumn;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -14,6 +12,9 @@ import java.util.Objects;
 @MyHtmlForm(label = "Add Employee", url = "./employee")
 @TableForm(label = "Edit Employee", url = "./employee")
 @MyTableSetting(includeActions = true)
+@NamedQueries({
+        @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.employeeId = :employeeId")
+})
 public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
     @Column(name = "employeeImage")
@@ -34,7 +35,7 @@ public class Employee extends BaseEntity {
     private String lastName;
     @MyHtmlFormField(label = "Choose Employee Role")
     @MyTableColHeader(header = "Employee Role")
-    @Column
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private EmployeeRole role;
     @JsonIgnore

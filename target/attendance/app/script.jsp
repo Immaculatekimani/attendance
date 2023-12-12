@@ -49,6 +49,12 @@
 
         window.location.href = "./employeeReport?employeeId=" + employeeId;
     }
+     function editEmployee(employeeId) {
+            console.log("Viewing attendance for employee with ID: " + employeeId);
+
+            window.location.href = "./updateEmployee?employeeId=" + employeeId;
+     }
+
     function typeDropDown(selectedValue) {
         console.log("Selected value:", selectedValue);
 
@@ -66,13 +72,11 @@
             rangeDatePicker.style.display = 'none';
         }
         function addLog(message) {
-                var logsDiv = document.getElementById("logs");
-                var logParagraph = document.createElement("p");
-                logParagraph.textContent = message;
-                logsDiv.appendChild(logParagraph);
-            }
+            var logsDiv = document.getElementById("logs");
+            var logParagraph = document.createElement("p");
+            logParagraph.textContent = message;
+            logsDiv.appendChild(logParagraph);
+        }
 
-            // Example: add a log
-            addLog("This is a sample log message.");
     }
 </script>

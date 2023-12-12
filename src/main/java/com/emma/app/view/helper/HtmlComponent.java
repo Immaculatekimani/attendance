@@ -76,12 +76,7 @@ public class HtmlComponent {
                     trBuilder.append("<div class=\"action-buttons\">");
 
                     // Edit Form
-                    trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
-                    trBuilder.append("<input type=\"hidden\" name=\"action\" value=\"update\"/>"); // Added hidden field
-                    trBuilder.append("<input type=\"hidden\" name=\"itemId\" value=\"")
-                            .append(getFieldValue(model, idFieldName)).append("\"/>");
-                    trBuilder.append("<button type=\"submit\" class=\"btn btn-sm btn-primary\">Edit</button>");
-                    trBuilder.append("</form>");
+                    trBuilder.append("    <a href=\"#\" onclick=\"editEmployee('" + getFieldValue(model, idFieldName) + "')\" class=\"submit-button\">Update</a>\n" );
 
                     // Delete Form
                     trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
@@ -164,6 +159,69 @@ public class HtmlComponent {
         htmlForm += "</form><br/>";
 
         return htmlForm;
+    }
+    public static String editForm(Class<?> model, Object entity) {
+        MyHtmlForm myHtmlForm = null;
+        if (model.isAnnotationPresent(MyHtmlForm.class)) myHtmlForm = model.getAnnotation(MyHtmlForm.class);
+        if (myHtmlForm == null) return StringUtils.EMPTY;
+
+        String htmlForm = "<form method=\"POST\" action=\"./updateEmployee\" class=\"modal-content\"> " + "<h4 class=\"text-center mb-0 mt-0\">" + myHtmlForm.label() + "</h4>";
+        Field[] fields = model.getDeclaredFields();
+
+        for (Field field : fields) {
+            if (!field.isAnnotationPresent(MyHtmlFormField.class)) continue;
+
+            MyHtmlFormField formField = field.getAnnotation(MyHtmlFormField.class);
+            String fieldName = field.getName();
+            String fieldType = String.valueOf(field.getType());
+
+            boolean isEnum = field.getType().isEnum();
+
+            htmlForm += "<div class=\"row\">";
+
+            if (isEnum) {
+                htmlForm += "<div class=\"col-md-4\">";
+                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label\">" + formField.label() + "</label>";
+                htmlForm += "<select class=\"form-select form-select-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\">";
+
+                for (Object option : field.getType().getEnumConstants()) {
+                    htmlForm += "<option value=\"" + option + "\" " + (getFieldValue(entity, field).equals(option) ? "selected" : "") + ">" + option + "</option>";
+                }
+
+                htmlForm += "</select>";
+                htmlForm += "</div>";
+            } else {
+                htmlForm += "<div class=\"col-md-4\">";
+                htmlForm += "<label for=\"" + fieldName + "\" class=\"form-label\">" + formField.label() + "</label>";
+
+                if (field.getType() == String.class && fieldName.equals("employeeImage")) {
+                    htmlForm += "<input type=\"file\" class=\"form-control form-control-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\">";
+                } else {
+                    htmlForm += "<input type=\"text\" class=\"form-control form-control-sm\" id=\"" + fieldName + "\" name=\"" + fieldName + "\" value=\"" + getFieldValue(entity, field) + "\">";
+                }
+
+                htmlForm += "</div>";
+            }
+
+            htmlForm += "</div>";
+        }
+
+        htmlForm += "<div class=\"gap-2 p-2 d-flex justify-content-center\">";
+        htmlForm += "<button class=\"btn btn-lg btn-primary\" type=\"submit\">Update " + myHtmlForm.label() + "</button>";
+        htmlForm += "</div>";
+        htmlForm += "</form>";
+
+        return htmlForm;
+    }
+
+    private static Object getFieldValue(Object entity, Field field) {
+        try {
+            field.setAccessible(true);
+            return field.get(entity);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
