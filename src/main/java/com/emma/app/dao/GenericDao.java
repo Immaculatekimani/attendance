@@ -129,10 +129,19 @@ public class GenericDao<T> implements GenericDaoI<T> {
     }
 
     public T find(Class<T> entityClass, String fieldName, Object columnValue) {
+        if (fieldName == null || fieldName.isEmpty()) {
+            throw new IllegalArgumentException("Field name cannot be null or empty");
+        }
+
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
         TypedQuery<T> query = em.createQuery(jpql, entityClass);
         query.setParameter("value", columnValue);
-        return query.getSingleResult();
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Handle the case where no result is found
+        }
     }
 
 

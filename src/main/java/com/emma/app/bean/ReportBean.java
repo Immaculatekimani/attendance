@@ -23,10 +23,10 @@ public class ReportBean implements ReportBeanI {
     public List<Attendance> getAttendanceData(String type, String singleDate, String startDate, String endDate, String role) {
         if ("2".equals(type)) {
             // By Single Date
-            return attendanceBean.select(Attendance.class, "attendance_date = ?", singleDate);
+            return attendanceBean.select(Attendance.class, "attendance_date = ?1", singleDate);
         } else if ("3".equals(type)) {
             // By Date Range
-            return attendanceBean.select(Attendance.class, "attendance_date BETWEEN ? AND ?", startDate, endDate);
+            return attendanceBean.select(Attendance.class, "attendance_date BETWEEN ?1 AND ?2", startDate, endDate);
 
         } else if (role != null && !role.isEmpty()) {
             // Handle the case when a role is selected
