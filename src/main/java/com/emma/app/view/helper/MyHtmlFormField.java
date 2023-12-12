@@ -18,5 +18,7 @@ public @interface MyHtmlFormField {
 
     String placeholder() default "";
 
+    String editLabel() default "";
+
     String styleClass() default "";
 }

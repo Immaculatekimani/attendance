@@ -159,5 +159,18 @@ padding-right:15px;
     bottom: 0;
     width: 100%;
     z-index: 1000;
-    margin-top: 10%
+    margin-top: 30%
+}
+.edit-form-control{
+     width: fit-content;
+           padding: 10px;
+           margin: 10px 0;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+}
+label{
+    display: inline-block;
+    margin-bottom: auto;
+    width: max-content;
+
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
-@MyHtmlForm(label = "Add Employee", url = "./employee")
+@MyHtmlForm(label = "Add Employee", url = "./employee", editLabel = "Edit Employee", editURL = "./updateEmployee", editSubmit = "Change details")
 @TableForm(label = "Edit Employee", url = "./employee")
 @MyTableSetting(includeActions = true)
 @NamedQueries({
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")
     @Column(name = "employeeImage")
-    @MyHtmlFormField(label = "Add Employee image")
+    @MyHtmlFormField(label = "Add Employee image", editLabel = "Edit Profile")
     private String employeeImage;
     @TableColumnIdentifier(columnIdentifier = "Employee FK")
     @MyHtmlFormField(placeholder = "Enter Employee ID")
@@ -33,7 +33,7 @@ public class Employee extends BaseEntity {
     @MyTableColHeader(header = "Employee Last Name")
     @Column(name = "lastname")
     private String lastName;
-    @MyHtmlFormField(label = "Choose Employee Role")
+    @MyHtmlFormField(label = "Choose Employee Role", editLabel = "Change Role")
     @MyTableColHeader(header = "Employee Role")
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

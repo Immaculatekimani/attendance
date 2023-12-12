@@ -49,11 +49,30 @@
 
         window.location.href = "./employeeReport?employeeId=" + employeeId;
     }
-     function editEmployee(employeeId) {
-            console.log("Viewing attendance for employee with ID: " + employeeId);
+ function editEmployee(employeeId) {
+     $.ajax({
+         url: "./updateEmployee",
+         data: { employeeId: employeeId },
+         type: "GET",
+         success: function (data) {
+             // Populate the modal with the fetched data
+             $(".modal-content").html(data);
+             // Show the modal
+             $(".modal").show();
+         },
+         error: function (xhr, status, error) {
+             console.error("AJAX request failed:", status, error);
+             alert("Failed to fetch employee data. Please try again.");
+         }
+     });
+ }
 
-            window.location.href = "./updateEmployee?employeeId=" + employeeId;
-     }
+
+ // Function to close the modal
+ function closeModal() {
+     $(".modal").hide();
+ }
+
 
     function typeDropDown(selectedValue) {
         console.log("Selected value:", selectedValue);
@@ -77,6 +96,7 @@
             logParagraph.textContent = message;
             logsDiv.appendChild(logParagraph);
         }
+
 
     }
 </script>

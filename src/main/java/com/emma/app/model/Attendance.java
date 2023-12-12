@@ -1,5 +1,6 @@
 package com.emma.app.model;
 
+import com.emma.app.view.helper.BackgroundColor;
 import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.app.view.helper.TableColumnIdentifier;
@@ -52,9 +53,11 @@ public class Attendance extends BaseEntity {
 
     @MyTableColHeader(header = "Day Status")
     @Column(name = "attendance_status")
+    @BackgroundColor
     private String attendanceStatus;
     @MyTableColHeader(header = "Joining Status")
     @Column(name = "joining_status")
+    @BackgroundColor
     private String joiningStatus;
 
 

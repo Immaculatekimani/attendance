@@ -7,8 +7,9 @@ import com.emma.app.model.EmployeeRole;
 import java.util.List;
 
 public interface EmployeeBeanI extends GenericBeanI<Employee> {
-    public void employeeAction(String action, String employeeId, Employee employeeInput);
+    public void employeeAction(String action, String employeeId, Employee employeeInput, String itemId);
 
     public Employee getEmployeeById(String employeeId);
+
     public void update(Employee updatedEmployee);
 }
