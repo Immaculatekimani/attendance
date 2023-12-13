@@ -28,4 +28,13 @@ public class EmployeeRestApi extends BaseRestApi {
     public Response list() {
         return respond(employeeBean.list(new Employee()));
     }
+
+    @Path("/list/employee/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response singleEmployee(@PathParam("id") String id) {
+        System.out.println("id " + id);
+
+        return respond(employeeBean.getEmployeeById(id));
+    }
 }

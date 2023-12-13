@@ -28,4 +28,13 @@ public class AttendanceRestApi extends BaseRestApi {
     public Response list() {
         return respond(attendanceBean.list(new Attendance()));
     }
+
+    @Path("/list/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response employeeAttendance(@PathParam("id") String id) {
+        System.out.println("id " + id);
+
+        return respond(attendanceBean.getEmployeeAttendance(id));
+    }
 }
