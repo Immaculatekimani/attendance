@@ -66,7 +66,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                 existingRecord.setAttendanceStatus(attendance.getAttendanceStatus());
 
                 try {
-                    update(existingRecord, "display_id", employeeId);
+                    update(employeeId, LocalDate.now(), attendance.getTimeOut(), attendance.getAttendanceStatus());
                     AttendanceLog editAttend = new AttendanceLog();
                     editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated at " + timeFormatter.timeDisplay());
                     event.fire(editAttend);
@@ -81,7 +81,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
     public Attendance findExistingRecord(List<Attendance> records, LocalDate currentDate) {
         for (Attendance record : records) {
-            if (record.getAttendanceDate().equals(currentDate)) {
+            if (record.getAttendanceDate().isEqual(currentDate)) {
                 return record;
             }
         }
@@ -137,6 +137,23 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
             return query.getResultList();
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(String displayId, LocalDate attendanceDate, LocalTime timeOut, String attendanceStatus) {
+        try {
+            String jpqlQuery = "UPDATE Attendance a SET a.timeOut = :timeOut, a.attendanceStatus = :attendanceStatus " +
+                    "WHERE a.displayId = :displayId AND a.attendanceDate = :attendanceDate";
+
+            Query query = getDao().getEm().createQuery(jpqlQuery);
+            query.setParameter("timeOut", timeOut);
+            query.setParameter("attendanceStatus", attendanceStatus);
+            query.setParameter("displayId", displayId);
+            query.setParameter("attendanceDate", attendanceDate);
+
+            query.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

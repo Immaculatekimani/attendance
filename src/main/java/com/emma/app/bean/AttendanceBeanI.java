@@ -3,6 +3,7 @@ package com.emma.app.bean;
 import com.emma.app.model.Attendance;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -17,4 +18,6 @@ public interface AttendanceBeanI extends GenericBeanI<Attendance> {
     public List<Attendance> getAttendanceByRole(String employeeRole);
 
     public List<Attendance> getTodaysAttendance();
+
+    public void update(String displayId, LocalDate attendanceDate, LocalTime timeOut, String attendanceStatus);
 }
