@@ -1,8 +1,8 @@
 package com.emma.app.action;
 
-import com.emma.app.bean.AuthBean;
 import com.emma.app.bean.AuthBeanI;
 import com.emma.app.model.User;
+import com.emma.app.utility.exception.MyExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.EJB;
@@ -25,12 +25,19 @@ public class LoginAction extends BaseAction {
     AuthBeanI authBean;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
 
-        if (httpSession.getAttribute("loggedInId") != null) {
-            resp.sendRedirect("./home");
-        } else
-            resp.sendRedirect("./");
+        try {
+            HttpSession httpSession = req.getSession();
+
+            if (httpSession.getAttribute("loggedInId") != null) {
+                resp.sendRedirect("./home");
+            } else
+                resp.sendRedirect("./");
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,8 +58,9 @@ public class LoginAction extends BaseAction {
             PrintWriter print = resp.getWriter();
             print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
         }
 
     }

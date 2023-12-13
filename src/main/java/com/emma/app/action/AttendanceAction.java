@@ -2,6 +2,8 @@ package com.emma.app.action;
 
 import com.emma.app.bean.AttendanceBeanI;
 import com.emma.app.model.Attendance;
+import com.emma.app.utility.exception.MyExceptionUtils;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,21 +16,35 @@ import java.io.IOException;
 public class AttendanceAction extends BaseAction {
     @EJB
     AttendanceBeanI attendanceBean;
+
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Attendance attendance = serializeForm(Attendance.class, req.getParameterMap());
 
-        String selectedValue = req.getParameter("attendanceStatus");
+        try {
+            Attendance attendance = serializeForm(Attendance.class, req.getParameterMap());
 
-        attendanceBean.logAttendance(attendance, selectedValue);
+            String selectedValue = req.getParameter("attendanceStatus");
 
-        resp.sendRedirect("./attendance-sheet");
+            attendanceBean.logAttendance(attendance, selectedValue);
 
+            resp.sendRedirect("./attendance-sheet");
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
 
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderAttendanceSheetPage(req, resp, 1);
+        try {
+            renderAttendanceSheetPage(req, resp, 1);
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
+
 
     }
 }

@@ -2,6 +2,7 @@ package com.emma.app.action;
 
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
+import com.emma.app.utility.exception.MyExceptionUtils;
 import com.emma.app.view.helper.design.DesignI;
 
 import javax.ejb.EJB;
@@ -23,19 +24,31 @@ public class EmployeeAction extends BaseAction {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.select(Employee.class, ""));
+        try {
+            renderPage(req, resp, 2, design.designer(), Employee.class, employeeBean.select(Employee.class, ""));
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
 
 
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        String employeeId = req.getParameter("employeeId");
-        Employee employeeInput = serializeForm(Employee.class, req.getParameterMap());
-        String itemID = req.getParameter("itemId");
 
-        employeeBean.employeeAction(action, employeeId, employeeInput, itemID);
-        resp.sendRedirect("./employee");
+        try {
+            String action = req.getParameter("action");
+            String employeeId = req.getParameter("employeeId");
+            Employee employeeInput = serializeForm(Employee.class, req.getParameterMap());
+            String itemID = req.getParameter("itemId");
+            employeeBean.employeeAction(action, employeeId, employeeInput, itemID);
+            resp.sendRedirect("./employee");
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
 
 
     }

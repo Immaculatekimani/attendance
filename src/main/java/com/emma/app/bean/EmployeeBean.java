@@ -4,6 +4,7 @@ import com.emma.app.model.Attendance;
 import com.emma.app.model.Employee;
 import com.emma.app.model.EmployeeLog;
 import com.emma.app.utility.TimeFormatter;
+import com.emma.app.utility.exception.MyExceptionUtils;
 
 import javax.ejb.*;
 import javax.enterprise.event.Event;
@@ -24,8 +25,6 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
 
     @Override
     public void employeeAction(String action, String employeeId, Employee employeeInput, String itemId) {
-        try {
-
             if ("update".equals(action)) {
                 employeeInput.setEmployeeId(employeeId);
                 update(employeeInput);
@@ -41,15 +40,11 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
                 employeeLogEvent.fire(log);
 
             } else {
-                // Default to add operation if action is not specified
                 addRecord(employeeInput);
                 EmployeeLog log = new EmployeeLog();
                 log.setEmployeeLogDetails("Successfully added an employee at " + timeFormatter.timeDisplay());
                 employeeLogEvent.fire(log);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
@@ -74,32 +69,36 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
     public void update(Employee updatedEmployee) {
         // Retrieve the existing Employee by ID
         Employee existingEmployee = getEmployeeById(updatedEmployee.getEmployeeId());
+        if (existingEmployee != null) {
+            // Update the Employee properties
+            existingEmployee.setFirstName(updatedEmployee.getFirstName());
+            existingEmployee.setLastName(updatedEmployee.getLastName());
+            existingEmployee.setRole(updatedEmployee.getRole());
+            existingEmployee.setEmployeeImage(updatedEmployee.getEmployeeImage());
 
-        // Update the Employee properties
-        existingEmployee.setFirstName(updatedEmployee.getFirstName());
-        existingEmployee.setLastName(updatedEmployee.getLastName());
-        existingEmployee.setRole(updatedEmployee.getRole());
-        existingEmployee.setEmployeeImage(updatedEmployee.getEmployeeImage());
-
-        // Use the same EntityManager to persist the changes to the Employee
-        addRecord(existingEmployee);
-        // Flush changes to the database
-        getDao().getEm().flush();
-
-        // Now that the Employee is persisted, update relevant information in each attendance record
-        List<Attendance> attendances = existingEmployee.getAttendances();
-        if (attendances != null) {
-            for (Attendance attendance : attendances) {
-                attendance.setEmployeeName(existingEmployee.getFirstName() + " " + existingEmployee.getLastName());
-                attendance.setEmployeeImage(existingEmployee.getEmployeeImage());
-                attendance.setDisplayId(existingEmployee.getEmployeeId());
-                attendance.setEmployee(existingEmployee);
-
-                attendanceBean.addRecord(attendance);
-            }
-            // Flush changes to the database after updating all Attendance records
+            // Use the same EntityManager to persist the changes to the Employee
+            addRecord(existingEmployee);
+            // Flush changes to the database
             getDao().getEm().flush();
+
+            // Now that the Employee is persisted, update relevant information in each attendance record
+            List<Attendance> attendances = existingEmployee.getAttendances();
+            if (attendances != null) {
+                for (Attendance attendance : attendances) {
+                    attendance.setEmployeeName(existingEmployee.getFirstName() + " " + existingEmployee.getLastName());
+                    attendance.setEmployeeImage(existingEmployee.getEmployeeImage());
+                    attendance.setDisplayId(existingEmployee.getEmployeeId());
+                    attendance.setEmployee(existingEmployee);
+
+                    attendanceBean.addRecord(attendance);
+                }
+                // Flush changes to the database after updating all Attendance records
+                getDao().getEm().flush();
+            }
+        } else {
+            MyExceptionUtils.throwNotFoundException("Employee", updatedEmployee.getEmployeeId());
         }
+
     }
 
 

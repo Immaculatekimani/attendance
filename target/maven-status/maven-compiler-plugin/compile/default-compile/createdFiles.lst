@@ -34,9 +34,9 @@ com/emma/app/view/helper/design/HomeDesign.class
 com/emma/filter/AuthFilter.class
 com/emma/rest/api/AttendanceRestApi.class
 com/emma/app/model/Employee.class
+com/emma/app/utility/exception/CustomNotFoundException.class
 com/emma/app/bean/AttendanceBean.class
 com/emma/app/action/HomeAction.class
-com/emma/rest/api/AttendanceFIlter.class
 com/emma/app/bean/GenericBean.class
 com/emma/app/model/AttendanceLog.class
 com/emma/app/action/AttendanceAction.class
@@ -48,6 +48,7 @@ com/emma/app/bean/AttendanceBeanI.class
 com/emma/app/view/helper/MenuLinkStatus.class
 com/emma/app/dao/GenericDao.class
 com/emma/rest/api/BaseRestApi.class
+com/emma/app/utility/exception/MyExceptionUtils.class
 com/emma/app/model/EmployeeLog.class
 com/emma/app/bean/ReportBean.class
 com/emma/app/view/helper/HtmlComponent.class
@@ -64,4 +65,5 @@ com/emma/app/view/helper/TopBar.class
 com/emma/app/view/helper/MyHtmlFormField.class
 com/emma/app/bean/AttendanceObserver.class
 com/emma/rest/api/UserRestApi.class
+com/emma/app/action/ErrorAction.class
 com/emma/app/bean/UserBean.class
