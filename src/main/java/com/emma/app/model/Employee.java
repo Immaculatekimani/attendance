@@ -23,7 +23,7 @@ public class Employee extends BaseEntity {
     @TableColumnIdentifier(columnIdentifier = "Employee FK")
     @MyHtmlFormField(placeholder = "Enter Employee ID")
     @MyTableColHeader(header = "Employee ID")
-    @Column(name = "employee_id", unique = true)
+    @Column(name = "employee_id", unique = true, nullable = false)
     private String employeeId;
     @MyHtmlFormField(placeholder = "Enter First Name")
     @MyTableColHeader(header = "Employee First Name")

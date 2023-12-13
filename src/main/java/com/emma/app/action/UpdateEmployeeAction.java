@@ -2,6 +2,7 @@ package com.emma.app.action;
 
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
+import com.emma.app.utility.exception.MyExceptionUtils;
 import com.emma.app.view.helper.HtmlComponent;
 
 import javax.ejb.EJB;
@@ -17,17 +18,25 @@ public class UpdateEmployeeAction extends BaseAction {
     EmployeeBeanI employeeBean;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String employeeId = req.getParameter("employeeId");
 
-        // Fetch employee data based on the employeeId (you need to implement this)
-        Employee employeeToEdit = employeeBean.getEmployeeById(employeeId);
+        try {
+            String employeeId = req.getParameter("employeeId");
 
-        // Create HTML for the edit form using the existing editForm method
-        String editFormHtml = HtmlComponent.editForm(Employee.class, employeeToEdit);
+            // Fetch employee data based on the employeeId (you need to implement this)
+            Employee employeeToEdit = employeeBean.getEmployeeById(employeeId);
 
-        // Send the HTML response
-        resp.setContentType("text/ahtml");
-        resp.getWriter().write(editFormHtml);
+            // Create HTML for the edit form using the existing editForm method
+            String editFormHtml = HtmlComponent.editForm(Employee.class, employeeToEdit);
+
+            // Send the HTML response
+            resp.setContentType("text/ahtml");
+            resp.getWriter().write(editFormHtml);
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
+
 
     }
 

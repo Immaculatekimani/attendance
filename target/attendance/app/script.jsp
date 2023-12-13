@@ -17,7 +17,6 @@
         var formattedTime = hours + ":" + minutes + ":" + seconds;
         document.getElementById('currentTime').innerText = formattedTime;
     }
-
     setInterval(updateDigitalClock, 1000);
 
     function searchTable() {

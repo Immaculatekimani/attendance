@@ -4,6 +4,7 @@ import com.emma.app.action.BaseAction;
 import com.emma.app.bean.AttendanceBeanI;
 import com.emma.app.bean.ReportBeanI;
 import com.emma.app.model.Attendance;
+import com.emma.app.utility.exception.MyExceptionUtils;
 import com.emma.app.view.helper.design.DesignI;
 
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("reports")
@@ -29,19 +31,31 @@ public class ReportAction extends BaseAction {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        renderPage(req, resp, 3, design.designer(), Attendance.class, attendanceBean.select(Attendance.class,""));
+        try {
+            renderPage(req, resp, 3, design.designer(), Attendance.class, attendanceBean.select(Attendance.class, ""));
 
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
 
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String type = req.getParameter("type");
-        String singleDate = req.getParameter("singleDate");
-        String startDate = req.getParameter("startDate");
-        String endDate = req.getParameter("endDate");
-        String role = req.getParameter("role");
+        try {
+            String type = req.getParameter("type");
+            String singleDate = req.getParameter("singleDate");
+            String startDate = req.getParameter("startDate");
+            String endDate = req.getParameter("endDate");
+            String role = req.getParameter("role");
 
-        renderPage(req, resp, 3, design.designer(), Attendance.class, reportBean.getAttendanceData(type, singleDate, startDate, endDate, role));
+            renderPage(req, resp, 3, design.designer(), Attendance.class, reportBean.getAttendanceData(type, singleDate, startDate, endDate, role));
+
+
+        } catch (Exception e) {
+            MyExceptionUtils.redirectToErrorPage(req, resp, e);
+
+        }
 
 
     }

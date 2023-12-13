@@ -27,9 +27,11 @@ public class ReportBean implements ReportBeanI {
         } else if ("3".equals(type)) {
             // By Date Range
             return attendanceBean.select(Attendance.class, "attendance_date BETWEEN ?1 AND ?2", startDate, endDate);
-
+        } else if ("ALL".equalsIgnoreCase(role) || "1".equals(type)) {
+            // Handle the case when "ALL" is selected for role
+            return attendanceBean.select(Attendance.class, "");
         } else if (role != null && !role.isEmpty()) {
-            // Handle the case when a role is selected
+            // Handle the case when a specific role is selected
             return getAttendanceByRole(role);
         } else {
             return attendanceBean.list(Attendance.class);
