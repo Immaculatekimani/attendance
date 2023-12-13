@@ -1,6 +1,6 @@
 <script>
-     function showAttendanceAlert(message) {
-            alert(message);
+     function showAttendanceAlert() {
+            alert("You have submitted an attendance");
      }
 
 

@@ -36,6 +36,7 @@ com/emma/rest/api/AttendanceRestApi.class
 com/emma/app/model/Employee.class
 com/emma/app/bean/AttendanceBean.class
 com/emma/app/action/HomeAction.class
+com/emma/rest/api/AttendanceFIlter.class
 com/emma/app/bean/GenericBean.class
 com/emma/app/model/AttendanceLog.class
 com/emma/app/action/AttendanceAction.class
