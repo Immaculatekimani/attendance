@@ -25,12 +25,13 @@ public class Attendance extends BaseEntity {
     @Column(name = "employeeImage")
     private String employeeImage;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "employee_id") // Specify the foreign key column
+//    @JoinColumn(name = "employee_id") // Specify the foreign key column
     private Employee employee;
 
     @TableColumnIdentifier(columnIdentifier = "Employee FK")
     @Formula("(employee_id)")
     private String employeeID;
+
     @MyTableColHeader(header = "Employee ID")
     @Column(name = "display_id")
     private String displayId;

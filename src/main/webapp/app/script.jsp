@@ -43,11 +43,14 @@
     }
 
     document.getElementById('searchInput').addEventListener('input', searchTable);
+
+
     function viewAttendance(employeeId) {
-        console.log("Viewing attendance for employee with ID: " + employeeId);
 
         window.location.href = "./employeeReport?employeeId=" + employeeId;
     }
+
+
  function editEmployee(employeeId) {
      $.ajax({
          url: "./updateEmployee",

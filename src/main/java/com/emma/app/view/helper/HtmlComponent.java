@@ -1,6 +1,7 @@
 package com.emma.app.view.helper;
 
 import com.emma.app.model.Attendance;
+import com.emma.app.model.BaseEntity;
 import com.emma.app.model.Employee;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,8 +26,12 @@ public class HtmlComponent {
 
         Field[] fields = dataClass.getDeclaredFields();
 
+        String idFieldName;
+        boolean isEmployeeTable = Employee.class.isAssignableFrom(dataClass);
 
-        String idFieldName = findIdField(fields);
+        idFieldName = findIdField(fields);
+
+
         if (idFieldName == null) {
             throw new RuntimeException("No field with header 'Employee FK' found in class " + dataClass.getSimpleName());
         }
@@ -83,9 +88,17 @@ public class HtmlComponent {
                     }
                 }
 
-                trBuilder.append("<td>\n" +
-                        " <button  class=\"submit-button\" onclick=\"viewAttendance('" + getFieldValue(model, idFieldName) + "')\">View Attendance</button>" +
-                        "</td>");
+                if (isEmployeeTable) {
+                    trBuilder.append("<td>\n" +
+                            " <button  class=\"submit-button\" onclick=\"viewAttendance('" + ((Employee) model).getId() + "')\">View Attendance</button>" +
+                            "</td>");
+                } else {
+                    trBuilder.append("<td>\n" +
+                            " <button  class=\"submit-button\" onclick=\"viewAttendance('" + getFieldValue(model, idFieldName) + "')\">View Attendance</button>" +
+                            "</td>");
+                }
+
+
                 if (includeActions) {
                     trBuilder.append("<td>");
                     trBuilder.append("<div class=\"action-buttons\">");

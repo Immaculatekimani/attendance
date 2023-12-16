@@ -17,8 +17,7 @@ public class ReportBean implements ReportBeanI {
     AttendanceBeanI attendanceBean;
     @EJB
     EmployeeBeanI employeeBean;
-    @Inject
-    GenericDaoI genericDao;
+
 
     public List<Attendance> getAttendanceData(String type, String singleDate, String startDate, String endDate, String role) {
         if ("2".equals(type)) {

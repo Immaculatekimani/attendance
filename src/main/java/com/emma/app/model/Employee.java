@@ -102,6 +102,10 @@ public class Employee extends BaseEntity {
         this.attendances = attendances;
     }
 
+    public Long getId() {
+        return super.getId();
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
