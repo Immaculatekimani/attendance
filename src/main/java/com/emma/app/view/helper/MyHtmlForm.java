@@ -18,6 +18,7 @@ public @interface MyHtmlForm {
 
     String editURL() default "";
     String editSubmit() default "";
+    String deleteURL() default "";
 
 
 }

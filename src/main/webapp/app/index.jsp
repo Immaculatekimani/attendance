@@ -8,9 +8,11 @@ ${topBar.setSessionUsername(username)}
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/8e79aa9e2c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+
 </head>
 <body class= "body-style">
 
@@ -23,9 +25,22 @@ ${topBar.setSessionUsername(username)}
     ${requestScope.header}
     ${requestScope.content}
 
- <jsp:include page="script.jsp"/>
-  <script src="./app/style/jquery/jquery.min.js"></script>
-  <script src="./app/style/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="./app/style/jquery-easing/jquery.easing.min.js"></script>
+   <jsp:include page="script.jsp"/>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script>
+ $(document).ready(function () {
+     $('#dataTable').DataTable({
+         "scrollY": "60vh", // Set the desired height for vertical scrolling
+         "scrollCollapse": true, // Enable scrolling collapse
+         "paging": true, // Enable pagination
+         "pageLength": 5,
+         "searching": true,
+     });
+ });
+ </script>
+
+
 </body>
 </html>

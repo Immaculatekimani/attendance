@@ -19,10 +19,8 @@ public class HtmlComponent {
 
     public static String table(List<?> dataList, Class<?> dataClass, boolean defaultIncludeActions) {
         StringBuilder trBuilder = new StringBuilder();
-        trBuilder.append("<div class= \"searchDiv\">");
-        trBuilder.append("<input type=\"text\" id=\"searchInput\" placeholder=\"Search\" class =\"form-control\" style=\"text-align:center\" >");
-        trBuilder.append("</div>");
-        trBuilder.append("<table><tr>");
+        trBuilder.append("<div style=\"max-height: 60vh; overflow: auto;\">");
+        trBuilder.append("<table id=\"dataTable\" class=\" display table table-bordered border-4 table-striped table-responsive-sm \"><thead><tr>");
 
         Field[] fields = dataClass.getDeclaredFields();
 
@@ -52,7 +50,7 @@ public class HtmlComponent {
         if (includeActions) {
             trBuilder.append("<th>Actions</th>");
         }
-        trBuilder.append("</tr>");
+        trBuilder.append("</tr></thead><tbody>");
 
         if (dataList != null && !dataList.isEmpty()) {
             for (Object model : dataList) {
@@ -107,7 +105,7 @@ public class HtmlComponent {
                     trBuilder.append("<button  class=\"btn btn-sm btn-success\" onclick=\"editEmployee('" + getFieldValue(model, idFieldName) + "')\">Update</button>");
 
                     // Delete Form
-                    trBuilder.append("<form method=\"post\" action=\"./employee\">"); // Updated action
+                    trBuilder.append("<form method=\"post\" action=\"" + dataClass.getAnnotation(MyHtmlForm.class).deleteURL() + "\">"); // Updated action
                     trBuilder.append("<input type=\"hidden\" name=\"action\" value=\"delete\"/>"); // Added hidden field
                     trBuilder.append("<input type=\"hidden\" name=\"itemId\" value=\"")
                             .append(getFieldValue(model, idFieldName)).append("\"/>");
@@ -121,7 +119,8 @@ public class HtmlComponent {
             }
         }
 
-        trBuilder.append("</table>");
+        trBuilder.append("</tbody></table>");
+        trBuilder.append("</div>");
 
         return trBuilder.toString();
     }

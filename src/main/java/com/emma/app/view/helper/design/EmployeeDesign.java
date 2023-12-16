@@ -24,6 +24,10 @@ public class EmployeeDesign implements DesignI {
                 "    <span class=\"close\" id=\"closePopup\">&times;</span>" +
                 HtmlComponent.form(Employee.class) +
                 "</div>" +
+                "<div class= \"searchDiv\">" +
+                "<h1 style=\" color: #3D0C11;\n" +
+                "    text-align: center; \"> EMPLOYEES LISTING </h1>" +
+                "</div>" +
                 "<div class=\"fixed-bottom-emp\" style=\"background-color: #3D0C11;  style=\"top: 80%;\">\n" +
                 "       <div class=\"row\">\n" +
                 "           <div class=\"col-xl-6 col-xl-12\">\n" +

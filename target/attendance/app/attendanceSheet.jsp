@@ -17,9 +17,9 @@ ${topBar.setSessionUsername(username)}
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
+     <script src="https://kit.fontawesome.com/8e79aa9e2c.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
 </head>
 <body class="body-style">
     <c:set var="activeMenu" value='${requestScope.activeMenu}' />
@@ -129,7 +129,36 @@ ${topBar.setSessionUsername(username)}
    </div>
 
 
-    <jsp:include page="script.jsp"/>
+    <script>
+     function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            table = document.querySelector('table');
+            tr = table.querySelectorAll('tr');
+            for (i = 1; i < tr.length; i++) {  // Start from 1 to skip the header row
+                tds = tr[i].querySelectorAll('td');
+                for (j = 0; j < tds.length; j++) {
+                    td = tds[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = '';
+                            break;
+                        } else {
+                            tr[i].style.display = 'none';
+                        }
+                    }
+                }
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', searchTable);
+
+
+    </script>
+        <jsp:include page="script.jsp"/>
+
 </body>
 <footer>
 
