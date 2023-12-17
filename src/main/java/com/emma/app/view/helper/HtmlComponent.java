@@ -105,13 +105,13 @@ public class HtmlComponent {
                     trBuilder.append("<button  class=\"btn btn-sm btn-success\" onclick=\"editEmployee('" + getFieldValue(model, idFieldName) + "')\">Update</button>");
 
                     // Delete Form
-                    trBuilder.append("<form method=\"post\" action=\"" + dataClass.getAnnotation(MyHtmlForm.class).deleteURL() + "\">"); // Updated action
+                    trBuilder.append("<form method=\"post\" action=\"" + dataClass.getAnnotation(MyHtmlForm.class).deleteURL() + "\">");
                     trBuilder.append("<input type=\"hidden\" name=\"action\" value=\"delete\"/>"); // Added hidden field
                     trBuilder.append("<input type=\"hidden\" name=\"itemId\" value=\"")
                             .append(getFieldValue(model, idFieldName)).append("\"/>");
                     trBuilder.append("<button type=\"submit\" class=\"btn btn-sm btn-danger\">Delete</button>");
                     trBuilder.append("</form>");
-                    trBuilder.append("</div>"); // Close the action-buttons div
+                    trBuilder.append("</div>");
                     trBuilder.append("</td>");
                 }
 
