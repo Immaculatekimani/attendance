@@ -34,8 +34,6 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
             throw new RuntimeException(ex.getMessage());
         }
 
-        //3. initiate event to send email ...Observer design pattern
-
         getDao().addRecord(user);
 
         return false;
@@ -43,6 +41,12 @@ public class UserBean extends GenericBean<User> implements UserBeanI {
 
     @Override
     public boolean unregister(User user) {
+        getDao().deleteRecord(User.class, "id", user.getId());
         return true;
+    }
+
+    public List<User> getUser(User checkUser) {
+        List<User> usersResult = select(User.class, "username = ?1", checkUser.getUsername());
+        return usersResult;
     }
 }

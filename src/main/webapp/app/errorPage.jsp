@@ -8,9 +8,9 @@ ${topBar.setSessionUsername(username)}
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./app/style/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="./app/style/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
+     <script src="https://kit.fontawesome.com/8e79aa9e2c.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="./app/style/indexStyle.css">
 </head>
 <body class= "body-style" style = "background-color: #3D0C11;">
 
@@ -29,8 +29,6 @@ ${topBar.setSessionUsername(username)}
 
 
  <jsp:include page="script.jsp"/>
-  <script src="./app/style/jquery/jquery.min.js"></script>
-  <script src="./app/style/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="./app/style/jquery-easing/jquery.easing.min.js"></script>
+
 </body>
 </html>

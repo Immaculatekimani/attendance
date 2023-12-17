@@ -61,7 +61,6 @@ ${topBar.setSessionUsername(username)}
                            columns: ':visible'
                        }
                    },
-
                    'colvis'
                ]
            });

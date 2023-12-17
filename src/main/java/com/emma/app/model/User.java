@@ -1,8 +1,5 @@
 package com.emma.app.model;
 
-import com.emma.database.helper.DbTable;
-import com.emma.database.helper.DbTableColumn;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -18,6 +15,10 @@ public class User extends BaseEntity {
     private String confirmPassword;
 
     public User() {
+    }
+
+    public User(String username) {
+        this.username = username;
     }
 
     public String getConfirmPassword() {
