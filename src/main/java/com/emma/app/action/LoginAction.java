@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -53,10 +51,6 @@ public class LoginAction extends BaseAction {
 
                 resp.sendRedirect("./home");
             }
-
-
-            PrintWriter print = resp.getWriter();
-            print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
 
         } catch (Exception e) {
             MyExceptionUtils.redirectToErrorPage(req, resp, e);
