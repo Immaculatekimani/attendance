@@ -35,11 +35,6 @@ public class GenericBean<T> implements GenericBeanI<T> {
         return genricDao.countRecords(entity, whereClause, parameters);
     }
 
-    @Override
-    public void update(Object entity, String columnName, Object columnValue) {
-        genricDao.setEm(em);
-        genricDao.update(entity, columnName, columnValue);
-    }
 
     @Override
     public void deleteRecord(Class<T> entityClass, String fieldName, Object columnValue) {
@@ -53,7 +48,8 @@ public class GenericBean<T> implements GenericBeanI<T> {
         genricDao.setEm(em);
         return genricDao.select(entityClass, whereClause, parameters);
     }
-    public T find(Class<T> entityClass, String fieldName, Object columnValue){
+
+    public T find(Class<T> entityClass, String fieldName, Object columnValue) {
         genricDao.setEm(em);
         return genricDao.find(entityClass, fieldName, columnValue);
 
