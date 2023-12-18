@@ -142,6 +142,43 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
         }
     }
 
+    public List<Attendance> selectByDateAndRole(String date, String role) {
+        try {
+            EmployeeRole employeeRole = EmployeeRole.valueOf(role);
+            LocalDate attendanceDate = LocalDate.parse(date);
+
+            TypedQuery<Attendance> query = getDao().getEm().createNamedQuery("Attendance.findByDateAndRole", Attendance.class);
+            query.setParameter("attendanceDate", attendanceDate);
+            query.setParameter("employeeRole", employeeRole);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Attendance> selectByRoleAndDateRange(String startDate, String endDate, String role) {
+        try {
+            TypedQuery<Attendance> query = getDao().getEm().createNamedQuery("Attendance.findByDateRangeAndRole", Attendance.class);
+
+            EmployeeRole employeeRole = EmployeeRole.valueOf(role);
+            LocalDate attendanceStartDate = LocalDate.parse(startDate);
+            LocalDate attendanceEndDate = LocalDate.parse(endDate);
+
+            query.setParameter("startDate", attendanceStartDate);
+            query.setParameter("endDate", attendanceEndDate);
+            query.setParameter("role", employeeRole);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            e.printStackTrace(); // or log the exception
+            return null; // or throw a custom exception
+        }
+    }
+
+
     public void update(String displayId, LocalDate attendanceDate, LocalTime timeOut, String attendanceStatus) {
         try {
             String jpqlQuery = "UPDATE Attendance a SET a.timeOut = :timeOut, a.attendanceStatus = :attendanceStatus " +

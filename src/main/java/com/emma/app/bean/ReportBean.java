@@ -22,20 +22,30 @@ public class ReportBean implements ReportBeanI {
     public List<Attendance> getAttendanceData(String type, String singleDate, String startDate, String endDate, String role) {
         if ("2".equals(type)) {
             // By Single Date
-            return attendanceBean.select(Attendance.class, "attendance_date = ?1", singleDate);
+            if ("ALL".equalsIgnoreCase(role)) {
+                return attendanceBean.select(Attendance.class, "attendance_date = ?1", singleDate);
+            } else {
+                return attendanceBean.selectByDateAndRole(singleDate, role);
+            }
         } else if ("3".equals(type)) {
             // By Date Range
-            return attendanceBean.select(Attendance.class, "attendance_date BETWEEN ?1 AND ?2", startDate, endDate);
-        } else if ("ALL".equalsIgnoreCase(role) || "1".equals(type)) {
-            // Handle the case when "ALL" is selected for role
-            return attendanceBean.select(Attendance.class, "");
-        } else if (role != null && !role.isEmpty()) {
-            // Handle the case when a specific role is selected
-            return getAttendanceByRole(role);
+            if ("ALL".equalsIgnoreCase(role)) {
+                return attendanceBean.select(Attendance.class, "attendance_date BETWEEN ?1 AND ?2", startDate, endDate);
+            } else {
+                return attendanceBean.selectByRoleAndDateRange(startDate, endDate, role);
+            }
+        } else if ("1".equals(type)) {
+            // By ALL
+            if ("ALL".equalsIgnoreCase(role)) {
+                return attendanceBean.select(Attendance.class, "");
+            } else {
+                return attendanceBean.getAttendanceByRole(role);
+            }
         } else {
-            return attendanceBean.list(Attendance.class);
+            return attendanceBean.select(Attendance.class, "");
         }
     }
+
 
     public List<Attendance> getEmployeeAttendanceData(String employeeId, String type, String singleDate, String
             startDate, String endDate) {
@@ -50,16 +60,6 @@ public class ReportBean implements ReportBeanI {
             return attendanceBean.select(Attendance.class, "employee_id = ?1", employeeId);
         }
 
-    }
-
-    public List<Attendance> getAttendanceByRole(String employeeRole) {
-
-        try {
-
-            return attendanceBean.getAttendanceByRole(employeeRole);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
