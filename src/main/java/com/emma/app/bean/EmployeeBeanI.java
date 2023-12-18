@@ -12,4 +12,7 @@ public interface EmployeeBeanI extends GenericBeanI<Employee> {
     public Employee getEmployeeById(String employeeId);
 
     public void update(Employee updatedEmployee);
+
+    public void deleteEmployee(String employeeId);
+
 }

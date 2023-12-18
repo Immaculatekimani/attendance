@@ -22,7 +22,7 @@ ${topBar.setSessionUsername(username)}
 
 
        <div  class="modal-content" style = "background-color: papayawhip;">
-        <h1>Error Page</h1>
+        <h2>THAT WON'T WORK! :(</h2>
 
                    <p>${errorMessage}</p>
        </div>

@@ -1,12 +1,10 @@
 package com.emma.app.bean;
 
-import com.emma.app.dao.GenericDaoI;
 import com.emma.app.model.Attendance;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import java.util.List;
 
 

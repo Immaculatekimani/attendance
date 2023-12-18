@@ -46,19 +46,7 @@ public class EmployeeDesign implements DesignI {
                 "           </div>\n" +
                 "       </div>\n" +
                 "   </div>" +
-                "   </div>" +
-
-                "<script> document.getElementById(\"openPopup\").addEventListener(\"click\", function() {" +
-                "  document.getElementById(\"popupForm\").style.display = \"block\";" +
-                "});" +
-                "document.getElementById(\"closePopup\").addEventListener(\"click\", function() {" +
-                "  document.getElementById(\"popupForm\").style.display = \"none\";" +
-                "});" +
-                "window.addEventListener(\"click\", function(event) {" +
-                "  if (event.target == document.getElementById(\"popupForm\")) {" +
-                "    document.getElementById(\"popupForm\").style.display = \"none\";" +
-                "  }" +
-                "});</script>";
+                "   </div>";
 
         return empHtml;
 

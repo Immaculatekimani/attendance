@@ -1,8 +1,6 @@
 package com.emma.app.model;
 
 import com.emma.app.view.helper.MyTableColHeader;
-import com.emma.database.helper.DbTable;
-import com.emma.database.helper.DbTableColumn;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

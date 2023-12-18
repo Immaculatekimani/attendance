@@ -1,6 +1,5 @@
 package com.emma.app.view.helper;
 
-import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

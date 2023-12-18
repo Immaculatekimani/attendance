@@ -61,7 +61,7 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
             return query.getSingleResult();
 
         } catch (NoResultException e) {
-            return null; // Handle the case where no employee is found with the given ID
+            return null;
         }
 
     }
@@ -76,12 +76,10 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
             existingEmployee.setRole(updatedEmployee.getRole());
             existingEmployee.setEmployeeImage(updatedEmployee.getEmployeeImage());
 
-            // Use the same EntityManager to persist the changes to the Employee
             addRecord(existingEmployee);
             // Flush changes to the database
             getDao().getEm().flush();
 
-            // Now that the Employee is persisted, update relevant information in each attendance record
             List<Attendance> attendances = existingEmployee.getAttendances();
             if (attendances != null) {
                 for (Attendance attendance : attendances) {
@@ -92,7 +90,6 @@ public class EmployeeBean extends GenericBean<Employee> implements EmployeeBeanI
 
                     attendanceBean.addRecord(attendance);
                 }
-                // Flush changes to the database after updating all Attendance records
                 getDao().getEm().flush();
             }
         } else {
