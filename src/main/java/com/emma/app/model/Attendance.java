@@ -18,7 +18,9 @@ import java.time.LocalTime;
 @Table(name = "attendances")
 @NamedQueries({
         @NamedQuery(name = "Attendance.findByRole", query = "SELECT a FROM Attendance a WHERE a.employee.role = :role"),
-        @NamedQuery(name = "Attendance.findTodaysAttendance", query = "SELECT a FROM Attendance a WHERE a.attendanceDate = CURRENT_DATE")
+        @NamedQuery(name = "Attendance.findTodaysAttendance", query = "SELECT a FROM Attendance a WHERE a.attendanceDate = CURRENT_DATE"),
+        @NamedQuery(name = "Attendance.findByDateAndRole", query = "SELECT a FROM Attendance a WHERE a.attendanceDate = :attendanceDate AND a.employee.role = :employeeRole"),
+        @NamedQuery(name = "Attendance.findByDateRangeAndRole", query = "SELECT a FROM Attendance a WHERE a.attendanceDate BETWEEN :startDate AND :endDate AND a.employee.role = :role")
 })
 public class Attendance extends BaseEntity {
     @MyTableColHeader(header = "Employee Image")

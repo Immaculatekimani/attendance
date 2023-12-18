@@ -11,5 +11,4 @@ public interface ReportBeanI extends Serializable {
 
     public List<Attendance> getEmployeeAttendanceData(String employeeId, String type, String singleDate, String startDate, String endDate);
 
-    public List<Attendance> getAttendanceByRole(String role);
 }

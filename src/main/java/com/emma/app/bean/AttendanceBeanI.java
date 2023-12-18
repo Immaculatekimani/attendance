@@ -20,4 +20,8 @@ public interface AttendanceBeanI extends GenericBeanI<Attendance> {
     public List<Attendance> getTodaysAttendance();
 
     public void update(String displayId, LocalDate attendanceDate, LocalTime timeOut, String attendanceStatus);
+
+    public List<Attendance> selectByDateAndRole(String date, String role);
+
+    public List<Attendance> selectByRoleAndDateRange(String startDate, String endDate, String role);
 }
