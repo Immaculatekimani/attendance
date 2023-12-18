@@ -54,7 +54,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                 try {
                     addRecord(attendance);
                     AttendanceLog add = new AttendanceLog();
-                    add.setAttendanceDetails("Attendance for " + employeeName + " has been added at " + timeFormatter.timeDisplay());
+                    add.setAttendanceDetails("Attendance for " + employeeName + " has been added at " +displayTime);
                     event.fire(add);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -62,13 +62,11 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
             } else {
                 // Update existing record
                 handleAttendanceStatus(attendance, attendStatus);
-                existingRecord.setTimeOut(attendance.getAttendanceTime());
-                existingRecord.setAttendanceStatus(attendance.getAttendanceStatus());
 
                 try {
                     update(employeeId, LocalDate.now(), attendance.getTimeOut(), attendance.getAttendanceStatus());
                     AttendanceLog editAttend = new AttendanceLog();
-                    editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated at " + timeFormatter.timeDisplay());
+                    editAttend.setAttendanceDetails("Attendance for " + employeeName + " has been updated at " + displayTime);
                     event.fire(editAttend);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -129,9 +127,7 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
     public List<Attendance> getAttendanceByRole(String employeeRole) {
         try {
             EmployeeRole role = EmployeeRole.valueOf(employeeRole);
-            System.out.println("Role: {} ------------------------------------------" + role);
 
-            // Use the named query to fetch attendances based on employee role
             TypedQuery<Attendance> query = getDao().getEm().createNamedQuery("Attendance.findByRole", Attendance.class);
             query.setParameter("role", role);
 
@@ -172,9 +168,8 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
 
             return query.getResultList();
         } catch (Exception e) {
-            // Handle exceptions appropriately
-            e.printStackTrace(); // or log the exception
-            return null; // or throw a custom exception
+            e.printStackTrace();
+            return null;
         }
     }
 

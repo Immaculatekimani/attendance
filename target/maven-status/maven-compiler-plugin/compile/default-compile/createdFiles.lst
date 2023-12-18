@@ -5,9 +5,7 @@ com/emma/app/utility/TimeFormatter.class
 com/emma/app/action/LogoutAction.class
 com/emma/rest/api/RestAuthFilter.class
 com/emma/app/bean/GenericBeanI.class
-com/emma/database/helper/DbTableColumn.class
 com/emma/app/view/helper/MyHtmlForm.class
-com/emma/database/helper/DbTable.class
 com/emma/app/utility/EmployeeTypeConverter.class
 com/emma/app/view/helper/MyTableSetting.class
 com/emma/app/bean/EmployeeBean.class
@@ -21,12 +19,10 @@ com/emma/app/action/LoginAction.class
 com/emma/app/dao/GenericDaoI.class
 com/emma/app/action/BaseAction.class
 com/emma/app/displaybean/MenuBean.class
-com/emma/app/view/helper/TableForm.class
 com/emma/app/bean/AuthBeanI.class
 com/emma/app/view/helper/MyTableColHeader.class
 com/emma/app/view/helper/design/EmployeeDesign.class
 com/emma/app/view/helper/design/SingleEmployee.class
-com/emma/database/helper/DbTableId.class
 com/emma/app/model/BaseEntity.class
 com/emma/app/bean/EmployeeObserver.class
 com/emma/app/bean/AuthBean.class

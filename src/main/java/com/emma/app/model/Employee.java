@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "employees")
 @MyHtmlForm(label = "Add Employee", url = "./employee", editLabel = "Edit Employee", editURL = "./updateEmployee", editSubmit = "Change details", deleteURL = "./employee")
-@TableForm(label = "Edit Employee", url = "./employee")
 @MyTableSetting(includeActions = true)
 @NamedQueries({
         @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.employeeId = :employeeId")

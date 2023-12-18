@@ -1,16 +1,11 @@
 package com.emma.app.model;
 
 import com.emma.app.view.helper.BackgroundColor;
-import com.emma.app.view.helper.MyHtmlFormField;
 import com.emma.app.view.helper.MyTableColHeader;
 import com.emma.app.view.helper.TableColumnIdentifier;
-import com.emma.database.helper.DbTable;
-import com.emma.database.helper.DbTableColumn;
-import com.emma.database.helper.DbTableId;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -27,7 +22,6 @@ public class Attendance extends BaseEntity {
     @Column(name = "employeeImage")
     private String employeeImage;
     @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "employee_id") // Specify the foreign key column
     private Employee employee;
 
     @TableColumnIdentifier(columnIdentifier = "Employee FK")
