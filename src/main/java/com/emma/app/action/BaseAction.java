@@ -70,9 +70,6 @@ public class BaseAction extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("./app/index.jsp");
         dispatcher.forward(request, response);
     }
-    public void renderPage(HttpServletRequest request, HttpServletResponse response, String header) throws ServletException, IOException {
-        renderPage(request, response, 0, header, null, null);
-    }
 
     public void renderAttendanceSheetPage(HttpServletRequest request, HttpServletResponse response, int activeMenu) throws ServletException, IOException {
         request.setAttribute("activeMenu", activeMenu);
