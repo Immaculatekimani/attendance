@@ -3,6 +3,7 @@ package com.emma.rest.api;
 import com.emma.app.bean.EmployeeBeanI;
 import com.emma.app.model.Employee;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,6 +14,7 @@ public class EmployeeRestApi extends BaseRestApi {
     @EJB
     private EmployeeBeanI employeeBean;
 
+    @RolesAllowed("LOGGED-IN")
     @Path("/add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -22,6 +24,7 @@ public class EmployeeRestApi extends BaseRestApi {
         return respond();
     }
 
+    @NoAuthentication
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +32,7 @@ public class EmployeeRestApi extends BaseRestApi {
         return respond(employeeBean.list(new Employee()));
     }
 
+    @NoAuthentication
     @Path("/list/employee/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

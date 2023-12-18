@@ -3,6 +3,7 @@ package com.emma.rest.api;
 import com.emma.app.bean.AttendanceBeanI;
 import com.emma.app.model.Attendance;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,6 +14,7 @@ public class AttendanceRestApi extends BaseRestApi {
     @EJB
     private AttendanceBeanI attendanceBean;
 
+    @RolesAllowed("LOGGED-IN")
     @Path("/add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -22,6 +24,7 @@ public class AttendanceRestApi extends BaseRestApi {
         return respond();
     }
 
+    @NoAuthentication
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +32,7 @@ public class AttendanceRestApi extends BaseRestApi {
         return respond(attendanceBean.list(new Attendance()));
     }
 
+    @NoAuthentication
     @Path("/list/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
