@@ -46,7 +46,8 @@ public class AttendanceRestApi extends BaseRestApi {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response log(Attendance attendance, String selectedValue) {
+    public Response log(Attendance attendance) {
+        String selectedValue = attendance.getAttendanceStatus();
         attendanceBean.logAttendance(attendance, selectedValue);
         return respond();
     }
