@@ -41,4 +41,14 @@ public class AttendanceRestApi extends BaseRestApi {
 
         return respond(attendanceBean.getEmployeeAttendance(id));
     }
+    @RolesAllowed("LOGGED-IN")
+    @Path("/log")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response log(Attendance attendance) {
+        String selectedValue = attendance.getAttendanceStatus();
+        attendanceBean.logAttendance(attendance, selectedValue);
+        return respond();
+    }
 }
