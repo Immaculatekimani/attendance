@@ -5,6 +5,8 @@ WORKDIR /app
 
 # Copy the source code
 COPY . .
+# Download MySQL Connector JAR
+RUN curl -o mysql-connector-java-8.0.17.jar https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar
 
 # Build the project
 RUN mvn compile package
