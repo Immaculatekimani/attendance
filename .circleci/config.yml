@@ -83,7 +83,8 @@ workflows:
             tags:
               only: /^v.*/
             branches:
-              ignore: /.*/
+              only:
+                - devops
       - publish-tag:
           requires:
             - build
@@ -91,4 +92,5 @@ workflows:
             tags:
               only: /^v.*/
             branches:
-              ignore: /.*/
+              only:
+                - devops
