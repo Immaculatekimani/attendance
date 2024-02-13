@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wildfly-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wildfly
+  template:
+    metadata:
+      labels:
+        app: wildfly
+    spec:
+      containers:
+        - name: wildfly
+          image: tatu333/attendance-img:latest
+          env:
+            - name: MYSQL_HOST
+              value: mysql-service
+          ports:
+            - containerPort: 8080
