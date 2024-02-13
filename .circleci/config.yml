@@ -34,7 +34,7 @@ jobs:
           docker_layer_caching: true
       - run:
           name: Load archived Docker
-          command: docker load -i image.tar
+          command: docker load -i /tmp/workspace/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
@@ -59,4 +59,7 @@ workflows:
             - build
           filters:
             branches:
-              only: main
+              only:
+                - main
+                - devops
+
