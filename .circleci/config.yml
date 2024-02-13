@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Build & push Docker image
           command: |
-            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
             docker build -t tatu333/my-webapp .
             docker tag tatu333/my-webapp:latest tatu333/my-webapp:latest
             docker push tatu333/my-webapp:latest
