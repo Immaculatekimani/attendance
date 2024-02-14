@@ -127,11 +127,11 @@
         <subsystem xmlns="urn:jboss:domain:datasources:7.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/attendance" pool-name="attendance" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:mysql://mysqld:3306/attendance</connection-url>
+                    <connection-url>env.CONNECTION_URL</connection-url>
                     <driver>mysql</driver>
                     <security>
-                        <user-name>root</user-name>
-                        <password>root</password>
+                        <user-name>env.USER_NAME</user-name>
+                        <password>env.PASSWORD</password>
                     </security>
                 </datasource>
                 <drivers>

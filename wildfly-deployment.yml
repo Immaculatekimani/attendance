@@ -16,7 +16,17 @@ spec:
         - name: wildfly
           image: tatu333/my-webapp:latest
           env:
-            - name: MYSQL_HOST
-              value: mysql-service
+            - name: CONNECTION_URL
+              value: jdbc:mysql://mysql:3306/attendance
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-user
+                  key: username
           ports:
-            - containerPort: 8082
+            - containerPort: 8080

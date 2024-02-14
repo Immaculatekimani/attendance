@@ -26,6 +26,8 @@ spec:
                 secretKeyRef:
                   name: mysql-user
                   key: user-name
+            - name: MYSQL_DATABASE
+              value: attendance
           ports:
             - containerPort: 3306
           volumeMounts:
