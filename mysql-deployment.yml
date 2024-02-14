@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysqld
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         app: mysqld
     spec:
       containers:
-        - name: mysql
+        - name: mysqld
           image: mysql:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -21,11 +21,11 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-user
-                  key: user-name
+#            - name: MYSQL_USER
+#              valueFrom:
+#                secretKeyRef:
+#                  name: mysql-user
+#                  key: user-name
             - name: MYSQL_DATABASE
               value: attendance
           ports:

@@ -17,16 +17,16 @@ spec:
           image: tatu333/my-webapp:latest
           env:
             - name: CONNECTION_URL
-              value: jdbc:mysql://mysql:3306/attendance
-            - name: MYSQL_PASSWORD
+              value: jdbc:mysql://mysqld:3306/attendance
+            - name: PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
-            - name: MYSQL_USER
+            - name: USER_NAME
               valueFrom:
                 secretKeyRef:
                   name: mysql-user
-                  key: username
+                  key: user-name
           ports:
             - containerPort: 8080
