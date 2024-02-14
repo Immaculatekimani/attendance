@@ -11,7 +11,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   attenance-app:
-    image: tatu333/attendance-img:latest
+    image: tatu333/my-webapp:latest
     ports:
       - "8082:8082"
     depends_on:

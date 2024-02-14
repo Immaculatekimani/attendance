@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: wildfly
-          image: tatu333/attendance-img:latest
+          image: tatu333/my-webapp:latest
           env:
             - name: MYSQL_HOST
               value: mysql-service
           ports:
-            - containerPort: 8080
+            - containerPort: 8082
