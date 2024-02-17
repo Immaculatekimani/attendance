@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: mysql-service
 spec:
+  type: NodePort
   ports:
     - port: 3306
+      targetPort: 3306
+      nodePort: 30000  # You can specify a specific nodePort here, or let Kubernetes assign one automatically.
   selector:
     app: mysqld
-  clusterIP: None

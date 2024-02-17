@@ -4,7 +4,7 @@ metadata:
   name: wildfly-service
 spec:
   selector:
-    app: wildfly
+    app: attendance-app
   ports:
     - protocol: TCP
       port: 8080

@@ -126,24 +126,18 @@
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:7.0">
             <datasources>
-                <datasource jndi-name="java:jboss/datasources/attendance" pool-name="attendance" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-<!--                    <connection-url>env.CONNECTION_URL</connection-url>-->
-<!--                    <driver>mysql</driver>-->
-<!--                    <security>-->
-<!--                        <user-name>env.USER_NAME</user-name>-->
-<!--                        <password>env.PASSWORD</password>-->
-<!--                    </security>-->
-                    <connection-url>${env.CONNECTION_URL}</connection-url>
+                <datasource jndi-name="java:jboss/datasources/assetmanager" pool-name="assetmanager" enabled="true" use-java-context="true">
+                    <connection-url>${env.MYSQL_CONNECTION}</connection-url>
                     <driver>mysql</driver>
                     <pool>
                         <min-pool-size>5</min-pool-size>
                         <max-pool-size>20</max-pool-size>
                         <prefill>true</prefill>
                     </pool>
-<!--                    <security>-->
-<!--                        <user-name>${env.USER_NAME}</user-name>-->
-<!--                        <password>${env.PASSWORD}</password>-->
-<!--                    </security>-->
+                    <security>
+                        <user-name>${env.MYSQL_USER}</user-name>
+                        <password>${env.MYSQL_PASSWORD}</password>
+                    </security>
                 </datasource>
                 <drivers>
                     <driver name="mysql" module="com.mysql">
@@ -521,7 +515,5 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
-    <deployments>
 
-    </deployments>
 </server>
