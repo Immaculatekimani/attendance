@@ -27,7 +27,7 @@ spec:
               cpu: "0.2"
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              value: tatu
             - name: MYSQL_DATABASE
               value: attendance
           ports:
