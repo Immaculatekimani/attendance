@@ -19,14 +19,16 @@ spec:
             - name: CONNECTION_URL
               value: jdbc:mysql://mysqld:3306/attendance
             - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
+              value: root
+#              valueFrom:
+#                secretKeyRef:
+#                  name: mysql-secret
+#                  key: password
             - name: USER_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-user
-                  key: user-name
+              value: root
+#              valueFrom:
+#                secretKeyRef:
+#                  name: mysql-user
+#                  key: user-name
           ports:
             - containerPort: 8080

@@ -17,10 +17,11 @@ spec:
           image: mysql:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
+              value: root
+#              valueFrom:
+#                secretKeyRef:
+#                  name: mysql-secret
+#                  key: password
 #            - name: MYSQL_USER
 #              valueFrom:
 #                secretKeyRef:

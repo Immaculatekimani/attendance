@@ -140,10 +140,10 @@
                         <max-pool-size>20</max-pool-size>
                         <prefill>true</prefill>
                     </pool>
-                    <security>
-                        <user-name>${env.USER_NAME}</user-name>
-                        <password>${env.PASSWORD}</password>
-                    </security>
+<!--                    <security>-->
+<!--                        <user-name>${env.USER_NAME}</user-name>-->
+<!--                        <password>${env.PASSWORD}</password>-->
+<!--                    </security>-->
                 </datasource>
                 <drivers>
                     <driver name="mysql" module="com.mysql">

@@ -1,0 +1,125 @@
+-
+- name: Run Docker Compose
+  hosts: all
+  become: true
+  tasks:
+    - name: Create file
+      copy:
+        content: Create \n
+        dest: /tmp/test.txt
+
+    - name: Increase no. of open files
+      sysctl:
+        name: fs.file-max
+        value: "500000"
+        state: present
+      become: true
+
+    # Installing necessary packages before installing Docker
+    - name: Install required system packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop:
+        - "apt-transport-https"
+        - "ca-certificates"
+        - "curl"
+        - "software-properties-common"
+        - "python3-pip"
+        - "virtualenv"
+        - "python3-setuptools"
+      become: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      become: true
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+      become: true
+
+    - name: Install Docker and Docker-Compose
+      apt:
+        pkg:
+          - docker
+          - docker-ce
+          - docker-compose
+        state: latest
+        update_cache: yes
+      become: true
+
+    - name: Running Docker without root and add it to user groups
+      shell: |
+        usermod -aG docker $USER
+      become: true
+
+    - name: Recursive change ownership
+      file:
+        path: /home/tatu/Attendance
+        state: directory
+        recurse: yes
+        owner: tatu333
+      become: true
+
+    - name: Install Minikube dependencies
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop:
+        - conntrack
+        - socat
+
+    - name: Download and install Minikube
+      shell: |
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb && sudo dpkg -i minikube_latest_amd64.deb
+      args:
+        creates: /usr/local/bin/minikube
+
+    - name: Start Minikube
+      shell: minikube start --driver=docker
+
+    - name: Install kubectl
+      apt:
+        name: kubectl
+        state: latest
+        update_cache: yes
+
+    - name: Copy Kubernetes manifests to VM
+      copy:
+        src: /path/to/kubernetes/manifests
+        dest: /home/tatu333/Attendance/K8Smanifest
+        owner: tatu333
+        group: tatu333
+        mode: 0755
+
+    # Copy kubeconfig from VM
+    - name: Copy kubeconfig from VM
+      fetch:
+        src: ~/.kube/config
+        dest: /home/your_user/.kube/config
+        flat: yes
+      become: yes
+      tags: kubeconfig
+
+    # Set KUBECONFIG environment variable
+    - name: Set KUBECONFIG environment variable
+      shell: echo "export KUBECONFIG=/home/your_user/.kube/config" >> ~/.bashrc
+      tags: kubeconfig
+      
+    - name: Apply MySQL deployment
+      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/mysql-deployment.yaml
+
+    - name: Apply WildFly deployment
+      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/wildfly-deployment.yaml
+
+
+#monitoring like new relic
+# traces
+# logs
+# metric
