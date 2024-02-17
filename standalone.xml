@@ -126,7 +126,7 @@
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:7.0">
             <datasources>
-                <datasource jndi-name="java:jboss/datasources/assetmanager" pool-name="assetmanager" enabled="true" use-java-context="true">
+                <datasource jndi-name="java:jboss/datasources/attendance" pool-name="attendance" enabled="true" use-java-context="true">
                     <connection-url>${env.MYSQL_CONNECTION}</connection-url>
                     <driver>mysql</driver>
                     <pool>

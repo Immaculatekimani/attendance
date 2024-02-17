@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: assetmanager-app
+  name: attendance-app
   labels:
-    app: assetmanager-app
+    app: attendance-app
 spec:
   replicas: 1
   selector:
@@ -21,16 +21,16 @@ spec:
           image: tatu333/my-webapp:latest
           env:
             - name: MYSQL_CONNECTION
-              value: jdbc:mysql://mysql:3306/attendance
+              value: jdbc:mysqld://mysql:3306/attendance
             - name: MYSQL_DATABASE
-              value: jdbc:mysql://mysql:3306/attendance
+              value: jdbc:mysqld://mysql:3306/attendance
             - name: MYSQL_HOST
               value: mysql
 
             - name: MYSQL_PASSWORD
-              value: tatu
+              value: root
             - name: MYSQL_USER
-              value: tatu
+              value: root
           ports:
             - name: web
               containerPort: 8080
