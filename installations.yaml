@@ -1,11 +1,11 @@
--
+---
 - name: Run Docker Compose
   hosts: all
   become: true
   tasks:
     - name: Create file
       copy:
-        content: Create \n
+        content: "Create\n"
         dest: /tmp/test.txt
 
     - name: Increase no. of open files
@@ -55,16 +55,10 @@
 
     - name: Running Docker without root and add it to user groups
       shell: |
-        usermod -aG docker $USER
+        usermod -aG docker tatu333
       become: true
 
-    - name: Recursive change ownership
-      file:
-        path: /home/tatu/Attendance
-        state: directory
-        recurse: yes
-        owner: tatu333
-      become: true
+
 
     - name: Install Minikube dependencies
       apt:
@@ -81,45 +75,3 @@
       args:
         creates: /usr/local/bin/minikube
 
-    - name: Start Minikube
-      shell: minikube start --driver=docker
-
-    - name: Install kubectl
-      apt:
-        name: kubectl
-        state: latest
-        update_cache: yes
-
-    - name: Copy Kubernetes manifests to VM
-      copy:
-        src: /path/to/kubernetes/manifests
-        dest: /home/tatu333/Attendance/K8Smanifest
-        owner: tatu333
-        group: tatu333
-        mode: 0755
-
-    # Copy kubeconfig from VM
-    - name: Copy kubeconfig from VM
-      fetch:
-        src: ~/.kube/config
-        dest: /home/your_user/.kube/config
-        flat: yes
-      become: yes
-      tags: kubeconfig
-
-    # Set KUBECONFIG environment variable
-    - name: Set KUBECONFIG environment variable
-      shell: echo "export KUBECONFIG=/home/your_user/.kube/config" >> ~/.bashrc
-      tags: kubeconfig
-      
-    - name: Apply MySQL deployment
-      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/mysql-deployment.yaml
-
-    - name: Apply WildFly deployment
-      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/wildfly-deployment.yaml
-
-
-#monitoring like new relic
-# traces
-# logs
-# metric

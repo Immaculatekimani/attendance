@@ -18,6 +18,7 @@ services:
       - mysqld
     environment:
       MYSQL_HOST: mysqld
+
       
 
 volumes:

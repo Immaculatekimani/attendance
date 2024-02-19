@@ -21,16 +21,17 @@ spec:
           image: tatu333/my-webapp:latest
           env:
             - name: MYSQL_CONNECTION
-              value: jdbc:mysqld://mysqld:3306/attendance
-            - name: MYSQL_DATABASE
-              value: jdbc:mysqld://mysqld:3306/attendance
-            - name: MYSQL_HOST
-              value: mysql
-
+              value: jdbc:mysql://mysql:3306/attendance
             - name: MYSQL_PASSWORD
-              value: tatu
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
             - name: MYSQL_USER
-              value: tatu
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
           ports:
             - name: web
               containerPort: 8080

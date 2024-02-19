@@ -1,0 +1,33 @@
+- name: Deploy app to the VM
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy Kubernetes manifests to VM
+      copy:
+        src: ./K8Smanifest
+        dest: /home/tatu333/Attendance/K8Smanifest
+        owner: tatu333
+        group: tatu333
+        mode: 0755
+
+    - name: Ensure the .kube directory exists
+      file:
+        path: /home/tatu333/.kube
+        state: directory
+        owner: tatu333
+        group: tatu333
+        mode: '0755'
+
+    - name: Copy kubeconfig from VM
+      become: true
+      fetch:
+        src: ~/.kube/config
+        dest: /home/tatu/.kube/config
+        flat: yes
+      tags: kubeconfig
+
+    - name: Apply MySQL deployment
+      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/mysql-deployment.yml
+
+    - name: Apply WildFly deployment
+      command: kubectl apply -f ./K8Smanifest/wildfly-deployment.yaml

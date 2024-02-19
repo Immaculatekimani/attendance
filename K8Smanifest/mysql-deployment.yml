@@ -16,8 +16,6 @@ spec:
       containers:
         - image: mysql:latest
           name: mysql
-          args:
-            - "--default-authentication-plugin=mysql_native_password"
           resources:
             limits:
               memory: 512Mi
