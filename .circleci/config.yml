@@ -51,7 +51,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          - "SHA256:arsgGUIUftfo8xIuLJqFfmvx/TRV34eCdnd7hdbOWr0"
+          fingerprints: ["SHA256:arsgGUIUftfo8xIuLJqFfmvx/TRV34eCdnd7hdbOWr0"]
 
       - run:
           name: Install Ansible and Dependencies
