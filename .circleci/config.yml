@@ -54,7 +54,8 @@ jobs:
       - run:
           name: Install Ansible and Dependencies
           command: |
-            apt-get update && apt-get install -y ansible python3-apt
+            sudo apt-get update
+            sudo apt-get install -y ansible python3-apt
       - run:
           name: Run Ansible Installation
           command: |
