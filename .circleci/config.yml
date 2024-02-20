@@ -45,30 +45,26 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
 
-  deploy:
-    docker:
-      - image: cimg/openjdk:17.0.9-node
-    steps:
-      - checkout
-      - run:
-          name: Add server SSH key to known_hosts
-          command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan -H 34.16.196.5 >> ~/.ssh/known_hosts
-      - run:
-          name: Install Ansible and Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y ansible python3-apt
-      - run:
-          name: Run Ansible Installation
-          command: |
-            ansible-playbook installations.yaml -i hosts
-      - run:
-          name: Run Application Playbook
-          command: |
-            ansible-playbook playbook.yml -i hosts
-
+#  deploy:
+#    docker:
+#      - image: cimg/openjdk:17.0.9-node
+#    steps:
+#      - checkout
+#
+#      - run:
+#          name: Install Ansible and Dependencies
+#          command: |
+#            sudo apt-get update
+#            sudo apt-get install -y ansible python3-apt
+#      - run:
+#          name: Run Ansible Installation
+#          command: |
+#            ssh $SSH_USER@$SSH_HOST ansible-playbook installations.yaml -i hosts
+#      - run:
+#          name: Run Application Playbook
+#          command: |
+#            ssh $SSH_USER@$SSH_HOST ansible-playbook playbook.yml -i hosts
+#
 
 workflows:
   version: 2
@@ -88,11 +84,11 @@ workflows:
               only:
                 - main
                 - devops
-      - deploy:
-          requires:
-            - publish-latest
-          filters:
-            branches:
-              only:
-                - main
-                - devops
+#      - deploy:
+#          requires:
+#            - publish-latest
+#          filters:
+#            branches:
+#              only:
+#                - main
+#                - devops
