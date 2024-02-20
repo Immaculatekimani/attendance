@@ -53,7 +53,7 @@ jobs:
       # Add the SSH key to the SSH agent
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:arsgGUIUftfo8xIuLJqFfmvx/TRV34eCdnd7hdbOWr0"
+            - "SHA256:pSzgW8k5/j8xE9YEMX7sE8cCpfPMkVe+ljxcck2D5LI"
       # Run the ssh-keyscan command to fetch and append the server's host key to the known_hosts file
       - run:
           name: Add server's host key to known_hosts
