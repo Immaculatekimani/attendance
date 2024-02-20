@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Run Ansible Installation
           command: |
-            ansible-playbook installations.yaml -i hosts
+            ssh $SSH_USER@$SSH_HOST ansible-playbook installations.yaml -i hosts
       - run:
           name: Run Application Playbook
           command: |
