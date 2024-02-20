@@ -346,7 +346,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: Minikube-attend
+      clusterName: local-kube
     http_server_enabled: true
     http_server_port: 8001
     is_forward_only: true
@@ -421,7 +421,7 @@ spec:
     metadata:
       annotations:
         checksum/nri-kubernetes: 0176b7f7c9673a1885f59684d4ec5219315977efbbe63a19970f98bf0b51ce83
-        checksum/agent-config: 24592cc9a0eb1e9e3c3fd9162cb743e7c4bdf7c0c8f63398647fabb42b344a94
+        checksum/agent-config: 822bc0d105a37c499b275b8a757a4a5373c145a59f62793b297f22cc48cb0a63
         checksum/license-secret: d2081583f4562e61ad6a88825319dffa9a56b723533d605c6db0287ae80a732c
       labels:
         app.kubernetes.io/instance: nri-bundle
@@ -445,7 +445,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8001"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: Minikube-attend
+              value: local-kube
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -750,7 +750,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: Minikube-attend
+      clusterName: local-kube
     http_server_enabled: true
     http_server_port: 8002
     is_forward_only: true
@@ -779,7 +779,7 @@ spec:
     metadata:
       annotations:
         checksum/nri-kubernetes: 56b603c9e4e9262631195eefe532fc8423287a16583d57674ebbf76f5ab7073e
-        checksum/agent-config: bab833b1999e1e36d1dd5b70a0cc65fc51fcb2872ffabe25b3295777d17488b2
+        checksum/agent-config: 904793ef9e8e1974a1bd8ddb8ecf2a027b112b9ed4379b3401053f18e665cd2b
         checksum/license-secret: d2081583f4562e61ad6a88825319dffa9a56b723533d605c6db0287ae80a732c
       labels:
         app.kubernetes.io/instance: nri-bundle
@@ -802,7 +802,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8002"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: Minikube-attend
+              value: local-kube
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -934,7 +934,7 @@ data:
     # This is the configuration file for the infrastructure agent. See:
     # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
     custom_attributes:
-      clusterName: Minikube-attend
+      clusterName: local-kube
     features:
       docker_enabled: false
     http_server_enabled: true
@@ -966,7 +966,7 @@ spec:
     metadata:
       annotations:
         checksum/nri-kubernetes: a5c7aed3710fbfeb6224c1e8252ec31855177cdd6b5ea3221e4fa54aa4430182
-        checksum/agent-config: e97d62bc27b3450e9a538257d72d40b686363dd7d629ea6546f57f390140cc43
+        checksum/agent-config: dff435365a844376ae775bd05423ca686fc1529ab3ba15e0036a1a91ea1a4454
         checksum/license-secret: d2081583f4562e61ad6a88825319dffa9a56b723533d605c6db0287ae80a732c
         checksum/integrations_config: 415789044686524d9bd8af49fd977017c1a739773996280c2aa3c6b5e88ecf1d
       labels:
@@ -990,7 +990,7 @@ spec:
             - name: "NRI_KUBERNETES_SINK_HTTP_PORT"
               value: "8003"
             - name: "NRI_KUBERNETES_CLUSTERNAME"
-              value: Minikube-attend
+              value: local-kube
             - name: "NRI_KUBERNETES_VERBOSE"
               value: "false"
 
@@ -1052,7 +1052,7 @@ spec:
                   apiVersion: "v1"
                   fieldPath: "spec.nodeName"
             - name: "CLUSTER_NAME"
-              value: Minikube-attend
+              value: local-kube
             - name: "NRIA_PASSTHROUGH_ENVIRONMENT"
               value: "CLUSTER_NAME"
             - name: "NRIA_HOST"
@@ -1368,7 +1368,7 @@ spec:
                   name: nri-bundle-newrelic-logging-config
                   key: license
             - name: CLUSTER_NAME
-              value: Minikube-attend
+              value: local-kube
             - name: LOG_LEVEL
               value: "info"
             - name: LOG_PARSER
@@ -1542,7 +1542,7 @@ data:
         - localhost:9090
     common:
       external_labels:
-        cluster_name: Minikube-attend
+        cluster_name: local-kube
       scrape_interval: 30s
     kubernetes:
       jobs:
@@ -1628,7 +1628,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: e27a5514b1e10bc7e77b046bd5d378ed9aeae265e449e6d5488d61217b94b219
+        checksum/config: 193b150ac749ebc331528eb3fbe0dca9465a7d879f49791b1c9cc45ddc076356
       labels:
         app.kubernetes.io/instance: nri-bundle
         app.kubernetes.io/name: newrelic-prometheus-agent
@@ -1809,7 +1809,7 @@ data:
       - name: newRelicInfra
         config:
           agentEndpoint: http://localhost:8001/v1/data
-          clusterName: Minikube-attend
+          clusterName: local-kube
           agentHTTPTimeout: 30s
     captureDescribe: true
     describeRefresh: 24h
@@ -2189,7 +2189,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: clusterName
-          value: Minikube-attend
+          value: local-kube
         ports:
           - containerPort: 8443
             protocol: TCP

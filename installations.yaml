@@ -55,7 +55,7 @@
 
     - name: Running Docker without root and add it to user groups
       shell: |
-        usermod -aG docker tatu333
+        usermod -aG docker tatu
       become: true
 
 
@@ -74,4 +74,13 @@
         curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb && sudo dpkg -i minikube_latest_amd64.deb
       args:
         creates: /usr/local/bin/minikube
+
+    - name: Install Kubernetes
+      shell: |
+        curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+        echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+        sudo apt-get update
+        sudo apt-get install -y kubelet kubeadm kubectl
+        sudo apt-mark hold kubelet kubeadm kubectl
+
 

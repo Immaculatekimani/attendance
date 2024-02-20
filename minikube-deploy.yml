@@ -5,17 +5,17 @@
     - name: Copy Kubernetes manifests to VM
       copy:
         src: ./K8Smanifest
-        dest: /home/tatu333/Attendance/K8Smanifest
-        owner: tatu333
-        group: tatu333
+        dest: /home/tatu/Attendance/K8Smanifest/
+        owner: tatu
+        group: tatu
         mode: 0755
 
     - name: Ensure the .kube directory exists
       file:
-        path: /home/tatu333/.kube
+        path: /home/tatu/.kube
         state: directory
-        owner: tatu333
-        group: tatu333
+        owner: tatu
+        group: tatu
         mode: '0755'
 
     - name: Copy kubeconfig from VM
@@ -26,8 +26,20 @@
         flat: yes
       tags: kubeconfig
 
+    - name: Apply MySQL Secret
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/mysql-user.yml
+
+    - name: Apply MySQL persistent volume
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/mysql-pv.yml
+
     - name: Apply MySQL deployment
-      command: kubectl apply -f /home/tatu333/Attendance/K8Smanifest/mysql-deployment.yml
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/mysql-deployment.yml
+
+    - name: Apply MySQL service
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/mysql-service.yml
 
     - name: Apply WildFly deployment
-      command: kubectl apply -f ./K8Smanifest/wildfly-deployment.yaml
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/wildfly-deployment.yaml
+
+    - name: Apply WildFly service
+      command: kubectl apply -f /home/tatu/Attendance/K8Smanifest/wildfly-service.yaml

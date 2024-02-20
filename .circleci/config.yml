@@ -1,11 +1,11 @@
 version: 2.1
+
 executors:
   docker-publisher:
     environment:
       IMAGE_NAME: tatu333/my-webapp
     docker:
       - image: cimg/openjdk:17.0.9-node
-
 
 jobs:
   build:
@@ -25,6 +25,7 @@ jobs:
           root: .
           paths:
             - ./image.tar
+
   publish-latest:
     executor: docker-publisher
     steps:
@@ -40,8 +41,24 @@ jobs:
           command: |
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
             IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:latest 
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
+            docker push $IMAGE_NAME:$IMAGE_TAG
+
+  deploy:
+    docker:
+      - image: cimg/openjdk:17.0.9-node
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Run Ansible Installation
+          command: |
+            ansible-playbook installations.yml -i hosts
+      - run:
+          name: Run Application Playbook
+          command: |
+            ansible-playbook playbook.yml -i hosts
 
 workflows:
   version: 2
@@ -61,4 +78,11 @@ workflows:
               only:
                 - main
                 - devops
-
+      - deploy:
+          requires:
+            - publish-latest
+          filters:
+            branches:
+              only:
+                - main
+                - devops
