@@ -59,11 +59,14 @@ jobs:
       - run:
           name: Run Ansible Installation
           command: |
+            cd /tmp/workspace
             ansible-playbook installations.yaml -i hosts
       - run:
           name: Run Application Playbook
           command: |
+            cd /tmp/workspace
             ansible-playbook playbook.yml -i hosts
+
 
 workflows:
   version: 2
