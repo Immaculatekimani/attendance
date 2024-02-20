@@ -49,8 +49,7 @@ jobs:
     docker:
       - image: cimg/openjdk:17.0.9-node
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
+      - checkout
       - run:
           name: Install Ansible and Dependencies
           command: |
@@ -59,12 +58,10 @@ jobs:
       - run:
           name: Run Ansible Installation
           command: |
-            cd /tmp/workspace
             ansible-playbook installations.yaml -i hosts
       - run:
           name: Run Application Playbook
           command: |
-            cd /tmp/workspace
             ansible-playbook playbook.yml -i hosts
 
 
