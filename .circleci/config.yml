@@ -51,6 +51,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add server SSH key to known_hosts
+          command: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -H 34.16.196.5 >> ~/.ssh/known_hosts
+      - run:
           name: Install Ansible and Dependencies
           command: |
             sudo apt-get update
