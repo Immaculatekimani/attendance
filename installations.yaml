@@ -1,6 +1,6 @@
 ---
 - name: Run Docker Compose
-  hosts: web
+  hosts: all
   become: true
   tasks:
     - name: Create file
