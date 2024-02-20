@@ -47,33 +47,31 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/openjdk:17.0.9-node
+      - image: cimg/python:3.8.13
     steps:
       - checkout
-      # Add the SSH key to the SSH agent
       - add_ssh_keys:
-          fingerprints:
-            - "SHA256:pSzgW8k5/j8xE9YEMX7sE8cCpfPMkVe+ljxcck2D5LI"
-      # Run the ssh-keyscan command to fetch and append the server's host key to the known_hosts file
+          fingerprints: [ "SHA256:gEOJi8dwhowiqrODkbjHPg7tcBWuXCwOD/Ltme30gbw" ]
+
       - run:
-          name: Add server's host key to known_hosts
+          name: Set up Python
           command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan -H 34.16.196.5 >> ~/.ssh/known_hosts
-      # Continue with the rest of your deployment steps...
-      - run:
-          name: Install Ansible and Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y ansible python3-apt
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install ansible
+
+      - add_ssh_keys:
+          fingerprints: [ "SHA256:gEOJi8dwhowiqrODkbjHPg7tcBWuXCwOD/Ltme30gbw" ]
+
       - run:
           name: Run Ansible Installation
           command: |
-            ansible-playbook -i hosts installations.yaml
-      - run:
-          name: Run Application Playbook
-          command: |
-            ssh $SSH_USER@$SSH_HOST ansible-playbook playbook.yml -i hosts
+            . venv/bin/activate
+            export ANSIBLE_HOST_KEY_CHECKING=False
+            ansible-playbook installations.yaml -i hosts
+            ansible-playbook playbook.yml -i hosts
+     
 
 workflows:
   version: 2
