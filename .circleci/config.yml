@@ -84,11 +84,11 @@ workflows:
               only:
                 - main
                 - devops
-#      - deploy:
-#          requires:
-#            - publish-latest
-#          filters:
-#            branches:
-#              only:
-#                - main
-#                - devops
+      - deploy:
+          requires:
+            - publish-latest
+          filters:
+            branches:
+              only:
+                - main
+                - devops
