@@ -50,6 +50,8 @@ jobs:
       - image: cimg/openjdk:17.0.9-node
     steps:
       - checkout
+      - add_ssh_keys:
+          - "SHA256:arsgGUIUftfo8xIuLJqFfmvx/TRV34eCdnd7hdbOWr0"
 
       - run:
           name: Install Ansible and Dependencies
