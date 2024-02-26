@@ -1,5 +1,5 @@
 [server1]
-34.118.241.22
+34.125.78.254
 [server1:vars]
 ansible_ssh_user=tatu
 ansible_python_interpreter=/usr/bin/python3
