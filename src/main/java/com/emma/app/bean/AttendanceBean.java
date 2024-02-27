@@ -92,9 +92,11 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                 if (attendance.getAttendanceTime().isAfter(LocalTime.parse("08:00", DateTimeFormatter.ofPattern("HH:mm")))) {
                     attendance.setAttendanceStatus("Late");
                     attendance.setJoiningStatus("Late");
+                    attendance.setTimeOut(LocalTime.MIN);
                 } else {
                     attendance.setAttendanceStatus("Present");
                     attendance.setJoiningStatus("In-Time");
+                    attendance.setTimeOut(LocalTime.parse("00.00", DateTimeFormatter.ofPattern("HH:mm")));
                 }
                 attendance.setTimeIn(attendance.getAttendanceTime());
                 break;
@@ -110,6 +112,9 @@ public class AttendanceBean extends GenericBean<Attendance> implements Attendanc
                 break;
             case "Absent":
                 attendance.setAttendanceStatus("Absent");
+                attendance.setJoiningStatus("Not Attended");
+                attendance.setTimeOut(LocalTime.MIN);
+                attendance.setTimeIn(LocalTime.MIN);
                 break;
         }
     }

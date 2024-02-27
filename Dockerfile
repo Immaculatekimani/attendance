@@ -23,6 +23,21 @@ RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 COPY --from=build /app/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 COPY --from=build /app/mysql-connector-java-8.0.17.jar /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 
+
+
+# Copy the entrypoint script
+COPY sqldumps.sql /opt/jboss/wildfly/bin/
+COPY entrypoint.sh /opt/jboss/wildfly/bin/
+USER root
+RUN chown root:root /opt/jboss/wildfly/bin/entrypoint.sh
+RUN chmod +x /opt/jboss/wildfly/bin/entrypoint.sh
+
+EXPOSE 8080
+
+ENTRYPOINT ["/opt/jboss/wildfly/bin/entrypoint.sh"]
+
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]
+
 EXPOSE 8080
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]

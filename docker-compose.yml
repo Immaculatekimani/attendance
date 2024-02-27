@@ -5,19 +5,26 @@ services:
     image: mysql:latest
     container_name: attendance
     restart: always
-    env_file:
-      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: tatu
+      MYSQL_DATABASE: attendance
     volumes:
       - mysql-data:/var/lib/mysql
 
   attenance-app:
-    image: tatu333/attendance-img:latest
+    image: tatu333/my-webapp:latest
     ports:
-      - "8082:8082"
+      - "8080:8080"
     depends_on:
       - mysqld
     environment:
       MYSQL_HOST: mysqld
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: tatu
+      MYSQL_DATABASE: attendance
+      MYSQL_CONNECTION: jdbc:mysql://mysqld:3306/attendance
+
       
 
 volumes:

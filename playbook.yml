@@ -16,10 +16,10 @@
       src: ./docker-compose.yml
       dest: /home/tatu/Remote/docker-compose.yml
 
-  - name: Copy Env file
-    copy:
-      src: ./.env
-      dest: /home/tatu/Remote/.env
+#  - name: Copy Env file
+#    copy:
+#      src: ./.env
+#      dest: /home/tatu/Remote/.env
 
   - name: Start Docker Compose
     # shell: |

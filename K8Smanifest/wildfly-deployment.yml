@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attendance-app
+  labels:
+    app: attendance-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attendance-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: attendance-app
+    spec:
+      containers:
+        - name: attendance-app
+          image: tatu333/my-webapp:latest
+          env:
+            - name: MYSQL_CONNECTION
+              value: jdbc:mysql://mysql:3306/attendance
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+          ports:
+            - name: web
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+      restartPolicy: Always

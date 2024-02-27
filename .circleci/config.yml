@@ -1,0 +1,101 @@
+version: 2.1
+
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: tatu333/my-webapp
+    docker:
+      - image: cimg/openjdk:17.0.9-node
+
+jobs:
+  build:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t $IMAGE_NAME:latest .
+      - run:
+          name: Archive Docker Image
+          command: docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
+
+  publish-latest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Load archived Docker
+          command: docker load -i /tmp/workspace/image.tar
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:latest
+            docker push $IMAGE_NAME:$IMAGE_TAG
+
+  deploy:
+    docker:
+      - image: cimg/python:3.8.13
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [ "SHA256:gEOJi8dwhowiqrODkbjHPg7tcBWuXCwOD/Ltme30gbw" ]
+
+      - run:
+          name: Set up Python
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install ansible
+
+      - add_ssh_keys:
+          fingerprints: [ "SHA256:gEOJi8dwhowiqrODkbjHPg7tcBWuXCwOD/Ltme30gbw" ]
+
+      - run:
+          name: Run Ansible Installation
+          command: |
+            . venv/bin/activate
+            export ANSIBLE_HOST_KEY_CHECKING=False
+            ansible-playbook installations.yaml -i hosts
+            ansible-playbook playbook.yml -i hosts
+     
+
+workflows:
+  version: 2
+  build-main:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+                - devops
+      - publish-latest:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
+                - devops
+      - deploy:
+          requires:
+            - publish-latest
+          filters:
+            branches:
+              only:
+                - main
+                - devops

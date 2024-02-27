@@ -169,6 +169,7 @@ public class HtmlComponent {
                     return bgColorAnnotation.inTimeColor();
 
 
+
                 default:
                     return bgColorAnnotation.value();
             }
@@ -189,6 +190,8 @@ public class HtmlComponent {
                         return bgColorAnnotation.joiningLateColor();
                     case "In-Time":
                         return bgColorAnnotation.inTimeColor();
+                    case "Not Attended":
+                        return bgColorAnnotation.nullColor();
                     default:
                         return bgColorAnnotation.value();
                 }
